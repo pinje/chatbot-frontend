@@ -5,9 +5,11 @@ stages:
 build:
   stage: build
   script:
+    - cd .\src\
     - npm run build
 
 test:
   stage: test
   script:
+    - cd .\src\
     - npm run test
