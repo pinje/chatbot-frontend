@@ -1,5 +1,6 @@
 import './App.css';
 import image from './img/bot.png'
+//
 
 function App() {
   return (
