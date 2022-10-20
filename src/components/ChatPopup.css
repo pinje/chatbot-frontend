@@ -1,0 +1,119 @@
+  
+  /* Add styles to the form container */
+  .form-container {
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    width: 290px;
+    height: 420px;
+    right: 28px;    
+    padding: 0;
+    background-color: rgb(235, 223, 234);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   
+  }
+   /* title, do something */
+   .popup-header{    
+    background-color: #73397a;
+   
+    width: 290px;
+    height: 42px;
+  }
+  .popup-header-title{
+    margin: 0px;
+    padding: 0px;
+    padding:4px ; 
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    float: left;
+  }
+  .popup-header-description{
+    margin: 0px;
+    padding: 0px;
+    padding: 0px 0px 0px 4px;     
+    color: white;
+    font-size: 8px;    
+    float: left;
+  }
+  .popup-header button{
+    background-color: #643c69;
+    border: 1px;
+    color: white;
+    height: 42px;
+    padding: 10px;
+    float: right;
+  }
+  .popup-header button:hover{
+    background-color: #a367a9;
+  }
+  /*footer css*/
+  .popup-footer{    
+    background-color: #9b899f;    
+    width: 290px;
+    height: 55px;
+    position: fixed;
+    bottom: 0px; 
+        
+  }
+  .popup-footer input{
+    height: 60%;
+    width: 224px;
+    margin:10px;  
+    float: left;
+    border: none;
+    border-radius:6px;
+  }
+  .bot-icon{
+    height: 70%;
+    width: auto;
+    float: left;
+    margin: 5px; 
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+     0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .send-icon{
+    height: 55%;
+    width: auto;
+    float: right;
+    margin: 12px 10px 10px auto; 
+       
+  }
+
+  .shortcut-bot-icon{    
+    position: fixed;
+    bottom: 23px;
+    right: 35px;
+    width: 70px;
+    height: 70px;    
+    border-radius: 50%;   
+    opacity: 0.8; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+     0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+  
+  .popup-back-image{
+    height: 60px;
+    width: auto;
+    float: left;
+    margin: 20px auto auto 54px ; 
+    border-radius: 50%;
+    opacity: 0.4;
+    
+  }
+  .popup-backgroud-text{
+    height: 70px;
+    color: rgb(118, 113, 113);   
+    float: right;
+    margin: 40px 54px auto auto ;   
+    opacity: 0.4;
+    
+  } 
+  .setting-icon{
+    height: 15px;
+    width: 15px;
+    float: left;   
+   
+  } 
