@@ -5,7 +5,6 @@ import {useEffect} from 'react';
 // import redux components 
 import {Provider} from "react-redux";
 import store from "../store"
-import {useAppDispatch, useAppSelector} from "../hooks"
 
 // import chat component
 import Chat from "./chat/Chat"
@@ -24,20 +23,11 @@ if (localStorage.session) {
 }
 
 function ChatPopup(props: popupState) {
-   
-   // const Selector = () => {
-   //    useAppSelector(createSession())
-   // }
-   // const Dispatch = () => {
-   //    useAppDispatch()
-   // }
 
    useEffect(() => {
       // check if there's a session
       if (!localStorage.session) {
          // create
-         // Selector();
-         // Dispatch();
          createSession();
       }
    })
