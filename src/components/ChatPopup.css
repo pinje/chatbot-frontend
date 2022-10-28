@@ -1,12 +1,11 @@
   
   /* Add styles to the form container */
   .form-container {
-    position: fixed;
     bottom: 0;
-    right: 15px;
     width: 290px;
     height: 420px;
-    right: 28px;    
+    position: fixed;
+    right: 15px;
     padding: 0;
     background-color: rgb(235, 223, 234);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -15,10 +14,10 @@
    /* title, do something */
    .popup-header{    
     background-color: #73397a;
-   
-    width: 290px;
+    width: 100%;
     height: 42px;
   }
+
   .popup-header-title{
     margin: 0px;
     padding: 0px;
@@ -51,7 +50,7 @@
   .popup-footer{    
     background-color: #9b899f;    
     width: 290px;
-    height: 55px;
+    /* height: 55px; */
     position: fixed;
     bottom: 0px; 
         

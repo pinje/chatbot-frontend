@@ -1,7 +1,7 @@
 import './App.css';
 import './components/ChatPopup.css';
 import ChatPopup from './components/ChatPopup';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 
 function App() {
