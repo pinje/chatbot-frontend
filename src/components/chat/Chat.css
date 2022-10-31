@@ -11,8 +11,8 @@
 }
 
 .user{
-  background-color: rgb(152, 85, 212);
-  color: white;
+  background-color: white;
+  border: 1px solid #643c69;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   border-radius: 10px; 
   text-align: right;
@@ -36,6 +36,10 @@
   height: 325px;
   width: 100%;
   position: static;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
 }
 
 .input-box {
@@ -62,3 +66,4 @@
   width: 30px;
   float: right;
 }
+

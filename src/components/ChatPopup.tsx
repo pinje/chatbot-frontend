@@ -39,8 +39,10 @@ function ChatPopup(props: popupState) {
             <img className='bot-icon' src={require('../img/fi12.jpg')} />
             <button onClick={() => props.setIsOpen(false)}> X </button>
             <button><img className='setting-icon' src={require('../img/setting.png')} /></button>
-            <p className='popup-header-title' >Fontys BOT</p><br />
-            <p className='popup-header-description'>Fontys Help-Desk </p><br />
+            <div className='popup-header-box'>
+               <div className='popup-header-title'>Fontys BOT</div>
+               <div className='popup-header-description'>Fontys Help-Desk</div>
+            </div>
          </div>
          <div className='title'>
             <Chat/>
