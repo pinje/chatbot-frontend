@@ -22,7 +22,7 @@ const Chat = ({
     const code = e.keyCode || e.which;
 
     if (code === 13) {
-      console.log(message);
+      console.log(message);            
       userMessage(message);
       sendMessage(message);
       setMessage("");
@@ -31,12 +31,16 @@ const Chat = ({
 
   return (
     <div className="chat">
-      {/* Handle Messages */}
-      <div className="history-box">
+      {/* Handle Messages */}    
+      <div className="history-box">     
+        <div className="bot">       
+        Hi! How can I help you?
+        </div>           
         {chat.length === 0
           ? ""
-          : chat.map((msg: any) => (
-              <div className={msg.type}>{msg.message}</div>
+          : chat.map((msg: any) => (           
+              <div className={msg.type}>{msg.message}
+               </div>
             ))}
       </div>
       {/* Input Box */}

@@ -43,8 +43,8 @@ function ChatPopup(props: popupState) {
                <div className='popup-header-title'>Fontys BOT</div>
                <div className='popup-header-description'>Fontys Help-Desk</div>
             </div>
-         </div>
-         <div className='title'>
+         </div>        
+         <div className='title'>         
             <Chat/>
          </div>
       </div>

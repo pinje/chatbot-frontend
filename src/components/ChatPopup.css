@@ -6,7 +6,7 @@
     height: 420px;
     position: fixed;
     right: 15px;
-    padding: 0;
+    padding: 0;    
     background-color: rgb(235, 223, 234);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
