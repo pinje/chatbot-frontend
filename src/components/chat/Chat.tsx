@@ -32,7 +32,10 @@ const Chat = ({
   return (
     <div className="chat">
       {/* Handle Messages */}    
-      <div className="history-box">     
+      <div className="history-box"> 
+      <div className="intro-container">
+        <p>Intro</p>
+        </div>    
         <div className="bot">       
         Hi! How can I help you?
         </div>           

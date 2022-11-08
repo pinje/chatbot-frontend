@@ -35,12 +35,12 @@ function ChatPopup(props: popupState) {
    return (
       <Provider store={store}>
       <div className='form-container'>
-         <div className='popup-header'>
-            <img className='bot-icon' src={require('../img/fi12.jpg')} />
+         <div className='popup-header'>            
+            <img className='bot-icon' src={require('../img/chat-profile.jpg')} />
             <button onClick={() => props.setIsOpen(false)}> X </button>
             <button><img className='setting-icon' src={require('../img/setting.png')} /></button>
             <div className='popup-header-box'>
-               <div className='popup-header-title'>Fontys BOT</div>
+               <div className='popup-header-title'>David</div>
                <div className='popup-header-description'>Fontys Help-Desk</div>
             </div>
          </div>        
