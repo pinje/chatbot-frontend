@@ -1,13 +1,14 @@
   
   /* Add styles to the form container */
   .form-container {
-    bottom: 0;
-    width: 290px;
+    bottom: 0;   
+    width: 310px;
     height: 420px;
-    position: fixed;
-    right: 15px;
+    position: fixed;   
+    right: 65px;
+    bottom: 80px;
     padding: 0;    
-    background-color: rgb(235, 223, 234);
+    background-color: rgb(227, 221, 227);  
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
@@ -15,8 +16,8 @@
 
    .popup-header{    
     background-color: #73397a;
-    width: 100%;
-    height: 42px;
+    width: 100%;   
+    height: 45px;
   }
   
   .popup-header-box {
@@ -28,19 +29,19 @@
   .popup-header-title{
     color: white;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 500;
   }
 
   .popup-header-description{    
     color: white;
-    font-size: 8px;
+    font-size: 10px;
   }
 
   .popup-header button{
     background-color: #643c69;
     border: 1px;
-    color: white;
-    height: 42px;
+    color: white;   
+    height: 45px;
     padding: 10px;
     float: right;
   }
@@ -50,11 +51,9 @@
   /*footer css*/
   .popup-footer{    
     background-color: #9b899f;    
-    width: 290px;
-    /* height: 55px; */
+    width: 290px;  
     position: fixed;
-    bottom: 0px; 
-        
+    bottom: 0px;         
   }
   .popup-footer input{
     height: 60%;
@@ -65,13 +64,14 @@
     border-radius:6px;
   }
   .bot-icon{
-    height: 70%;
+    height: 110%;
     width: auto;
-    float: left;
-    margin: 5px; 
+    float: left;   
+    margin: 5px 5px 10px 10px; 
     border-radius: 50%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+     border: 2px solid white;
   }
 
   .send-icon{
