@@ -73,6 +73,16 @@
   margin: 7px;
 }
 
+.input-box button {
+  border: none;
+  background-color: transparent;
+}
+
+.input-box button:hover {
+  cursor: pointer;
+  background-color: #6c5f6f;
+}
+
 .send-icon{
   height: 30px;
   width: 30px;

@@ -18,15 +18,13 @@ const Chat = ({
   const [message, setMessage] = useState("");
 
   // function that handles user submission
-  const handleClick = async (e: { keyCode: any; which: any }) => {
-    const code = e.keyCode || e.which;
+  const handleClick = (e: any) => {
 
-    if (code === 13) {
-      console.log(message);            
-      userMessage(message);
-      sendMessage(message);
-      setMessage("");
-    }
+    e.preventDefault();
+    console.log(message); 
+    userMessage(message);
+    sendMessage(message);
+    setMessage("");
   };
 
   return (
@@ -47,15 +45,18 @@ const Chat = ({
             ))}
       </div>
       {/* Input Box */}
-      <div className="input-box">
+      <div>
+        <form onSubmit={handleClick} className="input-box">
         <input
           id="chatBox"
           onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={handleClick}
           value={message}
           placeholder="Enter a question..."
         ></input>
-        <img className="send-icon" src={require("../../img/sendicon.png")} />
+        <button>
+          <img className="send-icon" src={require("../../img/sendicon.png")} />
+        </button>
+        </form>
       </div>
     </div>
   );
