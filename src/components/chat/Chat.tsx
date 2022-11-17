@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import "./Chat.css";
 
@@ -27,6 +27,16 @@ const Chat = ({
     setMessage("");
   };
 
+  const messagesEndRef = useRef<null | HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [chat]);
+
   return (
     <div className="chat">
       {/* Handle Messages */}    
@@ -43,6 +53,7 @@ const Chat = ({
               <div className={msg.type}>{msg.message}
                </div>
             ))}
+        <div ref={messagesEndRef} className="chat-buffer"/>
       </div>
       {/* Input Box */}
       <div>

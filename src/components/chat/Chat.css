@@ -103,4 +103,8 @@ color: rgba(151, 142, 142, 0.882);
 font-size: 14px;
 }
 
+.chat-buffer {
+  margin-top: 5px;
+}
+
 
