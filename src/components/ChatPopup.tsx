@@ -6,24 +6,24 @@ import React, {useEffect, useState} from 'react';
 import Settings from './Settings';
 
 
-// import redux components 
-import {Provider} from "react-redux";
-import store from "../store"
+// import redux components
+import { Provider } from "react-redux";
+import store from "../store";
 
 // import chat component
-import Chat from "./chat/Chat"
+import Chat from "./chat/Chat";
 
 // import action
-import {createSession} from "./actions/watson"
+import { createSession } from "./actions/watson";
 
 // import axios
-import axios from "axios"
+import axios from "axios";
 
 if (localStorage.session) {
-   delete axios.defaults.headers.common["session_id"]
-   axios.defaults.headers.common["session_id"] = localStorage.session;
+  delete axios.defaults.headers.common["session_id"];
+  axios.defaults.headers.common["session_id"] = localStorage.session;
 } else {
-   delete axios.defaults.headers.common["session_id"]
+  delete axios.defaults.headers.common["session_id"];
 }
 
 function ChatPopup(props: popupState) {
@@ -62,8 +62,8 @@ function ChatPopup(props: popupState) {
             <Chat/>
          </div>
       </div>
-      </Provider>
-   )
+    </Provider>
+  );
 }
 
 export default ChatPopup;

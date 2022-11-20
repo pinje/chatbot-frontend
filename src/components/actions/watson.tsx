@@ -43,3 +43,15 @@ export const sendMessage = (message: string) => async (dispatch: any) => {
     dispatch({ type: MESSAGE_FAIL });
   }
 };
+
+export const searchGoogle = (message: string) => async (dispatch: any) => {
+  try {
+    const res = axiosInstance.get(`/search?q=${message}`);
+    dispatch({
+      type: MESSAGE_SUCCESS,
+      payload: (await res).data.links,
+    });
+  } catch (err) {
+    dispatch({ type: MESSAGE_FAIL });
+  }
+};
