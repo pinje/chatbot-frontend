@@ -63,18 +63,18 @@ const Chat = ({
       {/* Input Box */}
       <div>
         <form onSubmit={handleClick} className="input-box">
-          <input
-            id="chatBox"
-            onChange={(e) => setMessage(e.target.value)}
-            value={message}
-            placeholder="Enter a question..."
-          ></input>
-          <button>
-            <img
-              className="send-icon"
-              src={require("../../img/sendicon.png")}
-            />
-          </button>
+        <input
+          id="chatBox"
+          onChange={(e) => setMessage(e.target.value)}
+          value={message}
+          placeholder="Enter a question...">         
+        </input>
+        <button> Send         
+          </button> 
+       
+        
+
+         {/* <img className="send-icon" src={require("../../img/sendicon.png")} /> */}
         </form>
       </div>
     </div>
