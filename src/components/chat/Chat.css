@@ -55,12 +55,15 @@
 }
 
 .input-box {
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   position: static;
   background-color: #9b899f;
   width: 100%;
   height: 100%;
+  
+  
 }
 
 .input-box input {
@@ -68,14 +71,26 @@
   width: 100%;
   float: left;
   border: none;
-  border-radius:6px;
-  padding: 5px;
-  margin: 7px;
+  border-radius:5px;
+  padding: 4px;
+  margin: 9px 7px;
+  padding-right: 80px;
 }
 
 .input-box button {
   border: none;
-  background-color: transparent;
+  height: 30px;
+  padding: 2px 15px;
+  margin: 13px 11px ;
+  border-radius: 4px;  
+  background-color: rgb(61, 61, 229);  
+  color: white;
+  font-weight: 400;  
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
+    0 4px 20px 0 rgba(0, 0, 0, 0.19); 
+  position: absolute;
+  right: 0; 
+  z-index: 1;
 }
 
 .input-box button:hover {

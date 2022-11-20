@@ -1,6 +1,10 @@
 import { popupState } from '../models/popupState';
 import './ChatPopup.css';
-import {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+
+//import settings
+import Settings from './Settings';
+
 
 // import redux components 
 import {Provider} from "react-redux";
@@ -24,6 +28,7 @@ if (localStorage.session) {
 
 function ChatPopup(props: popupState) {
 
+   const [openSettings, setOpenSettings] = useState<boolean>(false);
    useEffect(() => {
       // check if there's a session
       if (!localStorage.session) {
@@ -38,7 +43,16 @@ function ChatPopup(props: popupState) {
          <div className='popup-header'>            
             <img className='bot-icon' src={require('../img/chat-profile.jpg')} />
             <button onClick={() => props.setIsOpen(false)}> X </button>
-            <button><img className='setting-icon' src={require('../img/setting.png')} /></button>
+             
+            <button onClick={() => {
+                  setOpenSettings(!openSettings)
+                  }}>
+               <img className='setting-icon' src={require('../img/setting.png')}            
+               
+               />
+            </button>
+            {openSettings && <Settings/>}
+
             <div className='popup-header-box'>
                <div className='popup-header-title'>David</div>
                <div className='popup-header-description'>Fontys Help-Desk</div>

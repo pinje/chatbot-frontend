@@ -62,11 +62,14 @@ const Chat = ({
           id="chatBox"
           onChange={(e) => setMessage(e.target.value)}
           value={message}
-          placeholder="Enter a question..."
-        ></input>
-        <button>
-          <img className="send-icon" src={require("../../img/sendicon.png")} />
-        </button>
+          placeholder="Enter a question...">         
+        </input>
+        <button> Send         
+          </button> 
+       
+        
+
+         {/* <img className="send-icon" src={require("../../img/sendicon.png")} /> */}
         </form>
       </div>
     </div>
