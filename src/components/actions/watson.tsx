@@ -6,6 +6,7 @@ import {
   SESSION_FAIL,
   MESSAGE_SUCCESS,
   MESSAGE_FAIL,
+  LINK_SUCCESS,
 } from "../actions/types";
 
 // import axios
@@ -46,11 +47,21 @@ export const sendMessage = (message: string) => async (dispatch: any) => {
 
 export const searchGoogle = (message: string) => async (dispatch: any) => {
   try {
-    const res = axiosInstance.get(`/search?q=${message}`);
-    dispatch({
-      type: MESSAGE_SUCCESS,
-      payload: (await res).data.links,
+    const res = await (await axiosInstance.get(`/search?q=${message}`)).data.links as Array<string>;
+    if(res.length >0)
+    {
+      dispatch({
+        type: MESSAGE_SUCCESS,
+        payload: "Here are our top results for " + message + ":"
+      });
+
+    res.forEach((link: any) => {
+      dispatch({
+        type: LINK_SUCCESS,
+        payload: link
+      });
     });
+  }
   } catch (err) {
     dispatch({ type: MESSAGE_FAIL });
   }

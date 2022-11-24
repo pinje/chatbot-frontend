@@ -19,7 +19,7 @@ const Chat = ({
   //Handle User Message
   const [message, setMessage] = useState("");
   const [toggleSearch, setToggleSearch] = useState(false);
-
+  
   // function that handles user submission
   const handleClick = (e: any) => {
     e.preventDefault();
@@ -46,7 +46,12 @@ const Chat = ({
   return (
     <div className="chat">
       {/* sorry about this being so ugly guys lol, I know you'll take care of it, thanks in advance - Tsvetislav */}
-      <button onClick={handleSearchToggle}>Toggle Search</button>
+      <button className="google-button" onClick={handleSearchToggle}>
+      {toggleSearch === false
+          ? <div>Google search</div>
+          :<div>Bot search</div> }
+        
+        </button>
       {/* Handle Messages */}
       <div className="history-box">
         <div className="intro-container">
@@ -56,7 +61,12 @@ const Chat = ({
         {chat.length === 0
           ? ""
           : chat.map((msg: any) => (
-              <div className={msg.type}>{msg.message}</div>
+              <div className={msg.type}>
+                 {msg.type == "botLink" 
+                ?  <a href={msg.message}>{msg.message}</a>
+                :  <div> {msg.message} </div>                
+                }
+                </div>
             ))}
         <div ref={messagesEndRef} className="chat-buffer" />
       </div>
@@ -70,10 +80,7 @@ const Chat = ({
           placeholder="Enter a question...">         
         </input>
         <button> Send         
-          </button> 
-       
-        
-
+          </button>     
          {/* <img className="send-icon" src={require("../../img/sendicon.png")} /> */}
         </form>
       </div>

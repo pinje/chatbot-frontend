@@ -8,6 +8,7 @@ import {
   MESSAGE_FAIL,
   TOGGLE_FAIL,
   TOGGLE_SUCCESS,
+  LINK_SUCCESS,
 } from "../components/actions/types";
 
 // initial state
@@ -55,6 +56,13 @@ export default (state = initialState, action: { type: any; payload: any }) => {
     case MESSAGE_FAIL:
       return {
         ...state,
+      };
+
+    case LINK_SUCCESS:
+      messages = [...messages, { message: payload, type: "botLink" }];
+      return {
+        ...state,
+        messages,
       };
 
     default:

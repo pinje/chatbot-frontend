@@ -7,3 +7,5 @@ export const MESSAGE_SUCCESS = "MESSAGE_SUCESS";
 export const MESSAGE_FAIL = "MESSAGE_FAIL";
 export const TOGGLE_SUCCESS = "TOGGLE_SUCCESS";
 export const TOGGLE_FAIL = "TOGGLE_FAIL";
+
+export const LINK_SUCCESS = "LINK_SUCCESS";
