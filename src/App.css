@@ -99,6 +99,7 @@
   font-style: 1.1rem;
   border-radius: 10px;
   margin: 0 10px 0;
+  word-break:break-all;
 }
 
 .wrapper .content .main .main_content .messages .human-message {
