@@ -49,7 +49,7 @@ a:hover {
 .history-box{
   overflow-y: scroll;
   overflow-x: hidden; /* Hide horizontal scrollbar */
-  height: 325px;
+  height: 320px;
   width: 100%;
   position: static;
 }
@@ -159,5 +159,18 @@ font-size: 14px;
 .google-button:active {
   box-shadow: #D6D6E7 0 3px 7px inset;
   transform: translateY(2px);
+}
+
+.goback-button {
+  border: 2px solid #ccc;
+  text-decoration: none;
+  display: inline-block;
+  border: 0;
+}
+
+.arrow-left {
+  height: 12px;
+  display: inline;
+  margin-right: 5px;
 }
 

@@ -7,6 +7,9 @@ import {
   MESSAGE_SUCCESS,
   MESSAGE_FAIL,
   LINK_SUCCESS,
+  CATEGORY_LIST_SUCCESS,
+  CATEGORY_SUCCESS,
+  QUESTION_SUCCESS
 } from "../actions/types";
 
 // import axios
@@ -66,3 +69,38 @@ export const searchGoogle = (message: string) => async (dispatch: any) => {
     dispatch({ type: MESSAGE_FAIL });
   }
 };
+
+export const categoryList = () => async (dispatch:any) => {
+  try {
+    dispatch({
+      type: CATEGORY_LIST_SUCCESS,
+      payload: null,
+    });
+  } catch(err) {
+    dispatch({ type: MESSAGE_FAIL })
+  }
+}
+
+export const askCategory = (category:string) => async (dispatch: any) => {
+  try {
+    dispatch({
+      type: CATEGORY_SUCCESS,
+      payload: category,
+    });
+
+  } catch(err) {
+    dispatch({ type: MESSAGE_FAIL })
+  }
+}
+
+export const askQuestion = (question:string) => async (dispatch: any) => {
+  try {
+    dispatch({
+      type: QUESTION_SUCCESS,
+      payload: question,
+    });
+
+  } catch(err) {
+    dispatch({ type: MESSAGE_FAIL })
+  }
+}
