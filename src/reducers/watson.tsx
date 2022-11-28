@@ -9,6 +9,9 @@ import {
   TOGGLE_FAIL,
   TOGGLE_SUCCESS,
   LINK_SUCCESS,
+  CATEGORY_LIST_SUCCESS,
+  CATEGORY_SUCCESS,
+  QUESTION_SUCCESS
 } from "../components/actions/types";
 
 // initial state
@@ -60,6 +63,27 @@ export default (state = initialState, action: { type: any; payload: any }) => {
 
     case LINK_SUCCESS:
       messages = [...messages, { message: payload, type: "botLink" }];
+      return {
+        ...state,
+        messages,
+      };
+      
+    case CATEGORY_LIST_SUCCESS:
+      messages = [...messages, {message: payload, type: "category-list"}];
+      return {
+        ...state,
+        messages,
+      };
+
+    case CATEGORY_SUCCESS:
+      messages = [...messages, {message: payload, type: "category"}];
+      return {
+        ...state,
+        messages,
+      };
+
+    case QUESTION_SUCCESS:
+      messages = [...messages, {message: payload, type: "question"}];
       return {
         ...state,
         messages,
