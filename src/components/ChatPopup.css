@@ -116,3 +116,9 @@
     float: left;   
    
   } 
+  .refresh-icon{
+      height: 20px;
+    width: 20px;
+    float: left;   
+    color: white;
+  }
