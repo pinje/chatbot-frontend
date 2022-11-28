@@ -31,11 +31,11 @@ function Category(props:any) {
         <div>
           You can also see our FAQ
           <hr/>
-          <button onClickCapture={passwordQuestion}>I have a question about password reset <img className="arrow" src={require('../../img/arrow.png')} /></button>
-          <button onClickCapture={officeQuestion}>I have a question about Office 365 <img className="arrow" src={require('../../img/arrow.png')} /></button>
-          <button onClickCapture={fontysLaptopQuestion}>I have a question about my Fontys laptop <img className="arrow" src={require('../../img/arrow.png')} /></button>
-          <button onClickCapture={wifiQuestion}>I have a question about WiFi (eduroam) <img className="arrow" src={require('../../img/arrow.png')} /></button>
-          <button onClickCapture={mediaQuestion}>I have a question about audio and video <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <button onClickCapture={passwordQuestion}>Password reset <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <button onClickCapture={officeQuestion}>Office 365 <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <button onClickCapture={fontysLaptopQuestion}>Fontys laptop <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <button onClickCapture={wifiQuestion}>WiFi (eduroam) <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <button onClickCapture={mediaQuestion}>Audio and video <img className="arrow" src={require('../../img/arrow.png')} /></button>
         </div>
     );
 }

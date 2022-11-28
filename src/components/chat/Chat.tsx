@@ -64,12 +64,12 @@ const Chat = ({
         );
       case 'office':
         return (
-          userMessage("Let me see FAQs about office365."),
+          userMessage("Let me see FAQs about Office 365."),
           askCategory(category)
         );
       case 'equipment':
       return (
-        userMessage("Let me see FAQs about Fontys equipments."),
+        userMessage("Let me see FAQs about Fontys equipment."),
         askCategory(category)
       );
       case 'wifi':
@@ -79,7 +79,7 @@ const Chat = ({
         );
       case 'media':
         return (
-          userMessage("Let me see FAQs about audios and videos."),
+          userMessage("Let me see FAQs about audio and video."),
           askCategory(category)
         );
       default:
