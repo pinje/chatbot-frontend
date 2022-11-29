@@ -4,6 +4,7 @@ import "./Chat.css"
 import Category from "./Category";
 import Questions from "./Questions";
 import Question from "./Question";
+import "./Switch.css";
 
 // import action
 import { userMessage, sendMessage, searchGoogle, askCategory, categoryList, askQuestion } from "../actions/watson";
@@ -128,16 +129,34 @@ const Chat = ({
   }
 
   return (
-    <div className="chat">
-      {/* sorry about this being so ugly guys lol, I know you'll take care of it, thanks in advance - Tsvetislav */}
-      <button className="google-button" onClick={handleSearchToggle}>
-      {toggleSearch === false
-          ? <div>Google search</div>
-          :<div>Bot search</div> }
+    <div className="chat">  
+      {/* implement toggle button.. */}  
         
-        </button>
+      <div className="flex-container">
+      <div> <p className="googletext" >Google Search</p> </div>
+      <div className="switch-container">        
+     
+        <label  className="switch"> 
+        
+          <input onFocus={handleSearchToggle} type="checkbox"/>
+          <span className="slider round"/>       
+          {toggleSearch === false
+             ? <div className="off">Off</div>
+             :<div className="on">On</div> }                
+         </label>
+        </div> 
+    {/* <button className="onOffButton" onClick={handleSearchToggle}>
+      {toggleSearch === false
+          ? <div className="">Off</div>
+          :<div>On</div> }        
+        </button> */}
+    </div>
+     
+      {/* sorry about this being so ugly guys lol, I know you'll take care of it, thanks in advance - Tsvetislav */}
+      
       {/* Handle Messages */}
-      <div className="history-box">
+      {/* <div className="history-box"> */}
+      <div className="history-box"> 
         <div className="intro-container">
           <p>Intro</p>
         </div>
@@ -166,8 +185,7 @@ const Chat = ({
           value={message}
           placeholder="Enter a question...">         
         </input>
-        <button> Send </button>     
-         {/* <img className="send-icon" src={require("../../img/sendicon.png")} /> */}
+        <button> Send </button>          
         </form>
       </div>
     </div>
