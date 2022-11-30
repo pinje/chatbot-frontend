@@ -1,7 +1,7 @@
  /* Add styles to the setting container */
  .settings-container {
     position: fixed; 
-    top: 130px;       
+    top: 157px;       
     width: 150px;
     height: auto; 
     font-weight:400;
@@ -18,7 +18,7 @@
     background-color: #643c69;     
     margin: 3px 3px;
     border-radius: 2px;
-    padding: 6px 4px;
+    padding: 7px 4px;
     color: white;
     font-size: 12px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
