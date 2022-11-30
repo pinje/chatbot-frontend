@@ -11,7 +11,8 @@ import {
   LINK_SUCCESS,
   CATEGORY_LIST_SUCCESS,
   CATEGORY_SUCCESS,
-  QUESTION_SUCCESS
+  QUESTION_SUCCESS,
+  RESET_STATE,
 } from "../components/actions/types";
 
 // initial state
@@ -24,6 +25,7 @@ const initialState = {
 export default (state = initialState, action: { type: any; payload: any }) => {
   const { type, payload } = action;
   let { messages }: any = state;
+  console.log(state);
 
   switch (type) {
     case INPUT_SUCCESS:
@@ -67,28 +69,33 @@ export default (state = initialState, action: { type: any; payload: any }) => {
         ...state,
         messages,
       };
-      
+
     case CATEGORY_LIST_SUCCESS:
-      messages = [...messages, {message: payload, type: "category-list"}];
+      messages = [...messages, { message: payload, type: "category-list" }];
       return {
         ...state,
         messages,
       };
 
     case CATEGORY_SUCCESS:
-      messages = [...messages, {message: payload, type: "category"}];
+      messages = [...messages, { message: payload, type: "category" }];
+      return {
+        ...state,
+        messages,
+      };
+    case RESET_STATE:
+      messages = messages.splice(0, messages.length);
       return {
         ...state,
         messages,
       };
 
     case QUESTION_SUCCESS:
-      messages = [...messages, {message: payload, type: "question"}];
+      messages = [...messages, { message: payload, type: "question" }];
       return {
         ...state,
         messages,
       };
-
     default:
       return {
         ...state,
