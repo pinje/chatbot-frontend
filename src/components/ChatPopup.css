@@ -116,3 +116,9 @@
     float: left;   
    
   } 
+
+  .reload-icon {
+    height: 15px;
+    width: 15px;
+    float: left;
+  }

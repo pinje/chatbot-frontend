@@ -37,6 +37,7 @@ const Chat = ({
     toggleSearch ? searchGoogle(message) : sendMessage(message);
     setMessage("");
   };
+
   const handleSearchToggle = (e: any) => {
     e.preventDefault();
     setToggleSearch(!toggleSearch);
@@ -175,7 +176,7 @@ const Chat = ({
 };
 
 const mapStateToProps = (state: { watson: { messages: any } }) => ({
-  chat: state.watson.messages,
+  chat: state.watson.messages
 });
 
 export default connect(mapStateToProps, {
@@ -184,5 +185,5 @@ export default connect(mapStateToProps, {
   searchGoogle,
   askCategory,
   categoryList,
-  askQuestion
+  askQuestion,
 })(Chat);

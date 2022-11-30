@@ -27,8 +27,14 @@ if (localStorage.session) {
 }
 
 function ChatPopup(props: popupState) {
+   
 
    const [openSettings, setOpenSettings] = useState<boolean>(false);
+
+   const reloadClick = () => {
+      window.location.reload();
+   }
+
    useEffect(() => {
       // check if there's a session
       if (!localStorage.session) {
@@ -50,6 +56,10 @@ function ChatPopup(props: popupState) {
                <img className='setting-icon' src={require('../img/setting.png')}            
                
                />
+            </button>
+
+            <button onClickCapture={() => {reloadClick()}}>
+               <img className='reload-icon' src={require('../img/reload.png')} />
             </button>
             {openSettings && <Settings/>}
 
