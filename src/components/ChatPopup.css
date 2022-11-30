@@ -2,11 +2,11 @@
   /* Add styles to the form container */
   .form-container {
     bottom: 0;   
-    width: 310px;
-    height: 420px;
+    width: 320px;
+    height: 444px;
     position: fixed;   
     right: 65px;
-    bottom: 80px;
+    bottom: 75px;
     padding: 0;    
     background-color: rgb(227, 221, 227);  
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -116,9 +116,9 @@
     float: left;   
    
   } 
-  .refresh-icon{
-      height: 20px;
-    width: 20px;
-    float: left;   
-    color: white;
+
+  .reload-icon {
+    height: 15px;
+    width: 15px;
+    float: left;
   }

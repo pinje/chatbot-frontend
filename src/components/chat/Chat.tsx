@@ -4,6 +4,7 @@ import "./Chat.css";
 import Category from "./Category";
 import Questions from "./Questions";
 import Question from "./Question";
+import "./Switch.css";
 
 // import action
 import {
@@ -44,6 +45,7 @@ const Chat = ({
     toggleSearch ? searchGoogle(message) : sendMessage(message);
     setMessage("");
   };
+
   const handleSearchToggle = (e: any) => {
     e.preventDefault();
     setToggleSearch(!toggleSearch);
@@ -154,16 +156,34 @@ const Chat = ({
   }
 
   return (
-    <div className="chat">
-      <button className="google-button" onClick={handleSearchToggle}>
-        {toggleSearch === false ? (
-          <div>Google search</div>
-        ) : (
-          <div>Bot search</div>
-        )}
-      </button>
+    <div className="chat">  
+      {/* implement toggle button.. */}  
+        
+      <div className="flex-container">
+      <div> <p className="googletext" >Google Search</p> </div>
+      <div className="switch-container">        
+     
+        <label  className="switch"> 
+        
+          <input onFocus={handleSearchToggle} type="checkbox"/>
+          <span className="slider round"/>       
+          {toggleSearch === false
+             ? <div className="off">Off</div>
+             :<div className="on">On</div> }                
+         </label>
+        </div> 
+    {/* <button className="onOffButton" onClick={handleSearchToggle}>
+      {toggleSearch === false
+          ? <div className="">Off</div>
+          :<div>On</div> }        
+        </button> */}
+    </div>
+     
+      {/* sorry about this being so ugly guys lol, I know you'll take care of it, thanks in advance - Tsvetislav */}
+      
       {/* Handle Messages */}
-      <div className="history-box">
+      {/* <div className="history-box"> */}
+      <div className="history-box"> 
         <div className="intro-container">
           <p>Intro</p>
         </div>
@@ -185,14 +205,13 @@ const Chat = ({
       {/* Input Box */}
       <div>
         <form onSubmit={handleClick} className="input-box">
-          <input
-            id="chatBox"
-            onChange={(e) => setMessage(e.target.value)}
-            value={message}
-            placeholder="Enter a question..."
-          ></input>
-          <button> Send </button>
-          {/* <img className="send-icon" src={require("../../img/sendicon.png")} /> */}
+        <input
+          id="chatBox"
+          onChange={(e) => setMessage(e.target.value)}
+          value={message}
+          placeholder="Enter a question...">         
+        </input>
+        <button> Send </button>          
         </form>
       </div>
     </div>
@@ -200,7 +219,7 @@ const Chat = ({
 };
 
 const mapStateToProps = (state: { watson: { messages: any } }) => ({
-  chat: state.watson.messages,
+  chat: state.watson.messages
 });
 
 export default connect(mapStateToProps, {

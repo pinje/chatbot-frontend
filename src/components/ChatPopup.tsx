@@ -27,37 +27,41 @@ if (localStorage.session) {
 }
 
 function ChatPopup(props: popupState) {
-  const [openSettings, setOpenSettings] = useState<boolean>(false);
-  useEffect(() => {
-    // check if there's a session
-    if (!localStorage.session) {
-      // create
-      createSession();
-    }
-  });
+   
 
-  return (
-    <Provider store={store}>
-      <div className="form-container">
-        <div className="popup-header">
-          <img className="bot-icon" src={require("../img/chat-profile.jpg")} />
-          <button onClick={() => props.setIsOpen(false)}> X </button>
+   const [openSettings, setOpenSettings] = useState<boolean>(false);
 
-          <button
-            onClick={() => {
-              setOpenSettings(!openSettings);
-            }}
-          >
-            <img className="setting-icon" src={require("../img/setting.png")} />
-          </button>
-          {openSettings && <Settings />}
-          {/* this doesn't get called for some reason idk */}
-          <button onClick={() => clearStore}>
-            <img
-              className="refresh-icon"
-              src={require("../img/refresh.png")}
-            ></img>
-          </button>
+   const reloadClick = () => {
+      window.location.reload();
+   }
+
+   useEffect(() => {
+      // check if there's a session
+      if (!localStorage.session) {
+         // create
+         createSession();
+      }
+   })
+
+   return (
+      <Provider store={store}>
+      <div className='form-container'>
+         <div className='popup-header'>            
+            <img className='bot-icon' src={require('../img/chat-profile.jpg')} />
+            <button onClick={() => props.setIsOpen(false)}> X </button>
+             
+            <button onClick={() => {
+                  setOpenSettings(!openSettings)
+                  }}>
+               <img className='setting-icon' src={require('../img/setting.png')}            
+               
+               />
+            </button>
+
+            <button onClickCapture={() => {reloadClick()}}>
+               <img className='reload-icon' src={require('../img/reload.png')} />
+            </button>
+            {openSettings && <Settings/>}
 
           <div className="popup-header-box">
             <div className="popup-header-title">David</div>
