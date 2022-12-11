@@ -20,8 +20,6 @@ const Settings = ({
     lang: any,
     ChangeLang: any;
   }) => {
-    
-
     return (
         <div className="settings-container">
           {lang === "english" && (
