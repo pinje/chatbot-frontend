@@ -6,6 +6,11 @@ import {
   SESSION_FAIL,
   MESSAGE_SUCCESS,
   MESSAGE_FAIL,
+  LINK_SUCCESS,
+  CATEGORY_LIST_SUCCESS,
+  CATEGORY_SUCCESS,
+  QUESTION_SUCCESS,
+  RESET_STATE,
 } from "../actions/types";
 
 // import axios
@@ -46,10 +51,65 @@ export const sendMessage = (message: string) => async (dispatch: any) => {
 
 export const searchGoogle = (message: string) => async (dispatch: any) => {
   try {
-    const res = axiosInstance.get(`/search?q=${message}`);
+    const res = (await (
+      await axiosInstance.get(`/search?q=${message}`)
+    ).data.links) as Array<string>;
+    if (res.length > 0) {
+      dispatch({
+        type: MESSAGE_SUCCESS,
+        payload: "Here are our top results for " + message + ":",
+      });
+
+      res.forEach((link: any) => {
+        dispatch({
+          type: LINK_SUCCESS,
+          payload: link,
+        });
+      });
+    }
+  } catch (err) {
+    dispatch({ type: MESSAGE_FAIL });
+  }
+};
+
+export const categoryList = () => async (dispatch: any) => {
+  try {
     dispatch({
-      type: MESSAGE_SUCCESS,
-      payload: (await res).data.links,
+      type: CATEGORY_LIST_SUCCESS,
+      payload: null,
+    });
+  } catch (err) {
+    dispatch({ type: MESSAGE_FAIL });
+  }
+};
+
+export const askCategory = (category: string) => async (dispatch: any) => {
+  try {
+    dispatch({
+      type: CATEGORY_SUCCESS,
+      payload: category,
+    });
+  } catch (err) {
+    dispatch({ type: MESSAGE_FAIL });
+  }
+};
+
+export const askQuestion = (question: string) => async (dispatch: any) => {
+  try {
+    dispatch({
+      type: QUESTION_SUCCESS,
+      payload: question,
+    });
+  } catch (err) {
+    dispatch({ type: MESSAGE_FAIL });
+  }
+};
+
+export const clearStore = () => async (dispatch: any) => {
+  try {
+    dispatch({
+      type: RESET_STATE,
+      payload: null,
     });
   } catch (err) {
     dispatch({ type: MESSAGE_FAIL });
