@@ -160,7 +160,14 @@ const Chat = ({
       {/* implement toggle button.. */}  
         
       <div className="flex-container">
-      <div> <p className="googletext" >Google Search</p> </div>
+        <div>
+        <img className='search-icon' src={require('../../img/bing1.webp')}/>
+        </div>
+      <div><div className="googletext" >
+     
+        Bing Search </div>
+        
+          </div>
       <div className="switch-container">        
      
         <label  className="switch"> 
