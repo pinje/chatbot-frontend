@@ -1,7 +1,7 @@
+import { connect } from "react-redux";
 import "./Category.css"
 
 function Category(props:any) {
-
     const passwordQuestion = (e: any) => {
         e.preventDefault();
         props.clickCategory("password");
@@ -28,7 +28,8 @@ function Category(props:any) {
     }
 
     return (
-        <div>
+      <>
+      {props.lang == "english" && (<div>
           You can also see our FAQ
           <hr/>
           <button onClickCapture={passwordQuestion}> 
@@ -47,8 +48,29 @@ function Category(props:any) {
           <button onClickCapture={mediaQuestion}>
           <img className="icons" src={require('../../img/video.jpg')}/>
             Audio and video <img className="arrow" src={require('../../img/arrow.png')} /></button>
-        </div>
+        </div>)}
+        {props.lang == "dutch" && (<div>
+          Bekijk ook de vaakgestelde vragen
+          <hr/>
+          <button onClickCapture={passwordQuestion}> 
+          <img className="icons" src={require('../../img/password4.jpg')}/>     
+               
+           Reset wachtwoord<img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <button onClickCapture={officeQuestion}>
+          <img className="icons" src={require('../../img/office3.webp')}/>
+            Office 365 <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <button onClickCapture={fontysLaptopQuestion}>
+          <img className="icons" src={require('../../img/laptop1.jpg')}/>
+            Fontys laptop <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <button onClickCapture={wifiQuestion}>
+          <img className="icons" src={require('../../img/wifi2.jpg')}/>
+            WiFi (eduroam) <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <button onClickCapture={mediaQuestion}>
+          <img className="icons" src={require('../../img/video.jpg')}/>
+            Audio en video <img className="arrow" src={require('../../img/arrow.png')} /></button>
+        </div>)}
+        </>
     );
 }
 
-export default Category;
+export default Category

@@ -1,23 +1,64 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
+import { connect, ReactReduxContext } from "react-redux";
 import './Settings.css';
+import {
+    LANG_SUCCESS
+  } from "./actions/types";
 
-function Settings() {
+const ChangeLang = (e : React.ChangeEvent<HTMLSelectElement>) => (dispatch: any) => {
+    e.preventDefault();
+    dispatch({
+        type: LANG_SUCCESS,
+        payload: e.currentTarget.value,
+    });
+}
+
+const Settings = ({
+    lang,
+    ChangeLang
+  }: {
+    lang: any,
+    ChangeLang: any;
+  }) => {
+    
+
     return (
         <div className="settings-container">
-           <div className="setting-option">           
+          {lang === "english" && (
+        <div className="setting-option">           
           Language          
-          <select  name="cars" id="cars">
-              <option value="English"       
+          <img className='flags' src={require('../img/bflag.jpg')} />
+          <select  name="cars" id="cars" onChange={(e) => {ChangeLang(e)}}>
+              <option value="english"       
               >English
-                <img className='flags' src={require('../img/bflag.jpg')} />
+                
                 </option>
               <option value="dutch">Dutch</option>              
           </select>          
         
-           </div>           
+           </div>   )} 
+        {lang === "dutch" && (
+        <div className="setting-option">           
+          Taal          
+          <img className='flags' src={require('../img/dflag.jpg')} />
+          <select  name="cars" id="cars" onChange={(e) => {ChangeLang(e)}}>
+              <option value="english"       
+              >Engels
+                
+                </option>
+              <option value="dutch" selected={true}>Nederlands</option>              
+          </select>          
+        
+           </div>   )}       
              
         </div>
    
     )
 }
-export default Settings;
+const mapStateToProps = (state: { watson: {language: any } }) => ({
+    lang: state.watson.language
+  });
+  
+  export default connect(mapStateToProps, {
+    ChangeLang
+  })(Settings);

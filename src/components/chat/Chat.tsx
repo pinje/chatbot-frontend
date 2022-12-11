@@ -18,6 +18,7 @@ import {
 
 const Chat = ({
   chat,
+  lang,
   userMessage,
   sendMessage,
   searchGoogle,
@@ -26,6 +27,7 @@ const Chat = ({
   askQuestion,
 }: {
   chat: any;
+  lang: any;
   userMessage: any;
   sendMessage: any;
   searchGoogle: any;
@@ -65,31 +67,65 @@ const Chat = ({
       a message is sent as a user that asks the question (to personalize the experience),
       then the bot replies with Q&A of that topic */
   const clickCategory = (category: string) => {
-    switch (category) {
-      case "password":
-        return (
-          userMessage("Let me see FAQs about password resets."),
-          askCategory(category)
-        );
-      case "office":
-        return (
-          userMessage("Let me see FAQs about Office 365."),
-          askCategory(category)
-        );
-      case "equipment":
-        return (
-          userMessage("Let me see FAQs about Fontys equipment."),
-          askCategory(category)
-        );
-      case "wifi":
-        return (
-          userMessage("Let me see FAQs about wifi."), askCategory(category)
-        );
-      case "media":
-        return (
-          userMessage("Let me see FAQs about audio and video."),
-          askCategory(category)
-        );
+    switch(lang) {
+      case("english"):
+        switch (category) {
+          case "password":
+            return (
+              userMessage("Let me see FAQs about password resets."),
+              askCategory(category)
+            );
+          case "office":
+            return (
+              userMessage("Let me see FAQs about Office 365."),
+              askCategory(category)
+            );
+          case "equipment":
+            return (
+              userMessage("Let me see FAQs about Fontys equipment."),
+              askCategory(category)
+            );
+          case "wifi":
+            return (
+              userMessage("Let me see FAQs about wifi."), askCategory(category)
+            );
+          case "media":
+            return (
+              userMessage("Let me see FAQs about audio and video."),
+              askCategory(category)
+            );
+          default:
+            return null;
+        }
+        case("dutch"):
+        switch (category) {
+          case "password":
+            return (
+              userMessage("Laat me de veelgestelde vragen over het resetten van mijn wachtwoord zien."),
+              askCategory(category)
+            );
+          case "office":
+            return (
+              userMessage("Laat me de veelgestelde vragen over Office 365 zien."),
+              askCategory(category)
+            );
+          case "equipment":
+            return (
+              userMessage("Laat me de veelgestelde vragen over Fontys spullen zien."),
+              askCategory(category)
+            );
+          case "wifi":
+            return (
+              userMessage("Laat me de veelgestelde vragen over wifi zien."), askCategory(category)
+            );
+          case "media":
+            return (
+              userMessage("Laat me de veelgestelde vragen over audio en video zien."),
+              askCategory(category)
+            );
+          default:
+            return null;
+        }
       default:
         return null;
     }
@@ -115,13 +151,13 @@ const Chat = ({
       case "category-list":
         return (
           <div className="bot">
-            <Category clickCategory={clickCategory} />
+            <Category clickCategory={clickCategory} lang={lang} />
           </div>
         );
       case "category":
         return (
           <div className="bot">
-            <Questions category={msg.message} clickQuestion={clickQuestion} />
+            <Questions category={msg.message} clickQuestion={clickQuestion} lang={lang}/>
             <button
               className="goback-button"
               onClickCapture={returnCategoryMenu}
@@ -130,14 +166,15 @@ const Chat = ({
                 className="arrow-left"
                 src={require("../../img/arrow-left.png")}
               />{" "}
-              Return to FAQ List
+              {lang == "english" && (<>Return to FAQ List</>)}
+              {lang == "dutch" && (<>Terug naar veelgestelde vragen lijst</>)}
             </button>
           </div>
         );
       case "question":
         return (
           <div className="bot">
-            <Question question={msg.message} />
+            <Question question={msg.message} lang={lang}/>
             <button
               className="goback-button"
               onClickCapture={returnCategoryMenu}
@@ -146,7 +183,8 @@ const Chat = ({
                 className="arrow-left"
                 src={require("../../img/arrow-left.png")}
               />{" "}
-              Return to FAQ List
+              {lang == "english" && (<>Return to FAQ List</>)}
+              {lang == "dutch" && (<>Terug naar veelgestelde vragen lijst</>)}
             </button>
           </div>
         );
@@ -155,10 +193,9 @@ const Chat = ({
     }
   }
 
-  return (
-    <div className="chat">  
+  return (<>
+    {lang == "english" && (<div className="chat">  
       {/* implement toggle button.. */}  
-        
       <div className="flex-container">
       <div> <p className="googletext" >Google Search</p> </div>
       <div className="switch-container">        
@@ -191,7 +228,7 @@ const Chat = ({
 
         {/* Showing FAQ by categories*/}
         <div className="bot">
-          <Category clickCategory={clickCategory} />
+          <Category clickCategory={clickCategory} lang={lang} />
         </div>
 
         {/* Display Chat */}
@@ -214,12 +251,61 @@ const Chat = ({
         <button> Send </button>          
         </form>
       </div>
+    </div>)}
+    {lang == "dutch" && (<div className="chat">  
+      {/* Dutch version */}  
+      <div className="flex-container">
+      <div> <p className="googletext" >Zoek met Google</p> </div>
+      <div className="switch-container">        
+     
+        <label  className="switch"> 
+        
+          <input onFocus={handleSearchToggle} type="checkbox"/>
+          <span className="slider round"/>       
+          {toggleSearch === false
+             ? <div className="off">Uit</div>
+             :<div className="on">Aan</div> }                
+         </label>
+        </div> 
     </div>
-  );
+      <div className="history-box"> 
+        <div className="intro-container">
+          <p>Intro</p>
+        </div>
+        <div className="bot">Hallo! Hoe kan ik je helpen?</div>
+
+        {/* Showing FAQ by categories*/}
+        <div className="bot">
+          <Category clickCategory={clickCategory} lang={lang} />
+        </div>
+
+        {/* Display Chat */}
+        {chat.length === 0
+          ? ""
+          : chat.map((msg: any) => (
+              <div className={msg.type}>{condition(msg)}</div>
+            ))}
+        <div ref={messagesEndRef} className="chat-buffer" />
+      </div>
+      {/* Input Box */}
+      <div>
+        <form onSubmit={handleClick} className="input-box">
+        <input
+          id="chatBox"
+          onChange={(e) => setMessage(e.target.value)}
+          value={message}
+          placeholder="Vul een vraag in...">         
+        </input>
+        <button> Stuur </button>          
+        </form>
+      </div>
+    </div>)}
+  </>);
 };
 
-const mapStateToProps = (state: { watson: { messages: any } }) => ({
-  chat: state.watson.messages
+const mapStateToProps = (state: { watson: { messages: any, language: any } }) => ({
+  chat: state.watson.messages,
+  lang: state.watson.language
 });
 
 export default connect(mapStateToProps, {
