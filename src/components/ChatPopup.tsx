@@ -57,9 +57,10 @@ function ChatPopup(props: popupState) {
    return (
       <Provider store={store}>
       <div className='form-container'>
-         <div className='popup-header'>            
-            <img className='bot-icon' src={require('../img/chat-profile.jpg')} />
-            <button onClick={() => askFeedback()}> X </button>
+         <div className='popup-header'>  
+         <img className='bot-icon' src={require('../img/chatbot-icon.png')} />          
+            {/* <img className='bot-icon' src={require('../img/chat-profile.jpg')} /> */}
+            <button onClick={() => props.setIsOpen(false)}> X </button>
              
             <button onClick={() => {
                   setOpenSettings(!openSettings)
@@ -75,8 +76,8 @@ function ChatPopup(props: popupState) {
             {openSettings && <Settings/>}
 
           <div className="popup-header-box">
-            <div className="popup-header-title">David</div>
-            <div className="popup-header-description">Fontys Help-Desk</div>
+            <div className="popup-header-title">Fontys Buddy</div>
+            <div className="popup-header-description">Help-Desk</div>
           </div>
         </div>
         <div className="title">

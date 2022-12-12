@@ -31,8 +31,9 @@
 
   .popup-header-title{
     color: white;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
+    padding-top: 5px;
   }
 
   .popup-header-description{    
@@ -70,7 +71,7 @@
     border: none;
     border-radius:6px;
   }
-  .bot-icon{
+  /* .bot-icon{
     height: 110%;
     width: auto;
     float: left;   
@@ -79,6 +80,16 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
      0 6px 20px 0 rgba(0, 0, 0, 0.19);
      border: 2px solid white;
+  } */
+  .bot-icon{
+    height: 80%;
+    width: 47px;
+    float: left;   
+    margin: 5px 5px 10px 10px; 
+    /* border-radius: 50%; */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+     0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+     /* border: 2px solid white; */
   }
 
   .send-icon{
