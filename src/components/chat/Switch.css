@@ -91,7 +91,7 @@ input:checked + .slider {
     background-color: rgb(255, 255, 255);   
     /* background-color: rgb(246, 244, 247); */
     border: 1px solid rgb(145, 12, 145);    
-    margin: 0px 20px 10px 20px;
+    margin: 15px 20px 15px 20px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
     0 4px 20px 0 rgba(0, 0, 0, 0.19);    
     border-radius: 40px;
