@@ -18,6 +18,7 @@ import { clearStore, createSession } from "./actions/watson";
 // import axios
 import axios from "axios";
 import { RESET_STATE } from "./actions/types";
+import FeedbackPopup from "./FeedbackPopup";
 
 if (localStorage.session) {
   delete axios.defaults.headers.common["session_id"];
@@ -30,9 +31,19 @@ function ChatPopup(props: popupState) {
    
 
    const [openSettings, setOpenSettings] = useState<boolean>(false);
+   const [feedback, setFeedback] = useState<boolean>(false);
 
    const reloadClick = () => {
       window.location.reload();
+   }
+
+   const askFeedback = () => {
+    if (feedback == false) {
+      setFeedback(true);
+    } else {
+      // close chat
+      props.setIsOpen(false);
+    }
    }
 
    useEffect(() => {
@@ -48,7 +59,7 @@ function ChatPopup(props: popupState) {
       <div className='form-container'>
          <div className='popup-header'>            
             <img className='bot-icon' src={require('../img/chat-profile.jpg')} />
-            <button onClick={() => props.setIsOpen(false)}> X </button>
+            <button onClick={() => askFeedback()}> X </button>
              
             <button onClick={() => {
                   setOpenSettings(!openSettings)
@@ -69,7 +80,7 @@ function ChatPopup(props: popupState) {
           </div>
         </div>
         <div className="title">
-          <Chat />
+          {feedback ? <FeedbackPopup setIsOpen={setFeedback}/> : <Chat/>}
         </div>
       </div>
     </Provider>
