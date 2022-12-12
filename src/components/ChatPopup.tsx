@@ -58,20 +58,20 @@ function ChatPopup(props: popupState) {
       <Provider store={store}>
       <div className='form-container'>
          <div className='popup-header'>  
-         <img className='bot-icon' src={require('../img/chatbot-icon.png')} />          
+         <img alt="xd" className='bot-icon' src={require('../img/chatbot-icon.png')} />          
             {/* <img className='bot-icon' src={require('../img/chat-profile.jpg')} /> */}
-            <button onClick={() => props.setIsOpen(false)}> X </button>
+            <button onClick={() => askFeedback()}> X </button>
              
             <button onClick={() => {
                   setOpenSettings(!openSettings)
                   }}>
-               <img className='setting-icon' src={require('../img/setting.png')}            
+               <img alt="xd" className='setting-icon' src={require('../img/setting.png')}            
                
                />
             </button>
 
             <button onClickCapture={() => {reloadClick()}}>
-               <img className='reload-icon' src={require('../img/reload.png')} />
+               <img alt="xd" className='reload-icon' src={require('../img/reload.png')} />
             </button>
             {openSettings && <Settings/>}
 

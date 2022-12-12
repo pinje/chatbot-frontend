@@ -32,21 +32,21 @@ function Category(props:any) {
           You can also see our FAQ
           <hr/>
           <button className="highlight" onClickCapture={passwordQuestion}> 
-          <img className="icons" src={require('../../img/password4.jpg')}/>     
+          <img alt="xd" className="icons" src={require('../../img/password4.jpg')}/>     
                
-           Password reset<img className="arrow" src={require('../../img/arrow.png')} /></button>
+           Password reset<img alt="xd" className="arrow" src={require('../../img/arrow.png')} /></button>
           <button className="highlight" onClickCapture={officeQuestion}>
-          <img className="icons" src={require('../../img/office3.webp')}/>
-            Office 365 <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <img alt="xd" className="icons" src={require('../../img/office3.webp')}/>
+            Office 365 <img alt="xd" className="arrow" src={require('../../img/arrow.png')} /></button>
           <button className="highlight" onClickCapture={fontysLaptopQuestion}>
-          <img className="icons" src={require('../../img/laptop1.jpg')}/>
-            Fontys laptop <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <img alt="xd" className="icons" src={require('../../img/laptop1.jpg')}/>
+            Fontys laptop <img alt="xd" className="arrow" src={require('../../img/arrow.png')} /></button>
           <button className="highlight" onClickCapture={wifiQuestion}>
-          <img className="icons" src={require('../../img/wifi2.jpg')}/>
-            WiFi (eduroam) <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <img alt="xd" className="icons" src={require('../../img/wifi2.jpg')}/>
+            WiFi (eduroam) <img alt="xd" className="arrow" src={require('../../img/arrow.png')} /></button>
           <button className="highlight" onClickCapture={mediaQuestion}>
-          <img className="icons" src={require('../../img/video.jpg')}/>
-            Audio and video <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <img alt="xd" className="icons" src={require('../../img/video.jpg')}/>
+            Audio and video <img alt="xd" className="arrow" src={require('../../img/arrow.png')} /></button>
         </div>
     );
 }
