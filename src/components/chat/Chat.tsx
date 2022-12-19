@@ -14,6 +14,7 @@ import {
   askCategory,
   categoryList,
   askQuestion,
+  storeConveration,
 } from "../actions/watson";
 
 const Chat = ({
@@ -25,6 +26,7 @@ const Chat = ({
   askCategory,
   categoryList,
   askQuestion,
+  storeConveration
 }: {
   chat: any;
   lang: any;
@@ -34,6 +36,7 @@ const Chat = ({
   askCategory: any;
   categoryList: any;
   askQuestion: any;
+  storeConveration:any;
 }) => {
   //Handle User Message
   const [message, setMessage] = useState("");
@@ -143,11 +146,16 @@ const Chat = ({
     categoryList();
   };
 
+  const showLink = (url: string) => {
+    let domain = (new URL(url));
+    return domain.hostname;
+  }
+
   // Check output on chat: link, FAQ category list, Specific category questions list, normal message
   function condition(msg: any) {
     switch (msg.type) {
       case "botLink":
-        return <a href={msg.message}>{msg.message}</a>;
+        return <a target="_blank" href={msg.message}>{showLink(msg.message)}</a>;
       case "category-list":
         return (
           <div className="bot">
@@ -197,35 +205,42 @@ const Chat = ({
     {lang == "english" && (<div className="chat">  
       {/* implement toggle button.. */}  
       <div className="flex-container">
-      <div> <p className="googletext" >Google Search</p> </div>
-      <div className="switch-container">        
-     
-        <label  className="switch"> 
-        
-          <input onFocus={handleSearchToggle} type="checkbox"/>
-          <span className="slider round"/>       
-          {toggleSearch === false
-             ? <div className="off">Off</div>
-             :<div className="on">On</div> }                
-         </label>
-        </div> 
-    {/* <button className="onOffButton" onClick={handleSearchToggle}>
+        <div>
+          <img className='search-icon' src={require('../../img/bing1.webp')} />
+        </div>
+        <div><div className="googletext" >
+
+          Bing Search </div>
+
+        </div>
+        <div className="switch-container">
+
+          <label className="switch">
+
+            <input onFocus={handleSearchToggle} type="checkbox" />
+            <span className="slider round" />
+            {toggleSearch === false
+              ? <div className="off">Off</div>
+              : <div className="on">On</div>}
+          </label>
+        </div>
+        {/* <button className="onOffButton" onClick={handleSearchToggle}>
       {toggleSearch === false
           ? <div className="">Off</div>
           :<div>On</div> }        
         </button> */}
-    </div>
-     
+      </div>
+
       {/* sorry about this being so ugly guys lol, I know you'll take care of it, thanks in advance - Tsvetislav */}
-      
+
       {/* Handle Messages */}
       {/* <div className="history-box"> */}
-      <div className="history-box"> 
+      <div className="history-box">
         <div className="intro-container">
           <p>Intro</p>
         </div>
         <div className="bot">Hi! How can I help you?</div>
-
+        <div className="bot">Please note, that this converaiton will be stored.</div>
         {/* Showing FAQ by categories*/}
         <div className="bot">
           <Category clickCategory={clickCategory} lang={lang} />
@@ -235,20 +250,23 @@ const Chat = ({
         {chat.length === 0
           ? ""
           : chat.map((msg: any) => (
-              <div className={msg.type}>{condition(msg)}</div>
-            ))}
+            <div className={msg.type}>{condition(msg)}</div>
+          ))}
+        <div className="bot">Rate me!</div>
+
         <div ref={messagesEndRef} className="chat-buffer" />
       </div>
       {/* Input Box */}
       <div>
         <form onSubmit={handleClick} className="input-box">
-        <input
-          id="chatBox"
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
-          placeholder="Enter a question...">         
-        </input>
-        <button> Send </button>          
+          <input
+            id="chatBox"
+            spellCheck="true"
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
+            placeholder="Enter a question...">
+          </input>
+          <button> Send </button>
         </form>
       </div>
     </div>)}
@@ -315,4 +333,7 @@ export default connect(mapStateToProps, {
   askCategory,
   categoryList,
   askQuestion,
+  storeConveration
 })(Chat);
+
+

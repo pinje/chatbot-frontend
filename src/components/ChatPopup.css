@@ -1,14 +1,16 @@
   
   /* Add styles to the form container */
-  .form-container {
+  .form-container { 
+
     bottom: 0;   
-    width: 320px;
-    height: 444px;
+    width: 380px;
+    height: 520px;
     position: fixed;   
     right: 65px;
     bottom: 75px;
     padding: 0;    
-    background-color: rgb(227, 221, 227);  
+    background-color:white;   
+    border-radius: 13px 13px 0px 13px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
@@ -17,7 +19,8 @@
    .popup-header{    
     background-color: #73397a;
     width: 100%;   
-    height: 45px;
+    height: 55px;
+    border-radius: 13px 13px 0px 0px;
   }
   
   .popup-header-box {
@@ -28,8 +31,9 @@
 
   .popup-header-title{
     color: white;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
+    padding-top: 5px;
   }
 
   .popup-header-description{    
@@ -41,15 +45,20 @@
     background-color: #643c69;
     border: 1px;
     color: white;   
-    height: 45px;
-    padding: 10px;
+    height: 35px;
+    width: 35px;     
+    text-align: center;    
+    padding: 0px 10px;
     float: right;
+    margin: 5px 1px;
+    border-radius: 50%;
   }
   .popup-header button:hover{
     background-color: #a367a9;
   } 
-  .popup-footer{    
-    background-color: #9b899f;    
+  .popup-footer{  
+    background-color: #b1abb1;  
+    /* background-color: #9b899f;     */
     width: 290px;  
     position: fixed;
     bottom: 0px;         
@@ -62,7 +71,7 @@
     border: none;
     border-radius:6px;
   }
-  .bot-icon{
+  /* .bot-icon{
     height: 110%;
     width: auto;
     float: left;   
@@ -71,6 +80,16 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
      0 6px 20px 0 rgba(0, 0, 0, 0.19);
      border: 2px solid white;
+  } */
+  .bot-icon{
+    height: 80%;
+    width: 47px;
+    float: left;   
+    margin: 5px 5px 10px 10px; 
+    /* border-radius: 50%; */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+     0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+     /* border: 2px solid white; */
   }
 
   .send-icon{
@@ -116,7 +135,7 @@
     float: left;   
    
   } 
-
+  
   .reload-icon {
     height: 15px;
     width: 15px;

@@ -18,6 +18,7 @@ import { clearStore, createSession } from "./actions/watson";
 // import axios
 import axios from "axios";
 import { RESET_STATE } from "./actions/types";
+import FeedbackPopup from "./FeedbackPopup";
 
 if (localStorage.session) {
   delete axios.defaults.headers.common["session_id"];
@@ -30,9 +31,19 @@ function ChatPopup(props: popupState) {
    
 
    const [openSettings, setOpenSettings] = useState<boolean>(false);
+   const [feedback, setFeedback] = useState<boolean>(false);
 
    const reloadClick = () => {
       window.location.reload();
+   }
+
+   const askFeedback = () => {
+    if (feedback == false) {
+      setFeedback(true);
+    } else {
+      // close chat
+      props.setIsOpen(false);
+    }
    }
 
    useEffect(() => {
@@ -46,30 +57,31 @@ function ChatPopup(props: popupState) {
    return (
       <Provider store={store}>
       <div className='form-container'>
-         <div className='popup-header'>            
-            <img className='bot-icon' src={require('../img/chat-profile.jpg')} />
-            <button onClick={() => props.setIsOpen(false)}> X </button>
+         <div className='popup-header'>  
+         <img alt="xd" className='bot-icon' src={require('../img/chatbot-icon.png')} />          
+            {/* <img className='bot-icon' src={require('../img/chat-profile.jpg')} /> */}
+            <button onClick={() => askFeedback()}> X </button>
              
             <button onClick={() => {
                   setOpenSettings(!openSettings)
                   }}>
-               <img className='setting-icon' src={require('../img/setting.png')}            
+               <img alt="xd" className='setting-icon' src={require('../img/setting.png')}            
                
                />
             </button>
 
             <button onClickCapture={() => {reloadClick()}}>
-               <img className='reload-icon' src={require('../img/reload.png')} />
+               <img alt="xd" className='reload-icon' src={require('../img/reload.png')} />
             </button>
             {openSettings && <Settings/>}
 
           <div className="popup-header-box">
-            <div className="popup-header-title">David</div>
-            <div className="popup-header-description">Fontys Help-Desk</div>
+            <div className="popup-header-title">Fontys Buddy</div>
+            <div className="popup-header-description">Help-Desk</div>
           </div>
         </div>
         <div className="title">
-          <Chat />
+          {feedback ? <FeedbackPopup setIsOpen={setFeedback}/> : <Chat/>}
         </div>
       </div>
     </Provider>
