@@ -2,7 +2,7 @@
  .settings-container {
     position: fixed; 
     top: 130px;       
-    width: 150px;
+    width: 250px;
     height: auto; 
     font-weight:400;
     right: 65px; 
@@ -31,7 +31,7 @@
   .setting-option select{
     float: right;    
     font-size: 12px;
-    width: 65px;
+    width: 120px;
     
   }
   
