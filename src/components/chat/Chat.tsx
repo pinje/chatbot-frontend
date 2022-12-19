@@ -14,6 +14,7 @@ import {
   askCategory,
   categoryList,
   askQuestion,
+  storeConveration,
 } from "../actions/watson";
 
 const Chat = ({
@@ -24,6 +25,7 @@ const Chat = ({
   askCategory,
   categoryList,
   askQuestion,
+  storeConveration
 }: {
   chat: any;
   userMessage: any;
@@ -32,6 +34,7 @@ const Chat = ({
   askCategory: any;
   categoryList: any;
   askQuestion: any;
+  storeConveration:any;
 }) => {
   //Handle User Message
   const [message, setMessage] = useState("");
@@ -109,7 +112,7 @@ const Chat = ({
 
   const showLink = (url: string) => {
     let domain = (new URL(url));
-    return domain.hostname; 
+    return domain.hostname;
   }
 
   // Check output on chat: link, FAQ category list, Specific category questions list, normal message
@@ -212,6 +215,8 @@ const Chat = ({
           : chat.map((msg: any) => (
             <div className={msg.type}>{condition(msg)}</div>
           ))}
+        <div className="bot">Rate me!</div>
+
         <div ref={messagesEndRef} className="chat-buffer" />
       </div>
       {/* Input Box */}
@@ -242,6 +247,7 @@ export default connect(mapStateToProps, {
   askCategory,
   categoryList,
   askQuestion,
+  storeConveration
 })(Chat);
 
 

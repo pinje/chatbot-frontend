@@ -15,3 +15,5 @@ export const CATEGORY_SUCCESS = "CATEGORY_SUCCESS";
 
 export const QUESTION_SUCCESS = "QUESTION_SUCCESS";
 export const RESET_STATE = "RESET_STATE";
+
+export const STORED_FAIL = "STORED_FAIL";

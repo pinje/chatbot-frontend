@@ -32,8 +32,7 @@ function Category(props:any) {
           You can also see our FAQ
           <hr/>
           <button className="highlight" onClickCapture={passwordQuestion}> 
-          <img alt="xd" className="icons" src={require('../../img/password4.jpg')}/>     
-               
+          <img alt="xd" className="icons" src={require('../../img/password4.jpg')}/>                   
            Password reset<img alt="xd" className="arrow" src={require('../../img/arrow.png')} /></button>
           <button className="highlight" onClickCapture={officeQuestion}>
           <img alt="xd" className="icons" src={require('../../img/office3.webp')}/>
