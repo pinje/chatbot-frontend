@@ -14,7 +14,6 @@ import {
   askCategory,
   categoryList,
   askQuestion,
-  storeConveration,
 } from "../actions/watson";
 
 const Chat = ({
@@ -25,8 +24,7 @@ const Chat = ({
   searchGoogle,
   askCategory,
   categoryList,
-  askQuestion,
-  storeConveration
+  askQuestion
 }: {
   chat: any;
   lang: any;
@@ -36,7 +34,6 @@ const Chat = ({
   askCategory: any;
   categoryList: any;
   askQuestion: any;
-  storeConveration:any;
 }) => {
   //Handle User Message
   const [message, setMessage] = useState("");
@@ -70,8 +67,8 @@ const Chat = ({
       a message is sent as a user that asks the question (to personalize the experience),
       then the bot replies with Q&A of that topic */
   const clickCategory = (category: string) => {
-    switch(lang) {
-      case("english"):
+    switch (lang) {
+      case ("english"):
         switch (category) {
           case "password":
             return (
@@ -100,7 +97,7 @@ const Chat = ({
           default:
             return null;
         }
-        case("dutch"):
+      case ("dutch"):
         switch (category) {
           case "password":
             return (
@@ -165,7 +162,7 @@ const Chat = ({
       case "category":
         return (
           <div className="bot">
-            <Questions category={msg.message} clickQuestion={clickQuestion} lang={lang}/>
+            <Questions category={msg.message} clickQuestion={clickQuestion} lang={lang} />
             <button
               className="goback-button"
               onClickCapture={returnCategoryMenu}
@@ -182,7 +179,7 @@ const Chat = ({
       case "question":
         return (
           <div className="bot">
-            <Question question={msg.message} lang={lang}/>
+            <Question question={msg.message} lang={lang} />
             <button
               className="goback-button"
               onClickCapture={returnCategoryMenu}
@@ -202,8 +199,8 @@ const Chat = ({
   }
 
   return (<>
-    {lang == "english" && (<div className="chat">  
-      {/* implement toggle button.. */}  
+    {lang == "english" && (<div className="chat">
+      {/* implement toggle button.. */}
       <div className="flex-container">
         <div>
           <img className='search-icon' src={require('../../img/bing1.webp')} />
@@ -242,7 +239,7 @@ const Chat = ({
         <div className="bot">Hi! How can I help you?</div>
         <div className="bot">Please note, that this converaiton will be stored.</div>
         {/* Showing FAQ by categories*/}
-        <div className="bot">
+        <div className="faq">
           <Category clickCategory={clickCategory} lang={lang} />
         </div>
 
@@ -252,9 +249,9 @@ const Chat = ({
           : chat.map((msg: any) => (
             <div className={msg.type}>{condition(msg)}</div>
           ))}
-        <div className="bot">Rate me!</div>
 
         <div ref={messagesEndRef} className="chat-buffer" />
+
       </div>
       {/* Input Box */}
       <div>
@@ -267,26 +264,28 @@ const Chat = ({
             placeholder="Enter a question...">
           </input>
           <button> Send </button>
-        </form>
-      </div>
-    </div>)}
-    {lang == "dutch" && (<div className="chat">  
-      {/* Dutch version */}  
-      <div className="flex-container">
-      <div> <p className="googletext" >Zoek met Google</p> </div>
-      <div className="switch-container">        
-     
-        <label  className="switch"> 
+          <button className="feeback-btn"> Rate our service </button>
+        </form>      
         
-          <input onFocus={handleSearchToggle} type="checkbox"/>
-          <span className="slider round"/>       
-          {toggleSearch === false
-             ? <div className="off">Uit</div>
-             :<div className="on">Aan</div> }                
-         </label>
-        </div> 
-    </div>
-      <div className="history-box"> 
+      </div>      
+    </div>)}
+    {lang == "dutch" && (<div className="chat">
+      {/* Dutch version */}
+      <div className="flex-container">
+        <div> <p className="googletext" >Zoek met Google</p> </div>
+        <div className="switch-container">
+
+          <label className="switch">
+
+            <input onFocus={handleSearchToggle} type="checkbox" />
+            <span className="slider round" />
+            {toggleSearch === false
+              ? <div className="off">Uit</div>
+              : <div className="on">Aan</div>}
+          </label>
+        </div>
+      </div>
+      <div className="history-box">
         <div className="intro-container">
           <p>Intro</p>
         </div>
@@ -301,20 +300,20 @@ const Chat = ({
         {chat.length === 0
           ? ""
           : chat.map((msg: any) => (
-              <div className={msg.type}>{condition(msg)}</div>
-            ))}
+            <div className={msg.type}>{condition(msg)}</div>
+          ))}
         <div ref={messagesEndRef} className="chat-buffer" />
       </div>
       {/* Input Box */}
       <div>
         <form onSubmit={handleClick} className="input-box">
-        <input
-          id="chatBox"
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
-          placeholder="Vul een vraag in...">         
-        </input>
-        <button> Stuur </button>          
+          <input
+            id="chatBox"
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
+            placeholder="Vul een vraag in...">
+          </input>
+          <button> Stuur </button>
         </form>
       </div>
     </div>)}
@@ -332,8 +331,7 @@ export default connect(mapStateToProps, {
   searchGoogle,
   askCategory,
   categoryList,
-  askQuestion,
-  storeConveration
+  askQuestion
 })(Chat);
 
 

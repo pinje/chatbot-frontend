@@ -4,7 +4,7 @@
 
     bottom: 0;   
     width: 380px;
-    height: 520px;
+    height: 540px;
     position: fixed;   
     right: 65px;
     bottom: 75px;
@@ -61,7 +61,7 @@
     /* background-color: #9b899f;     */
     width: 290px;  
     position: fixed;
-    bottom: 0px;         
+    bottom: px;         
   }
   .popup-footer input{
     height: 60%;

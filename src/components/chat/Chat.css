@@ -16,10 +16,12 @@
   border: 1px solid #958796;  
   border-radius: 10px 5px 5px 0px;  
 }
-/* .sth {
+
+.faq {
   background-color: rgb(197, 173, 197);    
+  text-align: center;
   max-width: 450px;
-  min-width: 20px;
+  min-width: 282px;
   width: fit-content;
   font-size: 13px;  
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
@@ -29,10 +31,11 @@
   font-weight: 500; 
   margin-top: 10px;  
   padding: 8px;
-  margin-left: 20px;  
+  margin-left: 40px;  
+  margin-right: 40px;  
   border: 1px solid #958796;  
   border-radius: 10px 5px 5px 0px;  
-} */
+}
 
 a:hover {
   color: #c9184a;
@@ -80,17 +83,17 @@ a:hover {
   display: flex;
   justify-content: space-between;
   position: static;
-  background-color: #e8e3e8; 
+  background-color: #a26fa2; 
   width: 100%; 
   /* height: 70px;  */
-  height: 70px; 
+  height: 110px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
     0 4px 20px 0 rgba(0, 0, 0, 0.19); 
   border-radius: 0px 0px 0px 13px; 
 }
 
 .input-box input {
-  max-height: 100%;
+  max-height: 43%;
   width: 100%;
   float: left;
   border: none;
@@ -103,6 +106,7 @@ a:hover {
 
 .input-box button {  
   border: none;
+  width: 70px;
   height: 30px;
   padding: 2px 15px;  
   margin: 20px 16px;
@@ -120,6 +124,15 @@ a:hover {
 .input-box button:hover {
   cursor: pointer;
   background-color: #6c5f6f;
+}
+.input-box .feeback-btn{
+  margin-top: 70px;  
+  
+ width: 250px;
+ margin-right: 60px;
+  color: #ffffff;
+  align-items: center;
+  background-color: rgb(86, 34, 84);
 }
 
 .send-icon{
