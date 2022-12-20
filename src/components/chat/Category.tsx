@@ -1,4 +1,3 @@
-import { connect } from "react-redux";
 import "./Category.css"
 
 function Category(props:any) {
@@ -33,22 +32,22 @@ function Category(props:any) {
           You can also see our FAQ
           <hr/>
           <button onClickCapture={passwordQuestion}> 
-          <img className="icons" src={require('../../img/password4.jpg')}/>     
-               
-           Password reset<img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <img className="icons" src={require('../../img/password4.jpg')}/>                
+           Password reset</button><br/>
           <button onClickCapture={officeQuestion}>
           <img className="icons" src={require('../../img/office3.webp')}/>
-            Office 365 <img className="arrow" src={require('../../img/arrow.png')} /></button>
+            Office 365 </button><br/>
           <button onClickCapture={fontysLaptopQuestion}>
           <img className="icons" src={require('../../img/laptop1.jpg')}/>
-            Fontys laptop <img className="arrow" src={require('../../img/arrow.png')} /></button>
+            Fontys laptop </button><br/>
           <button onClickCapture={wifiQuestion}>
           <img className="icons" src={require('../../img/wifi2.jpg')}/>
-            WiFi (eduroam) <img className="arrow" src={require('../../img/arrow.png')} /></button>
+            WiFi (eduroam) </button><br/>
           <button onClickCapture={mediaQuestion}>
           <img className="icons" src={require('../../img/video.jpg')}/>
-            Audio and video <img className="arrow" src={require('../../img/arrow.png')} /></button>
+            Audio and video</button><br/>
         </div>)}
+
         {props.lang == "dutch" && (<div>
           Bekijk ook de vaakgestelde vragen
           <hr/>

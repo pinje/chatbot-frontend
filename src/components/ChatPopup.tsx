@@ -27,8 +27,7 @@ if (localStorage.session) {
   delete axios.defaults.headers.common["session_id"];
 }
 
-function ChatPopup(props: popupState) {
-   
+function ChatPopup(props: popupState) {   
 
    const [openSettings, setOpenSettings] = useState<boolean>(false);
    const [feedback, setFeedback] = useState<boolean>(false);
