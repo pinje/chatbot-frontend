@@ -235,38 +235,30 @@ const Chat = ({
           <img className="phonelogo" src={require("../../img/phone.png")} />
         </div>
 
+        {/* implement toggle button.. */}
         <div className="flex-container">
           <div>
             <img className='search-icon' src={require('../../img/bing1.webp')} />
           </div>
-
-          {/* implement toggle button.. */}
-          <div className="flex-container">
-            <div>
-              <img className='search-icon' src={require('../../img/bing1.webp')} />
-            </div>
-            <div><div className="googletext" >
-
-              Bing Search </div>
-
-            </div>
-            <div className="switch-container">
-
-              <label className="switch">
-
-                <input onFocus={handleSearchToggle} type="checkbox" />
-                <span className="slider round" />
-                {toggleSearch === false
-                  ? <div className="off">Off</div>
-                  : <div className="on">On</div>}
-              </label>
-            </div>
-            {/* <button className="onOffButton" onClick={handleSearchToggle}>
-          {toggleSearch === false
-              ? <div className="">Off</div>
-              :<div>On</div> }        
-            </button> */}
+          <div>
+            <div className="googletext" > Bing Search </div>
           </div>
+          <div className="switch-container">
+
+            <label className="switch">
+
+              <input onFocus={handleSearchToggle} type="checkbox" />
+              <span className="slider round" />
+              {toggleSearch === false
+                ? <div className="off">Off</div>
+                : <div className="on">On</div>}
+            </label>
+          </div>
+          {/* <button className="onOffButton" onClick={handleSearchToggle}>
+        {toggleSearch === false
+            ? <div className="">Off</div>
+            :<div>On</div> }        
+          </button> */}
         </div>
       </div>
 
