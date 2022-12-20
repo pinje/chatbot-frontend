@@ -93,10 +93,9 @@ export default (state = initialState, action: { type: any; payload: any }) => {
         messages,
       };
     case RESET_STATE:
-      messages = messages.splice(0, messages.length);
       return {
         ...state,
-        messages,
+        messages: [],
       };
 
     case QUESTION_SUCCESS:

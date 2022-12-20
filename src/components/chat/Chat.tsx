@@ -138,7 +138,6 @@ const Chat = ({
   };
 
   const sendContact = () => {
-    console.log("this works");
     return (
       userMessage("Send me contact details of Fontys."),
       askContact()
@@ -271,7 +270,7 @@ const Chat = ({
           <p>Intro</p>
         </div>
         <div className="bot">Hi! How can I help you?</div>
-        <div className="bot">Please note, that this converaiton will be stored.</div>
+        <div className="bot">Please note, that this conversation will be stored.</div>
         {/* Showing FAQ by categories*/}
         <div className="bot">
           <Category clickCategory={clickCategory} lang={lang} />
