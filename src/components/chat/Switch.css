@@ -95,7 +95,7 @@ input:checked + .slider {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
     0 4px 20px 0 rgba(0, 0, 0, 0.19);    
     border-radius: 40px;
-    
+    width: 100%;
   }
   
   .flex-container > div {

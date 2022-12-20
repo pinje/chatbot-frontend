@@ -14,6 +14,7 @@ import {
   askCategory,
   categoryList,
   askQuestion,
+  askContact
 } from "../actions/watson";
 
 const Chat = ({
@@ -24,6 +25,7 @@ const Chat = ({
   askCategory,
   categoryList,
   askQuestion,
+  askContact,
 }: {
   chat: any;
   userMessage: any;
@@ -32,6 +34,7 @@ const Chat = ({
   askCategory: any;
   categoryList: any;
   askQuestion: any;
+  askContact: any;
 }) => {
   //Handle User Message
   const [message, setMessage] = useState("");
@@ -95,6 +98,14 @@ const Chat = ({
     }
   };
 
+  const sendContact = () => {
+    console.log("this works");
+    return (
+      userMessage("Send me contact details of Fontys."),
+      askContact()
+    );
+  }
+
   // good shit shuhei - Tsvetislav
   // (category already chosen) user clicks on a question, the question is sent as a user (to personalize the experience),
   // then the bot replies with the answer
@@ -155,6 +166,20 @@ const Chat = ({
             </button>
           </div>
         );
+       case "contact":
+        return (
+          <div className="bot">
+            <div className="contact-detail-title">FONTYS CONTACT DETAILS</div>
+            <hr/>
+            <div className="contact-detail">
+              <b>Fontys Phone Number</b> <br/>+123456789
+            </div>
+            <br/>
+            <div className="contact-detail">
+              <b>Email</b> <br/>fontys@fhict.nl
+            </div>
+          </div>
+        ) 
       default:
         return <div> {msg.message} </div>;
     }
@@ -162,33 +187,39 @@ const Chat = ({
 
   return (
     <div className="chat">
-      {/* implement toggle button.. */}
-
-      <div className="flex-container">
-        <div>
-          <img className='search-icon' src={require('../../img/bing1.webp')} />
+      <div className="chat-header">
+        {/* Contact button */}
+        <div className="contact-button" onClickCapture={sendContact}>
+          <img className="phonelogo" src={require("../../img/phone.png")} />
         </div>
-        <div><div className="googletext" >
 
-          Bing Search </div>
+        {/* implement toggle button.. */}
+        <div className="flex-container">
+          <div>
+            <img className='search-icon' src={require('../../img/bing1.webp')} />
+          </div>
+          <div><div className="googletext" >
 
+            Bing Search </div>
+
+          </div>
+          <div className="switch-container">
+
+            <label className="switch">
+
+              <input onFocus={handleSearchToggle} type="checkbox" />
+              <span className="slider round" />
+              {toggleSearch === false
+                ? <div className="off">Off</div>
+                : <div className="on">On</div>}
+            </label>
+          </div>
+          {/* <button className="onOffButton" onClick={handleSearchToggle}>
+        {toggleSearch === false
+            ? <div className="">Off</div>
+            :<div>On</div> }        
+          </button> */}
         </div>
-        <div className="switch-container">
-
-          <label className="switch">
-
-            <input onFocus={handleSearchToggle} type="checkbox" />
-            <span className="slider round" />
-            {toggleSearch === false
-              ? <div className="off">Off</div>
-              : <div className="on">On</div>}
-          </label>
-        </div>
-        {/* <button className="onOffButton" onClick={handleSearchToggle}>
-      {toggleSearch === false
-          ? <div className="">Off</div>
-          :<div>On</div> }        
-        </button> */}
       </div>
 
       {/* sorry about this being so ugly guys lol, I know you'll take care of it, thanks in advance - Tsvetislav */}
@@ -242,6 +273,7 @@ export default connect(mapStateToProps, {
   askCategory,
   categoryList,
   askQuestion,
+  askContact,
 })(Chat);
 
 

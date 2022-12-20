@@ -13,6 +13,7 @@ import {
   CATEGORY_SUCCESS,
   QUESTION_SUCCESS,
   RESET_STATE,
+  CONTACT_SUCCESS,
 } from "../components/actions/types";
 
 // initial state
@@ -92,6 +93,13 @@ export default (state = initialState, action: { type: any; payload: any }) => {
 
     case QUESTION_SUCCESS:
       messages = [...messages, { message: payload, type: "question" }];
+      return {
+        ...state,
+        messages,
+      };
+
+    case CONTACT_SUCCESS:
+      messages = [...messages, { message: payload, type: "contact" }];
       return {
         ...state,
         messages,
