@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import Settings from "./Settings";
 
 // import redux components
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import store from "../store";
 
 // import chat component
@@ -18,6 +18,7 @@ import { clearStore, createSession } from "./actions/watson";
 // import axios
 import axios from "axios";
 import FeedbackPopup from "./FeedbackPopup";
+import { clear } from "console";
 
 if (localStorage.session) {
   delete axios.defaults.headers.common["session_id"];
@@ -31,8 +32,8 @@ function ChatPopup(props: popupState) {
    const [openSettings, setOpenSettings] = useState<boolean>(false);
    const [feedback, setFeedback] = useState<boolean>(false);
 
-   const reloadClick = () => {
-      window.location.reload();
+   const reloadClick = () =>  {
+    store.dispatch(clearStore());
    }
 
    const askFeedback = () => {

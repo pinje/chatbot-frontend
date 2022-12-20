@@ -14,6 +14,8 @@ import {
   askCategory,
   categoryList,
   askQuestion,
+  askContact,
+  storeConveration
 } from "../actions/watson";
 
 const Chat = ({
@@ -25,6 +27,8 @@ const Chat = ({
   askCategory,
   categoryList,
   askQuestion,
+  askContact,
+  storeConveration
 }: {
   chat: any;
   lang: any;
@@ -34,6 +38,8 @@ const Chat = ({
   askCategory: any;
   categoryList: any;
   askQuestion: any;
+  askContact: any;
+  storeConveration:any;
 }) => {
   //Handle User Message
   const [message, setMessage] = useState("");
@@ -156,6 +162,15 @@ const Chat = ({
         return null;
     }
   };
+
+  const sendContact = () => {
+    return (
+      userMessage("Send me contact details of Fontys."),
+      askContact()
+    );
+  }
+
+  // good shit shuhei - Tsvetislav
   // (category already chosen) user clicks on a question, the question is sent as a user (to personalize the experience),
   // then the bot replies with the answer
   const clickQuestion = (question: string) => {
@@ -218,65 +233,92 @@ const Chat = ({
             </button>
           </div>
         );
+       case "contact":
+        return (
+          <div className="bot">
+            <div className="contact-detail-title">FONTYS CONTACT DETAILS</div>
+            <hr/>
+            <div className="contact-detail">
+              <b>Fontys Phone Number</b> <br/>+123456789
+            </div>
+            <br/>
+            <div className="contact-detail">
+              <b>Email</b> <br/>fontys@fhict.nl
+            </div>
+          </div>
+        ) 
       default:
         return <div> {msg.message} </div>;
     }
   }
 
-  // const handleOutputSpeed = () => {    
-  //   chat.map((msg: any) => (
-  //     return (
-        
-  //      canShow == true
-  //       ? <div className={msg.type}>{condition(msg)}</div>
-  //       : ""
-  //       )))
-  //   }
+  return (<>
+    {lang == "english" && (<div className="chat">  
+      {/* implement toggle button.. */}  
+      <div className="chat-header">
+        {/* Contact button */}
+        <div className="contact-button" onClickCapture={sendContact}>
+          <img className="phonelogo" src={require("../../img/phone.png")} />
+        </div>
 
-const setTimeoutForMsg = (msg:any)=>{
-  setTimeout(() => setCanShow(true), 1000)
-  //wait for this bitch to turn to teuw
+        {/* implement toggle button.. */}
+        <div className="flex-container">
+          <div>
+            <img className='search-icon' src={require('../../img/bing1.webp')} />
+          </div>
+          <div>
+            <div className="googletext" > Bing Search </div>
+          </div>
+          <div className="switch-container">
 
-}
+            <label className="switch">
 
-
- 
-
-return (<>
-  {lang == "english" && (<div className="chat">
-    {/* implement toggle button.. */}
-    <div className="flex-container">
-      <div>
-        <img className='search-icon' src={require('../../img/bing1.webp')} />
+              <input onFocus={handleSearchToggle} type="checkbox" />
+              <span className="slider round" />
+              {toggleSearch === false
+                ? <div className="off">Off</div>
+                : <div className="on">On</div>}
+            </label>
+          </div>
+          {/* <button className="onOffButton" onClick={handleSearchToggle}>
+        {toggleSearch === false
+            ? <div className="">Off</div>
+            :<div>On</div> }        
+          </button> */}
+        </div>
       </div>
-      <div><div className="googletext" >
 
-        Bing Search </div>
+      {/* sorry about this being so ugly guys lol, I know you'll take care of it, thanks in advance - Tsvetislav */}
 
-      </div>
-      <div className="switch-container">
+      {/* Handle Messages */}
+      {/* <div className="history-box"> */}
+      <div className="history-box">
 
-        <label className="switch">
 
-          <input onFocus={handleSearchToggle} type="checkbox" />
-          <span className="slider round" />
-          {toggleSearch === false
-            ? <div className="off">Off</div>
-            : <div className="on">On</div>}
-        </label>
-      </div>
-      {/* <button className="onOffButton" onClick={handleSearchToggle}>
-      {toggleSearch === false
-          ? <div className="">Off</div>
-          :<div>On</div> }        
-        </button> */}
-    </div>
+        <div className="intro-container">
+          <div className="warning-container">
+          <p>Please note, that this conversation will be stored</p>
+        </div>
+        </div>
 
-    {/* Handle Messages */}
-    {/* <div className="history-box"> */}
-    <div className="history-box">
-      <div className="intro-container">
-        <p>Intro</p>
+
+
+        <div className="bot">Hi! How can I help you?</div>
+        {/* <div className="bot">Please note, that this conversation will be stored.</div> */}
+        {/* Showing FAQ by categories*/}
+        <div className="bot">
+          <Category clickCategory={clickCategory} lang={lang} />
+        </div>
+
+        {/* Display Chat */}
+        {chat.length === 0
+          ? ""
+          : chat.map((msg: any) => (
+            <div className={msg.type}>{condition(msg)}</div>
+          ))}
+        <div className="bot">Rate me!</div>
+
+        <div ref={messagesEndRef} className="chat-buffer" />
       </div>
       <div className="bot">Hi! How can I help you?</div>
       <div className="bot">Please note, that this converaiton will be stored.</div>
@@ -387,6 +429,8 @@ export default connect(mapStateToProps, {
   askCategory,
   categoryList,
   askQuestion,
+  askContact,
+  storeConveration
 })(Chat);
 
 

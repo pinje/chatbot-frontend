@@ -11,10 +11,12 @@ import {
   CATEGORY_SUCCESS,
   QUESTION_SUCCESS,
   RESET_STATE,
+  CONTACT_SUCCESS,
 } from "../actions/types";
 
 // import axios
 import axiosInstance from "../../config/AxiosConfig";
+import { Dispatch } from "redux";
 
 // function that handles user messages
 export const userMessage = (message: string) => async (dispatch: any) => {
@@ -105,16 +107,23 @@ export const askQuestion = (question: string) => async (dispatch: any) => {
   }
 };
 
-export const clearStore = () => async (dispatch: any) => {
+export const askContact = () => async (dispatch: any) => {
   try {
     dispatch({
-      type: RESET_STATE,
+      type: CONTACT_SUCCESS,
       payload: null,
     });
   } catch (err) {
     dispatch({ type: MESSAGE_FAIL });
   }
 };
+
+export const clearStore = () => {
+  return {
+    type: RESET_STATE,
+    payload: null
+  };
+}
 
 export const storeConveration = (messages: any, rating: number) => async (dispatch: any) => {
   try {
