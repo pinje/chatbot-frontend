@@ -39,7 +39,7 @@ const Chat = ({
   categoryList: any;
   askQuestion: any;
   askContact: any;
-  storeConveration:any;
+  storeConveration: any;
 }) => {
   //Handle User Message
   const [message, setMessage] = useState("");
@@ -233,34 +233,33 @@ const Chat = ({
             </button>
           </div>
         );
-       case "contact":
+      case "contact":
         return (
           <div className="bot">
             <div className="contact-detail-title">FONTYS CONTACT DETAILS</div>
-            <hr/>
+            <hr />
             <div className="contact-detail">
-              <b>Fontys Phone Number</b> <br/>+123456789
+              <b>Fontys Phone Number</b> <br />+123456789
             </div>
-            <br/>
+            <br />
             <div className="contact-detail">
-              <b>Email</b> <br/>fontys@fhict.nl
+              <b>Email</b> <br />fontys@fhict.nl
             </div>
           </div>
-        ) 
+        )
       default:
         return <div> {msg.message} </div>;
     }
   }
 
   return (<>
-    {lang == "english" && (<div className="chat">  
-      {/* implement toggle button.. */}  
+    {lang == "english" && (<div className="chat">
+      {/* implement toggle button.. */}
       <div className="chat-header">
         {/* Contact button */}
         <div className="contact-button" onClickCapture={sendContact}>
           <img className="phonelogo" src={require("../../img/phone.png")} />
         </div>
-
         {/* implement toggle button.. */}
         <div className="flex-container">
           <div>
@@ -288,20 +287,14 @@ const Chat = ({
         </div>
       </div>
 
-      {/* sorry about this being so ugly guys lol, I know you'll take care of it, thanks in advance - Tsvetislav */}
-
       {/* Handle Messages */}
-      {/* <div className="history-box"> */}
       <div className="history-box">
-
 
         <div className="intro-container">
           <div className="warning-container">
-          <p>Please note, that this conversation will be stored</p>
+            <p>Please note, that this conversation will be stored</p>
+          </div>
         </div>
-        </div>
-
-
 
         <div className="bot">Hi! How can I help you?</div>
         {/* <div className="bot">Please note, that this conversation will be stored.</div> */}
@@ -316,29 +309,14 @@ const Chat = ({
           : chat.map((msg: any) => (
             <div className={msg.type}>{condition(msg)}</div>
           ))}
-        <div className="bot">Rate me!</div>
+        {firstDBQ == true && toggleSearch == false
+          ? <div className="bot">Enter keyword for question: </div>
+          : ""
+        }
+
 
         <div ref={messagesEndRef} className="chat-buffer" />
       </div>
-      <div className="bot">Hi! How can I help you?</div>
-      <div className="bot">Please note, that this converaiton will be stored.</div>
-      {/* Showing FAQ by categories*/}
-      <div className="faq">
-        <Category clickCategory={clickCategory} lang={lang} />
-      </div>
-      {/* Display Chat */}
-      {chat.length === 0
-        ? ""
-        : chat.map((msg: any) => (
-          <div className={msg.type}>{condition(msg)}</div>
-        ))}
-      {firstDBQ == true && toggleSearch == false
-        ? <div className="bot">Enter keyword for question: </div>
-        : ""
-      }
-      <div ref={messagesEndRef} className="chat-buffer" />
-
-    </div>
     {/* Input Box */}
     <div>
       <form onSubmit={handleClick} className="input-box">
@@ -365,8 +343,10 @@ const Chat = ({
       </form>
 
     </div>
-  </div>)}
-  {lang == "dutch" && (<div className="chat">
+  </div>)
+}
+{
+  lang == "dutch" && (<div className="chat">
     {/* Dutch version */}
     <div className="flex-container">
       <div> <p className="googletext" >Zoek met Google</p> </div>
@@ -413,7 +393,8 @@ const Chat = ({
         <button> Stuur </button>
       </form>
     </div>
-  </div>)}
+  </div>)
+}
 </>);
 };
 
