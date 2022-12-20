@@ -129,17 +129,24 @@ a:hover {
 }
 
 .intro-container{
-  background-color:  rgb(255, 255, 255);
-  height: 22px;
+  background-color:  rgb(255, 255, 255); 
+  height: 33px;
   width: 333px;
   margin: 40px 20px 20px 20px;
   border-bottom: 1px solid rgb(169, 168, 168);
-  text-align: center;  
-  
+  text-align: center;    
+}
+.warning-container{
+  background-color:  rgb(226, 222, 226);
+  height: 26px;
+  width: 312px;
+  text-align: center;
+  margin: 8px 9px; 
+   border-radius: 4px;   
 }
 .intro-container p{
-color: rgba(151, 142, 142, 0.882);
-font-size: 14px;
+color: rgb(78, 74, 74);
+font-size: 13px;
 }
 
 .chat-buffer {

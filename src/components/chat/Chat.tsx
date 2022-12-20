@@ -266,11 +266,18 @@ const Chat = ({
       {/* Handle Messages */}
       {/* <div className="history-box"> */}
       <div className="history-box">
+
+
         <div className="intro-container">
-          <p>Intro</p>
+          <div className="warning-container">
+          <p>Please note, that this conversation will be stored</p>
         </div>
+        </div>
+
+
+
         <div className="bot">Hi! How can I help you?</div>
-        <div className="bot">Please note, that this conversation will be stored.</div>
+        {/* <div className="bot">Please note, that this conversation will be stored.</div> */}
         {/* Showing FAQ by categories*/}
         <div className="bot">
           <Category clickCategory={clickCategory} lang={lang} />
