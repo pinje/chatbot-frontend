@@ -3,8 +3,13 @@ import StarRatings from 'react-star-ratings'
 import { useState } from 'react';
 import { popupState } from '../models/popupState';
 import { storeConveration } from './actions/watson';
+import { connect } from "react-redux";
 
-function FeedbackPopup(props: popupState, ) {
+const FeedbackPopup = (props:any) => {
+
+    const { chat } = props;
+
+    console.log(chat);
 
     const [rating, setRating] = useState(0);
 
@@ -36,4 +41,8 @@ function FeedbackPopup(props: popupState, ) {
     )
 }
 
-export default FeedbackPopup;
+const feedbackMapStateToProps = (state: { watson: {messages: any} }) => ({
+    chat: state.watson.messages
+});
+  
+export default connect(feedbackMapStateToProps)(FeedbackPopup);
