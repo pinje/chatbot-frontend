@@ -16,6 +16,12 @@ button:hover {
     background-color: #bf86c6
 }
 
+.arrow {
+    height: 12px;
+    display: inline;
+    margin-left: 5px;
+}
+
 .icons{
     width: 30px;
     height: 30px;

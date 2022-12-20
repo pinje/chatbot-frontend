@@ -40,6 +40,8 @@ const Chat = ({
   const [toggleSearch, setToggleSearch] = useState(false);
   // sets if thats the first question send to db - used to send catergory
   const [firstDBQ, setFirstDBQ] = useState(true);
+  //used to slow down input
+  const [canShow, setCanShow] = useState(false);
 
   // function that handles user submission
   const handleClick = (e: any) => {
@@ -66,14 +68,6 @@ const Chat = ({
     }
   };
 
-  const checkUserInput = () => {
-
-    if (message == "") {
-      userMessage("No category")
-    }
-    else { userMessage(message) }
-
-  }
 
   const handleSearchToggle = (e: any) => {
     e.preventDefault();
@@ -169,8 +163,6 @@ const Chat = ({
   };
 
 
-  
-
   // Return button to see FAQ Category List
   const returnCategoryMenu = () => {
     categoryList();
@@ -231,137 +223,156 @@ const Chat = ({
     }
   }
 
-  return (<>
-    {lang == "english" && (<div className="chat">
-      {/* implement toggle button.. */}
-      <div className="flex-container">
-        <div>
-          <img className='search-icon' src={require('../../img/bing1.webp')} />
-        </div>
-        <div><div className="googletext" >
+  // const handleOutputSpeed = () => {    
+  //   chat.map((msg: any) => (
+  //     return (
+        
+  //      canShow == true
+  //       ? <div className={msg.type}>{condition(msg)}</div>
+  //       : ""
+  //       )))
+  //   }
 
-          Bing Search </div>
+const setTimeoutForMsg = (msg:any)=>{
+  setTimeout(() => setCanShow(true), 1000)
+  //wait for this bitch to turn to teuw
 
-        </div>
-        <div className="switch-container">
+}
 
-          <label className="switch">
 
-            <input onFocus={handleSearchToggle} type="checkbox" />
-            <span className="slider round" />
-            {toggleSearch === false
-              ? <div className="off">Off</div>
-              : <div className="on">On</div>}
-          </label>
-        </div>
-        {/* <button className="onOffButton" onClick={handleSearchToggle}>
+ 
+
+return (<>
+  {lang == "english" && (<div className="chat">
+    {/* implement toggle button.. */}
+    <div className="flex-container">
+      <div>
+        <img className='search-icon' src={require('../../img/bing1.webp')} />
+      </div>
+      <div><div className="googletext" >
+
+        Bing Search </div>
+
+      </div>
+      <div className="switch-container">
+
+        <label className="switch">
+
+          <input onFocus={handleSearchToggle} type="checkbox" />
+          <span className="slider round" />
+          {toggleSearch === false
+            ? <div className="off">Off</div>
+            : <div className="on">On</div>}
+        </label>
+      </div>
+      {/* <button className="onOffButton" onClick={handleSearchToggle}>
       {toggleSearch === false
           ? <div className="">Off</div>
           :<div>On</div> }        
         </button> */}
-      </div>
+    </div>
 
-      {/* Handle Messages */}
-      {/* <div className="history-box"> */}
-      <div className="history-box">
-        <div className="intro-container">
-          <p>Intro</p>
-        </div>
-        <div className="bot">Hi! How can I help you?</div>
-        <div className="bot">Please note, that this converaiton will be stored.</div>
-        {/* Showing FAQ by categories*/}
-        <div className="faq">
-          <Category clickCategory={clickCategory} lang={lang} />
-        </div>
-        {/* Display Chat */}
-        {chat.length === 0
-          ? ""
-          : chat.map((msg: any) => (
-            <div className={msg.type}>{condition(msg)}</div>
-          ))}
+    {/* Handle Messages */}
+    {/* <div className="history-box"> */}
+    <div className="history-box">
+      <div className="intro-container">
+        <p>Intro</p>
+      </div>
+      <div className="bot">Hi! How can I help you?</div>
+      <div className="bot">Please note, that this converaiton will be stored.</div>
+      {/* Showing FAQ by categories*/}
+      <div className="faq">
+        <Category clickCategory={clickCategory} lang={lang} />
+      </div>
+      {/* Display Chat */}
+      {chat.length === 0
+        ? ""
+        : chat.map((msg: any) => (
+          <div className={msg.type}>{condition(msg)}</div>
+        ))}
+      {firstDBQ == true && toggleSearch == false
+        ? <div className="bot">Enter keyword for question: </div>
+        : ""
+      }
+      <div ref={messagesEndRef} className="chat-buffer" />
+
+    </div>
+    {/* Input Box */}
+    <div>
+      <form onSubmit={handleClick} className="input-box">
+
         {firstDBQ == true && toggleSearch == false
-          ? <div className="bot">Enter keyword for question: </div>
-          : ""
-        }
-        <div ref={messagesEndRef} className="chat-buffer" />
-
-      </div>
-      {/* Input Box */}
-      <div>
-        <form onSubmit={handleClick} className="input-box">
-
-          {firstDBQ == true && toggleSearch == false
-            ? <input
-              id="chatBox"
-              spellCheck="true"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-              placeholder="Press enter to skip">
-            </input>
-            : <input
-              id="chatBox"
-              spellCheck="true"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-              placeholder="Enter a question...">
-            </input>
-          }
-
-          <button> Send </button>
-          <button className="feeback-btn"> Rate our service </button>
-        </form>
-
-      </div>
-    </div>)}
-    {lang == "dutch" && (<div className="chat">
-      {/* Dutch version */}
-      <div className="flex-container">
-        <div> <p className="googletext" >Zoek met Google</p> </div>
-        <div className="switch-container">
-
-          <label className="switch">
-
-            <input onFocus={handleSearchToggle} type="checkbox" />
-            <span className="slider round" />
-            {toggleSearch === false
-              ? <div className="off">Uit</div>
-              : <div className="on">Aan</div>}
-          </label>
-        </div>
-      </div>
-      <div className="history-box">
-        <div className="intro-container">
-          <p>Intro</p>
-        </div>
-        <div className="bot">Hallo! Hoe kan ik je helpen?</div>
-
-        {/* Showing FAQ by categories*/}
-        <div className="bot">
-          <Category clickCategory={clickCategory} lang={lang} />
-        </div>
-
-        {/* Display Chat */}
-        {chat.length === 0
-          ? ""
-          : chat.map((msg: any) => (
-            <div className={msg.type}>{condition(msg)}</div>
-          ))}
-        <div ref={messagesEndRef} className="chat-buffer" />
-      </div>
-      {/* Input Box */}
-      <div>
-        <form onSubmit={handleClick} className="input-box">
-          <input
+          ? <input
             id="chatBox"
+            spellCheck="true"
             onChange={(e) => setMessage(e.target.value)}
             value={message}
-            placeholder="Vul een vraag in...">
+            placeholder="Press enter to skip">
           </input>
-          <button> Stuur </button>
-        </form>
+          : <input
+            id="chatBox"
+            spellCheck="true"
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
+            placeholder="Enter a question...">
+          </input>
+        }
+
+        <button> Send </button>
+        <button className="feeback-btn"> Rate our service </button>
+      </form>
+
+    </div>
+  </div>)}
+  {lang == "dutch" && (<div className="chat">
+    {/* Dutch version */}
+    <div className="flex-container">
+      <div> <p className="googletext" >Zoek met Google</p> </div>
+      <div className="switch-container">
+
+        <label className="switch">
+
+          <input onFocus={handleSearchToggle} type="checkbox" />
+          <span className="slider round" />
+          {toggleSearch === false
+            ? <div className="off">Uit</div>
+            : <div className="on">Aan</div>}
+        </label>
       </div>
-    </div>)}
-  </>);
+    </div>
+    <div className="history-box">
+      <div className="intro-container">
+        <p>Intro</p>
+      </div>
+      <div className="bot">Hallo! Hoe kan ik je helpen?</div>
+
+      {/* Showing FAQ by categories*/}
+      <div className="bot">
+        <Category clickCategory={clickCategory} lang={lang} />
+      </div>
+
+      {/* Display Chat */}
+      {chat.length === 0
+        ? ""
+        : chat.map((msg: any) => (
+          <div className={msg.type}>{condition(msg)}</div>
+        ))}
+      <div ref={messagesEndRef} className="chat-buffer" />
+    </div>
+    {/* Input Box */}
+    <div>
+      <form onSubmit={handleClick} className="input-box">
+        <input
+          id="chatBox"
+          onChange={(e) => setMessage(e.target.value)}
+          value={message}
+          placeholder="Vul een vraag in...">
+        </input>
+        <button> Stuur </button>
+      </form>
+    </div>
+  </div>)}
+</>);
 };
 
 const mapStateToProps = (state: { watson: { messages: any, language: any } }) => ({
