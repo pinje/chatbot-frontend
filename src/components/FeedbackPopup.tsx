@@ -5,7 +5,7 @@ import { storeConveration } from './actions/watson';
 import { connect } from "react-redux";
 import { popupState } from '../models/popupState';
 
-const FeedbackPopup = (props:any, setIsOpen:popupState) => {
+const FeedbackPopup = (props:any) => {
     const { chat, storeConveration } = props;
 
     const [rating, setRating] = useState(0);
@@ -34,7 +34,7 @@ const FeedbackPopup = (props:any, setIsOpen:popupState) => {
                 By answering this, the chat logs will be stored into our database
             </div>
             <div>
-                <button onClick={() => setIsOpen.setIsOpen(false)} className='return-button'>return</button>
+                <button onClick={() => props.setIsOpen(false)} className='return-button'>return</button>
                 <button onClick={() => submitFeedback()} className='submit-button'>submit</button>
             </div>
         </div>
