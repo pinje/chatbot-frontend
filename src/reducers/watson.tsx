@@ -8,6 +8,7 @@ import {
   MESSAGE_FAIL,
   TOGGLE_FAIL,
   TOGGLE_SUCCESS,
+  LANG_SUCCESS,
   LINK_SUCCESS,
   CATEGORY_LIST_SUCCESS,
   CATEGORY_SUCCESS,
@@ -20,6 +21,7 @@ import {
 const initialState = {
   messages: [],
   toggleSearch: true,
+  language: "english"
 };
 
 // switch statement - update state
@@ -69,6 +71,12 @@ export default (state = initialState, action: { type: any; payload: any }) => {
       return {
         ...state,
         messages,
+      };
+
+    case LANG_SUCCESS:
+      return {
+        ...state,
+        language: payload,
       };
 
     case CATEGORY_LIST_SUCCESS:

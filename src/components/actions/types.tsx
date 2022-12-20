@@ -10,6 +10,8 @@ export const TOGGLE_FAIL = "TOGGLE_FAIL";
 
 export const LINK_SUCCESS = "LINK_SUCCESS";
 
+export const LANG_SUCCESS = "LANG_SUCCESS";
+
 export const CATEGORY_LIST_SUCCESS = "CATEGORY_LIST_SUCCESS";
 export const CATEGORY_SUCCESS = "CATEGORY_SUCCESS";
 
@@ -17,3 +19,5 @@ export const QUESTION_SUCCESS = "QUESTION_SUCCESS";
 
 export const CONTACT_SUCCESS = "CONTACT_SUCCESS";
 export const RESET_STATE = "RESET_STATE";
+
+export const STORED_FAIL = "STORED_FAIL";

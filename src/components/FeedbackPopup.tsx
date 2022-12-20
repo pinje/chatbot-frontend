@@ -2,13 +2,14 @@ import '../components/FeedbackPopup.css';
 import StarRatings from 'react-star-ratings'
 import { useState } from 'react';
 import { popupState } from '../models/popupState';
+import { storeConveration } from './actions/watson';
 
-function FeedbackPopup(props: popupState) {
+function FeedbackPopup(props: popupState, ) {
 
     const [rating, setRating] = useState(0);
 
     const submitFeedback = () => {
-        // send chat logs to database
+        storeConveration([{type:"botLink",message:"h"},{type:"botLink",message:"h"}], 5); 
     }
 
     return (
@@ -19,6 +20,7 @@ function FeedbackPopup(props: popupState) {
                 rating={rating}
                 starRatedColor="orange"
                 numberOfStars={5}
+                starDimension={"20"}
                 changeRating={setRating}
                 starHoverColor="purple"
                 name='rating'/>
