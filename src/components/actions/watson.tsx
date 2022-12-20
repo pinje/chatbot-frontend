@@ -11,6 +11,7 @@ import {
   CATEGORY_SUCCESS,
   QUESTION_SUCCESS,
   RESET_STATE,
+  CONTACT_SUCCESS,
 } from "../actions/types";
 
 // import axios
@@ -99,6 +100,17 @@ export const askQuestion = (question: string) => async (dispatch: any) => {
     dispatch({
       type: QUESTION_SUCCESS,
       payload: question,
+    });
+  } catch (err) {
+    dispatch({ type: MESSAGE_FAIL });
+  }
+};
+
+export const askContact = () => async (dispatch: any) => {
+  try {
+    dispatch({
+      type: CONTACT_SUCCESS,
+      payload: null,
     });
   } catch (err) {
     dispatch({ type: MESSAGE_FAIL });

@@ -200,3 +200,33 @@ font-size: 14px;
   font-weight: 700;
 }
 
+.chat-header {
+  display: flex;
+  align-items: center;
+}
+
+.phonelogo {
+  height: 12px;
+}
+
+.contact-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #73397a;
+  border-radius: 40px;
+  height: 40px;
+  width: 15%;
+  margin: 15px 0px 15px 20px;
+  cursor: pointer;
+}
+
+.contact-detail-title {
+  font-size: 14px;
+  font-weight: bolder;
+}
+
+.contact-detail {
+  border-left: 5px solid #73397a;
+  padding-left: 5px;
+}
