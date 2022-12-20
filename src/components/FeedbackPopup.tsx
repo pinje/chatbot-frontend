@@ -1,22 +1,20 @@
 import '../components/FeedbackPopup.css';
 import StarRatings from 'react-star-ratings'
 import { useState } from 'react';
-import { popupState } from '../models/popupState';
 import { storeConveration } from './actions/watson';
 import { connect } from "react-redux";
+import { popupState } from '../models/popupState';
 
-const FeedbackPopup = (props:any) => {
-
-    const { chat } = props;
-
-    console.log(chat);
+const FeedbackPopup = (props:any, setIsOpen:popupState) => {
+    const { chat, storeConveration } = props;
 
     const [rating, setRating] = useState(0);
 
     const submitFeedback = () => {
-        console.log("clcKC")
+        console.log("wasup")
         console.log(rating)
-        storeConveration("", rating);
+        console.log(chat)
+        storeConveration(chat, rating);
     }
 
     return (
@@ -36,7 +34,7 @@ const FeedbackPopup = (props:any) => {
                 By answering this, the chat logs will be stored into our database
             </div>
             <div>
-                <button onClick={() => props.setIsOpen(false)} className='return-button'>return</button>
+                <button onClick={() => setIsOpen.setIsOpen(false)} className='return-button'>return</button>
                 <button onClick={() => submitFeedback()} className='submit-button'>submit</button>
             </div>
         </div>
@@ -47,4 +45,4 @@ const feedbackMapStateToProps = (state: { watson: {messages: any} }) => ({
     chat: state.watson.messages
 });
   
-export default connect(feedbackMapStateToProps)(FeedbackPopup);
+export default connect(feedbackMapStateToProps, {storeConveration})(FeedbackPopup);

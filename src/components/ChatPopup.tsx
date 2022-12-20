@@ -17,7 +17,6 @@ import { clearStore, createSession } from "./actions/watson";
 
 // import axios
 import axios from "axios";
-import { RESET_STATE } from "./actions/types";
 import FeedbackPopup from "./FeedbackPopup";
 
 if (localStorage.session) {

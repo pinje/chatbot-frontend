@@ -24,7 +24,7 @@ const Chat = ({
   searchGoogle,
   askCategory,
   categoryList,
-  askQuestion
+  askQuestion,
 }: {
   chat: any;
   lang: any;
@@ -38,19 +38,51 @@ const Chat = ({
   //Handle User Message
   const [message, setMessage] = useState("");
   const [toggleSearch, setToggleSearch] = useState(false);
+  // sets if thats the first question send to db - used to send catergory
+  const [firstDBQ, setFirstDBQ] = useState(true);
 
   // function that handles user submission
   const handleClick = (e: any) => {
     e.preventDefault();
-    console.log(message);
-    userMessage(message);
-    toggleSearch ? searchGoogle(message) : sendMessage(message);
-    setMessage("");
+    //check if its a category message
+    if (toggleSearch == false && firstDBQ == true) {
+      setFirstDBQ(false);
+      if (message == "") {
+        userMessage("no category");
+        sendMessage("no category");
+      }
+      else {
+        userMessage(message);
+        sendMessage(message);
+      }
+    }
+    else {
+      if (message != "") {
+        console.log(message);
+        userMessage(message);
+        toggleSearch ? searchGoogle(message) : sendMessage(message);
+        setMessage("");
+      }
+    }
   };
+
+  const checkUserInput = () => {
+
+    if (message == "") {
+      userMessage("No category")
+    }
+    else { userMessage(message) }
+
+  }
 
   const handleSearchToggle = (e: any) => {
     e.preventDefault();
+    if (toggleSearch == true) {
+      setFirstDBQ(true);
+    }
     setToggleSearch(!toggleSearch);
+    console.log(toggleSearch)
+
   };
 
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
@@ -61,7 +93,7 @@ const Chat = ({
 
   useEffect(() => {
     scrollToBottom();
-  }, [chat]);
+  }, [chat, toggleSearch]);
 
   /*  When a category is chosen from the list,
       a message is sent as a user that asks the question (to personalize the experience),
@@ -130,13 +162,14 @@ const Chat = ({
         return null;
     }
   };
-
-  // good shit shuhei - Tsvetislav
   // (category already chosen) user clicks on a question, the question is sent as a user (to personalize the experience),
   // then the bot replies with the answer
   const clickQuestion = (question: string) => {
     return userMessage(question), askQuestion(question);
   };
+
+
+  
 
   // Return button to see FAQ Category List
   const returnCategoryMenu = () => {
@@ -228,8 +261,6 @@ const Chat = ({
         </button> */}
       </div>
 
-      {/* sorry about this being so ugly guys lol, I know you'll take care of it, thanks in advance - Tsvetislav */}
-
       {/* Handle Messages */}
       {/* <div className="history-box"> */}
       <div className="history-box">
@@ -242,32 +273,45 @@ const Chat = ({
         <div className="faq">
           <Category clickCategory={clickCategory} lang={lang} />
         </div>
-
         {/* Display Chat */}
         {chat.length === 0
           ? ""
           : chat.map((msg: any) => (
             <div className={msg.type}>{condition(msg)}</div>
           ))}
-
+        {firstDBQ == true && toggleSearch == false
+          ? <div className="bot">Enter keyword for question: </div>
+          : ""
+        }
         <div ref={messagesEndRef} className="chat-buffer" />
 
       </div>
       {/* Input Box */}
       <div>
         <form onSubmit={handleClick} className="input-box">
-          <input
-            id="chatBox"
-            spellCheck="true"
-            onChange={(e) => setMessage(e.target.value)}
-            value={message}
-            placeholder="Enter a question...">
-          </input>
+
+          {firstDBQ == true && toggleSearch == false
+            ? <input
+              id="chatBox"
+              spellCheck="true"
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
+              placeholder="Press enter to skip">
+            </input>
+            : <input
+              id="chatBox"
+              spellCheck="true"
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
+              placeholder="Enter a question...">
+            </input>
+          }
+
           <button> Send </button>
           <button className="feeback-btn"> Rate our service </button>
-        </form>      
-        
-      </div>      
+        </form>
+
+      </div>
     </div>)}
     {lang == "dutch" && (<div className="chat">
       {/* Dutch version */}
@@ -331,7 +375,7 @@ export default connect(mapStateToProps, {
   searchGoogle,
   askCategory,
   categoryList,
-  askQuestion
+  askQuestion,
 })(Chat);
 
 
