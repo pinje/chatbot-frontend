@@ -8,8 +8,9 @@
 }
 
 .feedback-box .title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bolder;
+    text-align: center;
 }
 
 .star-rating {
@@ -24,16 +25,17 @@
 }
 
 .return-button {
-    border: 2px solid #ff4d4d;
+    border: 2px solid #D99AC5;
     border-radius: 5px;
     padding: 5px;
+    text-align: center;
     text-transform: uppercase;
     font-weight: bolder;
-    margin-right: 80px;
+    margin-left: 90px;
 }
 
 .return-button:hover {
-    background-color: #ff4d4d;
+    background-color: #D99AC5;
 }
 
 .submit-button {
@@ -42,6 +44,8 @@
     padding: 5px;
     text-transform: uppercase;
     font-weight: bolder;
+    text-align: center;
+    margin-left: 90px;
 }
 
 .submit-button:hover {

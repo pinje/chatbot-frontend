@@ -1,46 +1,57 @@
  /* Add styles to the setting container */
  .settings-container {
-    position: fixed; 
-    top: 130px;       
-    width: 250px;
-    height: auto; 
-    font-weight:400;
-    right: 65px; 
-    padding: 0;    
-    background-color: #73397a;   
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    
-  }
+  position: fixed; 
+  top: 190px;       
+  width: 200px;
+  height: auto; 
+  font-weight:400;
+  right: 65px; 
+  padding: 0;    
+  background-color: #73397a;   
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+  0 6px 20px 0 rgba(0, 0, 0, 0.19);
   
-  .setting-option{
-    max-width: 100%;   
-    background-color: #643c69;     
-    margin: 3px 3px;
-    border-radius: 2px;
-    padding: 6px 4px;
-    color: white;
-    font-size: 12px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border: 1px solid rgb(55, 54, 54);
-  }
-  .setting-option:hover{
-    background-color: #a367a9;
-  }
-  .setting-option select{
-    float: right;    
-    font-size: 12px;
-    width: 120px;
-    
-  }
-  
-  .flags{   
-    width: 20px;
-    height: 14px;
-    border: 1px solid white;
-    float: right;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
-    0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-right: 5px;
-  }
+}
+
+.setting-option{
+  width: 100;
+  height: 25px;
+  background-color: #643c69;     
+  margin: 3px 3px;
+  border-radius: 2px;
+
+  padding-top: 3px;
+  padding-bottom: 9px;
+  color: white;
+  font-size: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid rgb(55, 54, 54);
+}
+/* .setting-option:hover{
+  background-color: #a367a9;
+} */
+.setting-option select{
+  float: right;    
+  font-size: 15px;
+  width: 150px;    
+  border-radius: 10px;
+  height: 30px;
+}
+select{
+  width: 500px;
+  height: 21px;
+}
+
+.flags{   
+  width: 24px;
+  height: 18px;
+  border: 1px solid white;
+  float: right;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-right: 5px;
+  margin-top: 4px;
+  margin-left: 2px;
+}
+

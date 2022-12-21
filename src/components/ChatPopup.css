@@ -1,10 +1,9 @@
   
   /* Add styles to the form container */
   .form-container { 
-
     bottom: 0;   
     width: 380px;
-    height: 540px;
+    height: 520px;
     position: fixed;   
     right: 65px;
     bottom: 75px;

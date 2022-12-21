@@ -18,7 +18,6 @@ import { clearStore, createSession } from "./actions/watson";
 // import axios
 import axios from "axios";
 import FeedbackPopup from "./FeedbackPopup";
-import { clear } from "console";
 
 if (localStorage.session) {
   delete axios.defaults.headers.common["session_id"];
@@ -27,52 +26,63 @@ if (localStorage.session) {
   delete axios.defaults.headers.common["session_id"];
 }
 
-function ChatPopup(props: popupState) {   
+function ChatPopup(props: popupState) {
 
-   const [openSettings, setOpenSettings] = useState<boolean>(false);
-   const [feedback, setFeedback] = useState<boolean>(false);
+  const [openSettings, setOpenSettings] = useState<boolean>(false);
+  const [feedback, setFeedback] = useState<boolean>(false);
+  const [toggleSearch, setToggleSearch] = useState(false);
+  const [firstDBQ, setFirstDBQ] = useState(true);
 
-   const reloadClick = () =>  {
+  const handleSearchToggle = () => {
+    // e.preventDefault();
+    console.log("wassup")
+    if (toggleSearch == false) {
+      setFirstDBQ(true);
+    }
+    setToggleSearch(!toggleSearch);
+  };
+
+  const reloadClick = () => {
     store.dispatch(clearStore());
-   }
+  };
 
-   const askFeedback = () => {
+  const askFeedback = () => {
     if (feedback == false) {
       setFeedback(true);
     } else {
       // close chat
       props.setIsOpen(false);
     }
-   }
+  }
 
-   useEffect(() => {
-      // check if there's a session
-      if (!localStorage.session) {
-         // create
-         createSession();
-      }
-   })
+  useEffect(() => {
+    // check if there's a session
+    if (!localStorage.session) {
+      // create
+      createSession();
+    }
+  })
 
-   return (
-      <Provider store={store}>
+  return (
+    <Provider store={store}>
       <div className='form-container'>
-         <div className='popup-header'>  
-         <img alt="xd" className='bot-icon' src={require('../img/chatbot-icon.png')} />          
-            {/* <img className='bot-icon' src={require('../img/chat-profile.jpg')} /> */}
-            <button onClick={() => askFeedback()}> X </button>
-             
-            <button onClick={() => {
-                  setOpenSettings(!openSettings)
-                  }}>
-               <img alt="xd" className='setting-icon' src={require('../img/setting.png')}            
-               
-               />
-            </button>
+        <div className='popup-header'>
+          <img alt="xd" className='bot-icon' src={require('../img/chatbot-icon.png')} />
+          {/* <img className='bot-icon' src={require('../img/chat-profile.jpg')} /> */}
+          <button onClick={()=>{props.setIsOpen(false)}}> X </button>
 
-            <button onClickCapture={() => {reloadClick()}}>
-               <img alt="xd" className='reload-icon' src={require('../img/reload.png')} />
-            </button>
-            {openSettings && <Settings/>}
+          <button onClick={() => {
+            setOpenSettings(!openSettings)
+          }}>
+            <img alt="xd" className='setting-icon' src={require('../img/setting.png')}
+            />
+          </button>
+
+          <button onClickCapture={() => { reloadClick() }}>
+            <img alt="xd" className='reload-icon' src={require('../img/reload.png')} />
+          </button>
+          {openSettings && <Settings handleSearchToggle={handleSearchToggle} toggleSearch={toggleSearch} setToggleSearch={setToggleSearch}
+            firstDBQ={firstDBQ} setFirstDBQ={setFirstDBQ} isOpen={setOpenSettings} />}
 
           <div className="popup-header-box">
             <div className="popup-header-title">Fontys Buddy</div>
@@ -80,7 +90,10 @@ function ChatPopup(props: popupState) {
           </div>
         </div>
         <div className="title">
-          {feedback ? <FeedbackPopup setIsOpen={setFeedback}/> : <Chat/>}
+          {feedback ? <FeedbackPopup setIsOpen={setFeedback}
+            chatIsOpen={props.setIsOpen} /> : <Chat handleSearchToggle ={handleSearchToggle} toggleSearch ={toggleSearch} setToggleSearch = {setToggleSearch}
+            firstDBQ = {firstDBQ} setFirstDBQ = {setFirstDBQ} askFeedback={askFeedback}
+           />}
         </div>
       </div>
     </Provider>

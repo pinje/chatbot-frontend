@@ -1,6 +1,6 @@
 /* bot message style */
 .bot, .botLink{
-  background-color: rgb(197, 173, 197);    
+  background-color: #c5adc5;    
   max-width: 190px;
   min-width: 20px;
   width: fit-content;
@@ -83,17 +83,16 @@ a:hover {
   display: flex;
   justify-content: space-between;
   position: static;
-  background-color: #a26fa2; 
+  background-color: #e8e3e8; 
   width: 100%; 
-  /* height: 70px;  */
-  height: 110px;
+  height: 70px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
     0 4px 20px 0 rgba(0, 0, 0, 0.19); 
   border-radius: 0px 0px 0px 13px; 
 }
 
 .input-box input {
-  max-height: 43%;
+  max-height: 100%;
   width: 100%;
   float: left;
   border: none;
@@ -106,9 +105,9 @@ a:hover {
 
 .input-box button {  
   border: none;
-  width: 70px;
+  width:90px; 
   height: 30px;
-  padding: 2px 15px;  
+  /* padding: 2px 15px;   */
   margin: 20px 16px;
   border-radius: 4px;  
   background-color: #73397a;  
@@ -125,14 +124,24 @@ a:hover {
   cursor: pointer;
   background-color: #6c5f6f;
 }
-.input-box .feeback-btn{
-  margin-top: 70px;  
-  
- width: 250px;
- margin-right: 60px;
-  color: #ffffff;
+
+.feeback-btn{
+  display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: rgb(86, 34, 84);
+  border: none;
+  color:white;
+  background-color: #73397a;
+  border-radius: 40px;
+  height: 40px;
+  width: 70%;
+  margin: 15px 0px 15px 20px;
+  cursor: pointer;
+}
+
+.feeback-btn:hover {
+  cursor: pointer;
+  background-color: #6c5f6f;
 }
 
 .send-icon{
@@ -143,9 +152,9 @@ a:hover {
 
 .intro-container{
   background-color:  rgb(255, 255, 255); 
-  height: 33px;
+  height: 40px;
   width: 333px;
-  margin: 40px 20px 20px 20px;
+  margin: 10px 20px 20px 20px;
   border-bottom: 1px solid rgb(169, 168, 168);
   text-align: center;    
 }
@@ -154,7 +163,7 @@ a:hover {
   height: 26px;
   width: 312px;
   text-align: center;
-  margin: 8px 9px; 
+  margin: 20px 9px; 
    border-radius: 4px;   
 }
 .intro-container p{
@@ -166,42 +175,6 @@ font-size: 13px;
   margin-top: 5px;
 }
 
-.google-button {
-  align-items: center;
-  appearance: none;
-  background-color: #FCFCFD;
-  border-radius: 10px;
-  border-width: 0;
-  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
-  box-sizing: border-box;
-  color: #36395A;
-  cursor: pointer;
-  margin-right: 10px; 
-  float: right;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;  
-  height: 26px;  
-  padding-left: 10px;
-  padding-right: 10px;
-  position: relative;
-  text-align: center;
-  transition: box-shadow .15s,transform .15s;
-  will-change: box-shadow,transform;
-  font-size: 13px;
-}
-
-.google-button:focus {
-  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-}
-
-.google-button:hover {
-  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-  transform: translateY(-2px);
-}
-
-.google-button:active {
-  box-shadow: #D6D6E7 0 3px 7px inset;
-  transform: translateY(2px);
-}
 
 .goback-button {
   border: 2px solid #ccc;
@@ -239,6 +212,11 @@ font-size: 13px;
   width: 15%;
   margin: 15px 0px 15px 20px;
   cursor: pointer;
+}
+
+.contact-button:hover {
+  cursor: pointer;
+  background-color: #6c5f6f;
 }
 
 .contact-detail-title {

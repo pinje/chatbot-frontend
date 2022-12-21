@@ -1,20 +1,18 @@
 .switch{
     position: relative;
     display: inline-block;
-    width: 37px;
+    width: 34px;
     height: 16px;       
-    margin-left: 24%; 
+    margin-left: 50%; 
+    margin-top:2%;    
     
 }
 .switch input{
     opacity: 0;
     width: 0;
-    height: 0;
-    
-    
+    height: 0;    
 }
-.slider{
-    
+.slider{    
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -40,13 +38,13 @@
 }
 input:checked + .slider {
     /* background-color: #2196F3; */
-    background-color: rgb(61, 61, 229);
+    background-color: rgb(96, 96, 231);
     
   }
   
   input:focus + .slider {
     /* box-shadow: 0 0 1px #2196F3; */
-    box-shadow: 0 0 1px rgb(61, 61, 229);
+    box-shadow: 0 0 1px rgb(96, 96, 231);
   }
   input:checked + .slider:before {
     -webkit-transform: translateX(20px);
@@ -64,7 +62,6 @@ input:checked + .slider {
   }
   .switch-container{
     max-width: 100%;
-    background-color: yellow;
     padding: 3px;
   }
   .onOffButton{
@@ -74,12 +71,14 @@ input:checked + .slider {
   }
   .on{
     margin: none;
+    color: black;
     font-size: 10px;
     margin: 3px 2px 0px 20px;
    
   }
   .off{
     margin: none;
+    color:black;
     font-size: 10px;  
     margin: 2px;
     margin: 3px 2px 0px 2px;
@@ -91,50 +90,45 @@ input:checked + .slider {
     background-color: rgb(255, 255, 255);   
     /* background-color: rgb(246, 244, 247); */
     border: 1px solid rgb(145, 12, 145);    
-    margin: 15px 20px 15px 20px;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
     0 4px 20px 0 rgba(0, 0, 0, 0.19);    
-    border-radius: 40px;
-    width: 100%;
+    border-radius: 10px;
+    width:180px;    
+    height: 30px;
   }
   
-  .flex-container > div {
-   
+  .flex-container > div {   
     background-color: rgb(255, 255, 255);    
     color: white;
     width: 100%;
-    height: 29px;
+    height: 20px;
     margin: 1px;   
     font-size: 10px;    
     padding: none;
-    border-radius: 40px;    
+    border-radius: 10px;    
     
   }
   .flex-container > div:nth-child(1){    
-    width: 50px;  
-    height: 34px; 
-    margin: 3px 0px 0px 4px; 
-    
-   
+    width: 300px;  
+    height: 20px;
+    margin-left: 2%;
    
   }
   .flex-container > div:nth-child(3){
     background-color: rgb(224, 221, 221);     
-    width: 80px;    
+    width: 100px;    
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
     0 4px 20px 0 rgba(0, 0, 0, 0.19);  
-    color: rgb(36, 35, 35); 
-   
-   
+    color: rgb(36, 35, 35);    
   }
 
 .googletext{
   padding: none;
-  font-size: 14px;
+  font-size: 15px;
   color: rgb(36, 35, 35); 
-  padding-top: 6px;
-  
+  padding-top: 6px;  
 }
+
 .search-icon{
   width: 30px;
   height: 30px;
@@ -144,4 +138,5 @@ input:checked + .slider {
    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
     0 4px 20px 0 rgba(0, 0, 0, 0.19);  
     color: rgb(36, 35, 35); 
+    
 }

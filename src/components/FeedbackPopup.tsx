@@ -3,23 +3,27 @@ import StarRatings from 'react-star-ratings'
 import { useState } from 'react';
 import { storeConveration } from './actions/watson';
 import { connect } from "react-redux";
-import { popupState } from '../models/popupState';
+import { clearStore } from "./actions/watson";
+import store from "../store";
 
-const FeedbackPopup = (props:any, setIsOpen:popupState) => {
+//мъ бранцх
+const FeedbackPopup = (props:any) => {
     const { chat, storeConveration } = props;
 
     const [rating, setRating] = useState(0);
 
     const submitFeedback = () => {
-        console.log("wasup")
         console.log(rating)
         console.log(chat)
         storeConveration(chat, rating);
+        props.chatIsOpen(false);
+        store.dispatch(clearStore());
+     
     }
 
     return (
         <div className='feedback-box'>
-            <div className='title'>HOW WAS THE EXPERIENCE?</div>
+            <div className='title'>HOW WOULD YOU RATE <br/> THE EXPERIENCE?</div>
             <div className='star-rating'>
                 <StarRatings
                     rating={rating}
@@ -31,11 +35,11 @@ const FeedbackPopup = (props:any, setIsOpen:popupState) => {
                     name='rating' />
             </div>
             <div className='notice'>
-                By answering this, the chat logs will be stored into our database
+                Your feedback will help us to improve our service. 
             </div>
             <div>
-                <button onClick={() => setIsOpen.setIsOpen(false)} className='return-button'>return</button>
                 <button onClick={() => submitFeedback()} className='submit-button'>submit</button>
+                <button onClick={() => props.setIsOpen(false)} className='return-button'>return</button>
             </div>
         </div>
     )

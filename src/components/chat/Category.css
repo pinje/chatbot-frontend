@@ -1,19 +1,34 @@
 button {
-    border: 2px solid #355070;
-    text-align: center;
-    
+    border: none;
+    background-color: transparent;
+    text-align: left;    
     text-decoration: none;
     /* display: inline-block; */
     border-radius: 8px;   
     /* border-left: 5px solid #73397a; */
-    background-color: transparent;
+ 
     margin-bottom: 5px;
     width: 200px;
 }
 
-button:hover {
+.catBtn div {
+    padding-top: 8px;
+}
+.catBtn {
+    /* border: 2px solid #694D75; */
+    background-color: #A483A4;
+    text-align: center;    
+    text-decoration: none;
+    /* display: inline-block; */
+    border-radius: 8px;   
+    /* border-left: 5px solid #73397a; */ 
+    margin-bottom: 5px;
+    width: 200px;
+} 
+
+.catBtn:hover {
     cursor: pointer;
-    background-color: #bf86c6
+    background-color: #6c5f6f
 }
 
 .arrow {

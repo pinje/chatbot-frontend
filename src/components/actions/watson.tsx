@@ -125,11 +125,12 @@ export const clearStore = () => {
   };
 }
 
-export const storeConveration = (messages: any, rating: number) => async (dispatch: any) => {
+export const storeConveration = (messages: any, rating: number) => () => {
   try {
+    console.log("hello")
     const body = { messages: messages, rating: rating };
     axiosInstance.post("/log", body).catch((err) => { console.log(err) })
   } catch (err) {
-    dispatch({ type: MESSAGE_FAIL });
+    console.log(err)
   }
 };

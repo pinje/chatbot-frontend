@@ -29,44 +29,44 @@ function Category(props:any) {
     return (
       <>
       {props.lang == "english" && (<div>
-          You can also see our FAQ
+          <strong>FAQ</strong>
           <hr/>
-          <button onClickCapture={passwordQuestion}> 
+          <button onClickCapture={passwordQuestion}className="catBtn"> 
           <img className="icons" src={require('../../img/password4.jpg')}/>                
-           Password reset</button><br/>
-          <button onClickCapture={officeQuestion}>
-          <img className="icons" src={require('../../img/office3.webp')}/>
-            Office 365 </button><br/>
-          <button onClickCapture={fontysLaptopQuestion}>
+           <div>Password reset</div></button><br/>
+          <button onClickCapture={officeQuestion} className="catBtn">
+          <img className="icons" src={require('../../img/office3.png')}/>
+           <div> Office 365</div> </button><br/>
+          <button onClickCapture={fontysLaptopQuestion} className="catBtn">
           <img className="icons" src={require('../../img/laptop1.jpg')}/>
-            Fontys laptop </button><br/>
-          <button onClickCapture={wifiQuestion}>
+          <div>Fontys laptop</div> </button><br/>
+          <button onClickCapture={wifiQuestion} className="catBtn">
           <img className="icons" src={require('../../img/wifi2.jpg')}/>
-            WiFi (eduroam) </button><br/>
-          <button onClickCapture={mediaQuestion}>
+          <div>  WiFi (eduroam)</div> </button><br/>
+          <button onClickCapture={mediaQuestion} className="catBtn">
           <img className="icons" src={require('../../img/video.jpg')}/>
-            Audio and video</button><br/>
+          <div> Audio and video</div></button><br/>
         </div>)}
 
         {props.lang == "dutch" && (<div>
-          Bekijk ook de vaakgestelde vragen
+          <strong>FAQ</strong>
           <hr/>
-          <button onClickCapture={passwordQuestion}> 
+          <button onClickCapture={passwordQuestion} className="catBtn"> 
           <img className="icons" src={require('../../img/password4.jpg')}/>     
-               
-           Reset wachtwoord<img className="arrow" src={require('../../img/arrow.png')} /></button>
-          <button onClickCapture={officeQuestion}>
-          <img className="icons" src={require('../../img/office3.webp')}/>
-            Office 365 <img className="arrow" src={require('../../img/arrow.png')} /></button>
-          <button onClickCapture={fontysLaptopQuestion}>
+          <div>     
+           Reset wachtwoord</div></button>
+          <button onClickCapture={officeQuestion} className="catBtn">
+          <img className="icons" src={require('../../img/office3.png')}/>
+          <div>  Office 365</div> </button>
+          <button onClickCapture={fontysLaptopQuestion} className="catBtn">
           <img className="icons" src={require('../../img/laptop1.jpg')}/>
-            Fontys laptop <img className="arrow" src={require('../../img/arrow.png')} /></button>
-          <button onClickCapture={wifiQuestion}>
+          <div> Fontys laptop </div></button>
+          <button onClickCapture={wifiQuestion} className="catBtn">
           <img className="icons" src={require('../../img/wifi2.jpg')}/>
-            WiFi (eduroam) <img className="arrow" src={require('../../img/arrow.png')} /></button>
-          <button onClickCapture={mediaQuestion}>
+          <div> WiFi (eduroam) </div></button>
+          <button onClickCapture={mediaQuestion} className="catBtn">
           <img className="icons" src={require('../../img/video.jpg')}/>
-            Audio en video <img className="arrow" src={require('../../img/arrow.png')} /></button>
+          <div> Audio en video </div></button>
         </div>)}
         </>
     );
