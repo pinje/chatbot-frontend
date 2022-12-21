@@ -11,6 +11,11 @@ button {
     width: 200px;
 }
 
+button:hover{
+    cursor: pointer;
+    background-color: #a483ae
+}
+
 .catBtn div {
     padding-top: 8px;
 }
@@ -28,7 +33,7 @@ button {
 
 .catBtn:hover {
     cursor: pointer;
-    background-color: #6c5f6f
+    background-color: #855e91
 }
 
 .arrow {

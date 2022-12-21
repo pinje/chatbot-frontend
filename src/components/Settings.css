@@ -10,7 +10,7 @@
   background-color: #73397a;   
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
   0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .setting-option{
@@ -19,7 +19,6 @@
   background-color: #643c69;     
   margin: 3px 3px;
   border-radius: 2px;
-
   padding-top: 3px;
   padding-bottom: 9px;
   color: white;
@@ -27,16 +26,20 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
   0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border: 1px solid rgb(55, 54, 54);
+  
 }
 /* .setting-option:hover{
   background-color: #a367a9;
 } */
 .setting-option select{
   float: right;    
-  font-size: 15px;
+  font-size: 14px;
   width: 150px;    
+  padding-left: 5px;
   border-radius: 10px;
   height: 30px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
 }
 select{
   width: 500px;

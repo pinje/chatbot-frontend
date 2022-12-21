@@ -11,7 +11,7 @@ function Questions(props:any) {
           case 'password':
             return (
               <div>
-                  FAQ: Password
+                  <strong>FAQ: Password</strong>
                   <hr/>
                   <button onClickCapture={(e) => question(e, "How can I reset my password?")}>Q: How can I reset my password? <img className="arrow" src={require('../../img/arrow.png')} /></button>
               </div>
@@ -19,7 +19,7 @@ function Questions(props:any) {
           case 'office':
             return (
               <div>
-                  FAQ: Office 365
+                 <strong> FAQ: Office 365</strong>
                   <hr/>
                   <button onClickCapture={(e) => question(e, "What is included in Office 365?")}>Q: What is included in Office 365? <img className="arrow" src={require('../../img/arrow.png')} /></button>
                   <button onClickCapture={(e) => question(e, "Can I get Office 365?")}>Q: Can I get Office 365? <img className="arrow" src={require('../../img/arrow.png')} /></button>
@@ -31,7 +31,7 @@ function Questions(props:any) {
           case 'equipment':
           return (
             <div>
-                FAQ: Fontys Laptop
+             <strong>FAQ: Fontys Laptop</strong>
                 <hr/>
                 {/* <button onClickCapture={(e) => question(e, "I have direct access problems in the start up of the laptop.")}>Q: I have direct access problems in the start up of the laptop. <img className="arrow" src={require('../../img/arrow.png')} /></button> */}
                 <button onClickCapture={(e) => question(e, "I have Battery, Sound or Camera issues.")}>Q: I have Battery, Sound or Camera issues. <img className="arrow" src={require('../../img/arrow.png')} /></button>
@@ -40,7 +40,7 @@ function Questions(props:any) {
           case 'wifi':
             return (
               <div>
-                  FAQ: WiFi
+             <strong>FAQ: WiFi</strong>
                   <hr/>
                   <button onClickCapture={(e) => question(e, "How to connect to eduroam (students)?")}>Q: How to connect to eduroam (students)? <img className="arrow" src={require('../../img/arrow.png')} /></button>
                   {/* <button onClickCapture={(e) => question(e, "How to connect to eduroam as a visitor (guest lecturer)?")}>Q: How to connect to eduroam as a visitor (guest lecturer)? <img className="arrow" src={require('../../img/arrow.png')} /></button> */}
@@ -49,7 +49,7 @@ function Questions(props:any) {
           case 'media':
             return (
               <div>
-                  FAQ: Audio & Video
+                  <strong>FAQ: Audio & Video</strong>
                   <hr/>
                   <button onClickCapture={(e) => question(e, "How to use the smart board?")}>Q: How to use the smart board? <img className="arrow" src={require('../../img/arrow.png')} /></button>
               </div>
@@ -62,7 +62,7 @@ function Questions(props:any) {
           case 'password':
             return (
               <div>
-                  FAQ: Wachtwoord
+                <strong>  FAQ: Wachtwoord</strong>
                   <hr/>
                   <button onClickCapture={(e) => question(e, "How kan ik mijn wachtwoord resetten?")}>Q: How kan ik mijn wachtwoord resetten? <img className="arrow" src={require('../../img/arrow.png')} /></button>
               </div>
@@ -70,7 +70,7 @@ function Questions(props:any) {
           case 'office':
             return (
               <div>
-                  FAQ: Office 365
+               <strong>   FAQ: Office 365</strong>
                   <hr/>
                   <button onClickCapture={(e) => question(e, "Wat is inbegrepen bij Office 365?")}>Q: Wat is inbegrepen bij Office 365? <img className="arrow" src={require('../../img/arrow.png')} /></button>
                   <button onClickCapture={(e) => question(e, "Krijg ik Office 365?")}>Q: Krijg ik Office 365? <img className="arrow" src={require('../../img/arrow.png')} /></button>
@@ -82,7 +82,7 @@ function Questions(props:any) {
           case 'equipment':
           return (
             <div>
-                FAQ: Fontys Laptop
+               <strong> FAQ: Fontys Laptop</strong>
                 <hr/>
                 {/* <button onClickCapture={(e) => question(e, "I have direct access problems in the start up of the laptop.")}>Q: I have direct access problems in the start up of the laptop. <img className="arrow" src={require('../../img/arrow.png')} /></button> */}
                 <button onClickCapture={(e) => question(e, "Ik heb batterij, geluid of camera problemen.")}>Q: Ik heb batterij, geluid of camera problemen. <img className="arrow" src={require('../../img/arrow.png')} /></button>
@@ -91,7 +91,7 @@ function Questions(props:any) {
           case 'wifi':
             return (
               <div>
-                  FAQ: WiFi
+               <strong>   FAQ: WiFi </strong>
                   <hr/>
                   <button onClickCapture={(e) => question(e, "Hoe verbind ik met eduroam (studenten)?")}>Q: Hoe verbind ik met eduroam (studenten)? <img className="arrow" src={require('../../img/arrow.png')} /></button>
                   {/* <button onClickCapture={(e) => question(e, "How to connect to eduroam as a visitor (guest lecturer)?")}>Q: How to connect to eduroam as a visitor (guest lecturer)? <img className="arrow" src={require('../../img/arrow.png')} /></button> */}
@@ -100,7 +100,7 @@ function Questions(props:any) {
           case 'media':
             return (
               <div>
-                  FAQ: Audio & Video
+                 <strong> FAQ: Audio & Video </strong>
                   <hr/>
                   <button onClickCapture={(e) => question(e, "Hoe gebruik ik het smart board?")}>Q: Hoe gebruik ik het smart board? <img className="arrow" src={require('../../img/arrow.png')} /></button>
               </div>
