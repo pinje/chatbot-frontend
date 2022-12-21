@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
-    baseURL: 'http://localhost:8080'
+    baseURL: 'https://pie3bot.azurewebsites.net'
 });
 
 export default axiosInstance;
