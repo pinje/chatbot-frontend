@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { clearStore } from "./actions/watson";
 import store from "../store";
 
-//мъ бранцх
 const FeedbackPopup = (props:any) => {
     const { chat, storeConveration } = props;
 
