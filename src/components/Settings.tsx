@@ -4,7 +4,6 @@ import './Settings.css';
 import {
   LANG_SUCCESS
 } from "./actions/types";
-import { popupState } from "../models/popupState";
 
 const ChangeLang = (e: React.ChangeEvent<HTMLSelectElement>) => (dispatch: any) => {
   e.preventDefault();
@@ -13,7 +12,6 @@ const ChangeLang = (e: React.ChangeEvent<HTMLSelectElement>) => (dispatch: any) 
     payload: e.currentTarget.value,
   });
 }
-
 
 const Settings = (props: any) => {
 
@@ -41,11 +39,11 @@ const Settings = (props: any) => {
               </div>
               <div className="switch-container">
                 <label className="switch">
-                  <input onFocus={props.handleSearchToggle} type="checkbox" />
+                  <input onFocus={props.handleSearchToggle} checked={props.toggleSearch} type="checkbox"  />
                   <span className="slider round" />
                   {props.toggleSearch == true
-                    ? <div className="on">On</div>
-                    : <div className="off">Off</div>
+                    ? <div className="off">On</div>
+                    : <div className="on">Off</div>
                   }
                 </label>
               </div>

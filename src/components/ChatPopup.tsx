@@ -1,6 +1,6 @@
 import { popupState } from "../models/popupState";
 import "./ChatPopup.css";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 //import settings
 import Settings from "./Settings";
@@ -31,11 +31,11 @@ function ChatPopup(props: popupState) {
   const [openSettings, setOpenSettings] = useState<boolean>(false);
   const [feedback, setFeedback] = useState<boolean>(false);
   const [toggleSearch, setToggleSearch] = useState(false);
+  //first question send to db search - keyword
   const [firstDBQ, setFirstDBQ] = useState(true);
 
   const handleSearchToggle = () => {
     // e.preventDefault();
-    console.log("wassup")
     if (toggleSearch == false) {
       setFirstDBQ(true);
     }
@@ -44,6 +44,8 @@ function ChatPopup(props: popupState) {
 
   const reloadClick = () => {
     store.dispatch(clearStore());
+    //closes feedback
+    setFeedback(false); 
   };
 
   const askFeedback = () => {

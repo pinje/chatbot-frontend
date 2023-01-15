@@ -12,12 +12,9 @@ const FeedbackPopup = (props:any) => {
     const [rating, setRating] = useState(0);
 
     const submitFeedback = () => {
-        console.log(rating)
-        console.log(chat)
         storeConveration(chat, rating);
         props.chatIsOpen(false);
-        store.dispatch(clearStore());
-     
+        store.dispatch(clearStore());     
     }
 
     return (

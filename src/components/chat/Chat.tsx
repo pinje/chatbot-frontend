@@ -33,9 +33,7 @@ const Chat = (props: any) => {
 
   //Handle User Message
   const [message, setMessage] = useState("");
-  // const [toggleSearch, setToggleSearch] = useState(false);
-  // sets if thats the first question send to db - used to send catergory
-  // const [firstDBQ, setFirstDBQ] = useState(true);
+ 
 
   // function that handles user submission
   const handleClick = (e: any) => {
@@ -61,15 +59,6 @@ const Chat = (props: any) => {
       }
     }
   };
-
-  // const handleSearchToggle = (e: any) => {
-  //   e.preventDefault();
-  //   if (props.toggleSearch == true) {
-  //     props.setFirstDBQ(true);
-  //   }
-  //   props.setToggleSearch(!props.toggleSearch);
-  //   console.log(props.toggleSearch)
-  // };
 
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
