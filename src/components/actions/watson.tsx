@@ -12,6 +12,7 @@ import {
   QUESTION_SUCCESS,
   RESET_STATE,
   CONTACT_SUCCESS,
+  PREVENT_INPUT
 } from "../actions/types";
 
 // import axios
@@ -132,5 +133,14 @@ export const storeConveration = (messages: any, rating: number) => () => {
     axiosInstance.post("/log", body).catch((err) => { console.log(err) })
   } catch (err) {
     console.log(err)
+  }
+};
+
+// function that handles not allowed input such as "/"
+export const preventInput = (message: string) => async (dispatch: any) => {
+  try {
+    dispatch({ type: PREVENT_INPUT, payload: message });
+  } catch (err) {
+    dispatch({ type: INPUT_FAIL });
   }
 };

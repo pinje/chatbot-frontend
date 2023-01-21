@@ -15,7 +15,8 @@ import {
   categoryList,
   askQuestion,
   askContact,
-  storeConveration
+  storeConveration,
+  preventInput
 } from "../actions/watson";
 
 const Chat = (props: any) => {
@@ -29,6 +30,7 @@ const Chat = (props: any) => {
     categoryList,
     askQuestion,
     askContact,
+    preventInput
   } = props;
 
   //Handle User Message
@@ -52,10 +54,14 @@ const Chat = (props: any) => {
     }
     else {
       if (message != "") {
-        console.log(message);
-        userMessage(message);
-        props.toggleSearch ? sendMessage(message) : searchGoogle(message);
-        setMessage("");
+        if (message.includes("/")) {
+          preventInput("\"/\" input not allowed. Try to rewrite your question.");
+        } else {
+          console.log(message);
+          userMessage(message);
+          props.toggleSearch ? sendMessage(message) : searchGoogle(message);
+          setMessage("");
+        }
       }
     }
   };
@@ -423,7 +429,8 @@ export default connect(mapStateToProps, {
   categoryList,
   askQuestion,
   askContact,
-  storeConveration
+  storeConveration,
+  preventInput
 })(Chat);
 
 
