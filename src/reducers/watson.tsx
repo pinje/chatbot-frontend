@@ -15,6 +15,7 @@ import {
   QUESTION_SUCCESS,
   RESET_STATE,
   CONTACT_SUCCESS,
+  PREVENT_INPUT
 } from "../components/actions/types";
 
 // initial state
@@ -111,6 +112,14 @@ export default (state = initialState, action: { type: any; payload: any }) => {
         ...state,
         messages,
       };
+
+    case PREVENT_INPUT:
+      messages = [...messages, { message: payload, type: "not-allowed" }];
+      return {
+        ...state,
+        messages,
+      };
+
     default:
       return {
         ...state,

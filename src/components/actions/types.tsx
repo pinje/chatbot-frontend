@@ -21,3 +21,5 @@ export const CONTACT_SUCCESS = "CONTACT_SUCCESS";
 export const RESET_STATE = "RESET_STATE";
 
 export const STORED_FAIL = "STORED_FAIL";
+
+export const PREVENT_INPUT = "PREVENT_INPUT";
