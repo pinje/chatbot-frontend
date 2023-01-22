@@ -175,16 +175,15 @@ const Chat = (props: any) => {
     categoryList();
   };
 
-  const showLink = (url: string) => {
-    let domain = (new URL(url));
-    return domain.host;
+  const showLink = (title: string) => {
+    return title;
   }
 
   // Check output on chat: link, FAQ category list, Specific category questions list, normal message
   function condition(msg: any) {
     switch (msg.type) {
       case "botLink":
-        return <a target="_blank" href={msg.message}>{showLink(msg.message)}</a>;
+        return <a target="_blank" href={msg.message}>{showLink(msg.title)}</a>;
       case "category-list":
         return (
           <div className="faq">

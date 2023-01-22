@@ -68,7 +68,7 @@ export default (state = initialState, action: { type: any; payload: any }) => {
       };
 
     case LINK_SUCCESS:
-      messages = [...messages, { message: payload, type: "botLink" }];
+      messages = [...messages, { message: payload.link, title: payload.linkTitle, type: "botLink" }];
       return {
         ...state,
         messages,
