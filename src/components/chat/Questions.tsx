@@ -8,20 +8,31 @@ function Questions(props: any) {
   const { questions, fetchQuestionsForTopic } = props;
   const [questionList, setQuestionList] = useState([]);
 
+  //questions in the redux store are the same, niceeee im fucked then. 
+
   //child question
   const selectQuestion = (e: any, question: any) => {
     e.preventDefault();
     return (props.clickQuestion(question));
   }
-  useEffect(() => {
-    console.log("SUP")
+  useEffect(()=>{
     console.log(props)
-    fetchQuestionsForTopic(props.category.message.id);
-    if (questions != undefined && questions.length > 0) {
-      setQuestionList(questions[0].questionList);
-      console.log(questionList)
-    }
-  }, [])
+    setQuestionList(props.category.message.questions)
+  },[])
+
+  // useEffect(() => {
+  //   console.log(props.category.message.id)
+  //   console.log(questions)
+  //   console.log("FUCK")
+  //   fetchQuestionsForTopic(props.category.message.id);
+  // }, [])
+
+  // useEffect(() => {
+
+  //   if (questions != undefined && questions.length > 0) {
+  //     setQuestionList(questions[0].questionList);
+  //   }
+  // }, [questions])
 
   //return questions for category 
   //pass selected category as id and name 
@@ -30,7 +41,7 @@ function Questions(props: any) {
   return (
     <>
       <div>
-        <strong>FAQ: {props.category.message.name}</strong>
+        <strong>FAQ: {props.category.message.description}</strong>
         <hr />
         <> {questionList.map((question: any) => {
           return (

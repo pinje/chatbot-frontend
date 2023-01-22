@@ -3,6 +3,9 @@ function Question(props: any) {
   //check if question has childer, if it does - return them as questions. 
   //if it does not, then do the thing 
 
+  //the thing needs to happen here, as each previos question will be fucked 
+
+
   const processQuestion = (e: any, question: any) => {
     e.preventDefault();
     console.log(question)
@@ -11,6 +14,7 @@ function Question(props: any) {
 
   const subQuestions = () => {
     {console.log(props)}
+
     return (
       props.question.message.children.map((cat: any) => {
         return (
@@ -43,7 +47,6 @@ function Question(props: any) {
         AnswerRr
       </div>
     );
-
   }
 
   const condition = () => {

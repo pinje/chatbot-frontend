@@ -5,32 +5,23 @@ import "./Category.css"
 
 
 function Category(props: any) {
-
     const { categories, fetchTopics } = props;
-
     const [fetched, setFetched] = useState([]);
-    const [render, setRender] = useState<boolean>(false);
 
     useEffect(() => {
         fetchTopics();
+    }, [])
+
+    useEffect(() => {
         if (categories != undefined && categories.length > 0) {
             console.log(categories)
             setFetched(categories[0].fetchedCategories);
-            setRender(true)
-            // console.log(categories[0].fetchedCategories)
         }
-    }, []);
+    }, [categories]);
 
-    useEffect(() => {
-        if (render == true) {
-            console.log(categories)
-            setFetched(categories[0].fetchedCategories);
-        }
-    }, [render]);
-
-    const processQuestion = (e: any, name: string, id: number) => {
+    const processQuestion = (e: any, cat:any) => {
         e.preventDefault();
-        props.clickCategory(name, id);
+        props.clickCategory(cat);
     }
 
     // const officeQuestion = (e: any) => {
@@ -59,8 +50,7 @@ function Category(props: any) {
             {fetched.map((cat: any) => {
                 return (
                     <div>
-                        <button onClickCapture={e => { processQuestion(e, cat.description, cat.id) }} className="catBtn">
-                            <>{console.log(cat)}</>
+                        <button onClickCapture={e => { processQuestion(e, cat) }} className="catBtn">
                             <img className="icons" src={require('../../img/password4.jpg')} />
                             <div>{cat.description}</div></button><br />
                     </div>

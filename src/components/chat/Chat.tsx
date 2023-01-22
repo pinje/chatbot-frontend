@@ -15,7 +15,8 @@ import {
   categoryList,
   askQuestion,
   askContact,
-  storeConveration
+  storeConveration,
+  fetchTopics
 } from "../actions/watson";
 
 const Chat = (props: any) => {
@@ -29,11 +30,11 @@ const Chat = (props: any) => {
     categoryList,
     askQuestion,
     askContact,
+    fetchTopics
   } = props;
 
   //Handle User Message
   const [message, setMessage] = useState("");
-
 
   // function that handles user submission
   const handleClick = (e: any) => {
@@ -70,12 +71,17 @@ const Chat = (props: any) => {
     scrollToBottom();
   }, [chat, props.toggleSearch]);
 
+  useEffect(()=>{
+    fetchTopics();
+  },[])
+
+
   /*  When a category is chosen from the list,
       a message is sent as a user that asks the question (to personalize the experience),
       then the bot replies with Q&A of that topic */
-  const clickCategory = (name: string, id: number) => {
-    userMessage("Let me see FAQs about " + name);
-    askCategory({ name, id });
+  const clickCategory = (msg:any) => {
+    userMessage("Let me see FAQs about " + msg.description);
+    askCategory(msg);
 
     // switch (lang) {
     // case ("english"):
@@ -193,6 +199,7 @@ const Chat = (props: any) => {
         return (
           <div className="bot">
             <Questions category={msg} clickQuestion={clickQuestion} lang={lang} />
+            <>{console.log("in +" + msg.message.id)}</>
             <button
               className="goback-button"
               onClickCapture={returnCategoryMenu}
@@ -374,7 +381,7 @@ const Chat = (props: any) => {
           {chat.length === 0
             ? ""
             : chat.map((msg: any) => (
-              <div className={msg.type}>{condition(msg)}</div>
+              <div className={msg.type}><>{console.log(msg)}{condition(msg)}</></div>
             ))}
           {props.firstDBQ == true && props.toggleSearch == true
             ? <div className="bot">Enter keyword for question: </div>
@@ -427,7 +434,8 @@ export default connect(mapStateToProps, {
   categoryList,
   askQuestion,
   askContact,
-  storeConveration
+  storeConveration,
+  fetchTopics
 })(Chat);
 
 

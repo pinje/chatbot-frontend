@@ -87,7 +87,7 @@ export const categoryList = () => async (dispatch: any) => {
   }
 };
 
-export const askCategory = (category: {name:string, id:number}) => async (dispatch: any) => {
+export const askCategory = (category: any) => async (dispatch: any) => {
   try {
     dispatch({
       type: CATEGORY_SUCCESS,
@@ -129,7 +129,6 @@ export const clearStore = () => {
 
 export const storeConveration = (messages: any, rating: number) => () => {
   try {
-    console.log("hello")
     const body = { messages: messages, rating: rating };
     axiosInstance.post("/log", body).catch((err) => { console.log(err) })
   } catch (err) {
@@ -138,26 +137,36 @@ export const storeConveration = (messages: any, rating: number) => () => {
 };
 
 // fetch topics
+
 export const fetchTopics = () => async (dispatch: any) => {
+  let idk;
   try {
     console.log("raboti");
-
     await axiosInstance.get('/faq-topics').then((res: any) => {
       console.log(res.data.topics);
+      const topics = res.data.topics.forEach((topic: any) => {
+        axiosInstance.get('/faq-questions/topic',
+          { params: { topicId: topic.id } })
+          .then((res: any) => {
+            topic.questions = res.data.questions;
+          })
+      })
       dispatch({
         type: TOPIC_SUCCESS,
         payload: res.data.topics,
       });
+      return res.data.topics;
     })
   }
   catch (err) {
     console.error(err);
   }
+  return idk;
 }
 
 // fetch primary questions with children
 
-export const fetchQuestionsForTopic = (topicId: number) => async (dispatch:any) => {
+export const fetchQuestionsForTopic = (topicId: number) => async (dispatch: any) => {
   try {
     console.log(topicId)
     const body = {
@@ -165,15 +174,15 @@ export const fetchQuestionsForTopic = (topicId: number) => async (dispatch:any) 
         topicId: topicId
       }
     }
-    await axiosInstance.get('/faq-questions/topic', 
-    {params:{topicId:topicId}})
-    .then((res: any) => {
-      console.log(res.data.questions);
-      dispatch({
-        type: TOPIC_QUESTIONS_SUCCESS,
-        payload: res.data.questions,
-      });
-    })
+    await axiosInstance.get('/faq-questions/topic',
+      { params: { topicId: topicId } })
+      .then((res: any) => {
+        console.log(res.data.questions);
+        dispatch({
+          type: TOPIC_QUESTIONS_SUCCESS,
+          payload: res.data.questions,
+        });
+      })
   }
   catch (err) {
     console.error(err);
