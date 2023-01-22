@@ -15,10 +15,10 @@ function Questions(props: any) {
     e.preventDefault();
     return (props.clickQuestion(question));
   }
-  useEffect(()=>{
+  useEffect(() => {
     console.log(props)
     setQuestionList(props.category.message.questions)
-  },[])
+  }, [])
 
   // useEffect(() => {
   //   console.log(props.category.message.id)
@@ -41,12 +41,20 @@ function Questions(props: any) {
   return (
     <>
       <div>
-        <strong>FAQ: {props.category.message.description}</strong>
+        <strong>FAQ:
+          {props.lang == "english"
+            ? props.category.message.description
+            : props.category.message.descriptionDutch}
+        </strong>
         <hr />
         <> {questionList.map((question: any) => {
           return (
             <button onClickCapture={(e) => selectQuestion(e, question)}>
-              Q: {question.questionText} <img className="arrow" src={require('../../img/arrow.png')} /></button>
+              Q:
+              {props.lang == "english"
+                ? question.questionText
+                : question.questionTextDutch}
+              <img className="arrow" src={require('../../img/arrow.png')} /></button>
           )
         }
 

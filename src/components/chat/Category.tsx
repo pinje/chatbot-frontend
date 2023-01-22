@@ -19,7 +19,7 @@ function Category(props: any) {
         }
     }, [categories]);
 
-    const processQuestion = (e: any, cat:any) => {
+    const processQuestion = (e: any, cat: any) => {
         e.preventDefault();
         props.clickCategory(cat);
     }
@@ -52,7 +52,10 @@ function Category(props: any) {
                     <div>
                         <button onClickCapture={e => { processQuestion(e, cat) }} className="catBtn">
                             <img className="icons" src={require('../../img/password4.jpg')} />
-                            <div>{cat.description}</div></button><br />
+                            <div>
+                                {props.lang == "english"
+                                    ? cat.description
+                                    : cat.descriptionDutch}</div></button><br />
                     </div>
                 )
             })

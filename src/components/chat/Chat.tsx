@@ -23,6 +23,7 @@ const Chat = (props: any) => {
   const {
     chat,
     lang,
+    categories,
     userMessage,
     sendMessage,
     searchGoogle,
@@ -71,15 +72,14 @@ const Chat = (props: any) => {
     scrollToBottom();
   }, [chat, props.toggleSearch]);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchTopics();
-  },[])
-
+  }, [])
 
   /*  When a category is chosen from the list,
       a message is sent as a user that asks the question (to personalize the experience),
       then the bot replies with Q&A of that topic */
-  const clickCategory = (msg:any) => {
+  const clickCategory = (msg: any) => {
     userMessage("Let me see FAQs about " + msg.description);
     askCategory(msg);
 
@@ -169,14 +169,30 @@ const Chat = (props: any) => {
 
   // (category already chosen) user clicks on a question, the question is sent as a user (to personalize the experience),
   // then the bot replies with the answer
-  const clickQuestion = (question: any) => {   
-      return userMessage(question.questionText), askQuestion(question);  
+  const clickQuestion = (question: any) => {
+    return userMessage(question.questionText), askQuestion(question);
   };
 
   // Return button to see FAQ Category List
   const returnCategoryMenu = () => {
     categoryList();
   };
+
+  const returnPrevios = (msg: any) => {
+    console.log(msg);
+    console.log("YOOOO")
+    if (msg.message.topicId != null) {
+      //get from stored
+      
+      askCategory(categories[0].fetchedCategories.filter((cat: any) => {
+        return cat.id == msg.message.topicId.id
+      })[0]);
+    }
+    else {
+      askQuestion(msg.message);
+    }
+
+  }
 
   const showLink = (url: string) => {
     let domain = (new URL(url));
@@ -219,7 +235,7 @@ const Chat = (props: any) => {
             <Question question={msg} lang={lang} clickQuestion={clickQuestion} />
             <button
               className="goback-button"
-              onClickCapture={returnCategoryMenu}
+              onClickCapture={() => returnPrevios(msg)}
             >
               <img
                 className="arrow-left"
@@ -421,9 +437,10 @@ const Chat = (props: any) => {
   </>);
 };
 
-const mapStateToProps = (state: { watson: { messages: any, language: any } }) => ({
+const mapStateToProps = (state: { watson: { messages: any, language: any, categories: any } }) => ({
   chat: state.watson.messages,
-  lang: state.watson.language
+  lang: state.watson.language,
+  categories: state.watson.categories
 });
 
 export default connect(mapStateToProps, {

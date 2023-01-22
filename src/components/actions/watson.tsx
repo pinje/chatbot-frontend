@@ -144,24 +144,34 @@ export const fetchTopics = () => async (dispatch: any) => {
     console.log("raboti");
     await axiosInstance.get('/faq-topics').then((res: any) => {
       console.log(res.data.topics);
-      const topics = res.data.topics.forEach((topic: any) => {
+      res.data.topics.forEach((topic: any) => {
         axiosInstance.get('/faq-questions/topic',
           { params: { topicId: topic.id } })
           .then((res: any) => {
-            topic.questions = res.data.questions;
+            // res.data.questions.forEach((quest:any)=>{
+            //   quest.topicId = topic
+            //   console.log(quest)
+            //   if(quest.children.lenght >0){
+            //     console.log("yoS")
+            //     quest.children.forEach((child:any)=>{
+            //       child.parent = quest
+            //     })
+            //   }
+            // })
+            topic.questions = res.data.questions;            
           })
       })
       dispatch({
         type: TOPIC_SUCCESS,
         payload: res.data.topics,
       });
-      return res.data.topics;
+      console.log(res.data.topics);
     })
   }
   catch (err) {
     console.error(err);
   }
-  return idk;
+
 }
 
 // fetch primary questions with children

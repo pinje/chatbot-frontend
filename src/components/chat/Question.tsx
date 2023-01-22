@@ -13,7 +13,7 @@ function Question(props: any) {
   }
 
   const subQuestions = () => {
-    {console.log(props)}
+    { console.log(props) }
 
     return (
       props.question.message.children.map((cat: any) => {
@@ -22,7 +22,10 @@ function Question(props: any) {
             <button onClickCapture={e => { processQuestion(e, cat) }} className="catBtn">
               <>{console.log(cat)}</>
               <img className="icons" src={require('../../img/password4.jpg')} />
-              <div>{cat.questionText}</div></button><br />
+              <div>
+                {props.lang == "english"
+                  ? cat.questionText
+                  : cat.questionTextDutch}</div></button><br />
           </div>
         )
       })
@@ -33,19 +36,24 @@ function Question(props: any) {
     return (
       <div>
         Answer:
-        {/* get link from db  */}
-        <a
-          target="_blank"
-          href="https://google.com/search?q=Fontys+Microsoft+Office"
-        >
-          <img
-            className="arrow-left"
-            src={require("../../img/search.png")}
-          />
-        </a>
+
+        {props.question.message.answer.link != null
+          ? <a target="_blank" href={props.question.message.answer.link}>
+            <img className="arrow-left" src={require("../../img/search.png")} />
+          </a>
+          : ""
+        }
+
         <br />
-        AnswerRr
-      </div>
+        {
+          props.question.message.answer != null
+            ? props.lang == "english"
+              ? props.question.message.answer.answerText
+              : props.question.message.answer.answerTextDutch
+            : ""
+        }
+
+      </div >
     );
   }
 
@@ -55,13 +63,13 @@ function Question(props: any) {
       return subQuestions();
     }
     else {
-      return answer(); 
+      return answer();
     }
   }
 
   return (
     <>
-    {condition()}
+      {condition()}
     </>
   )
 }
