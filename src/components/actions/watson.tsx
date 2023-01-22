@@ -12,6 +12,8 @@ import {
   QUESTION_SUCCESS,
   RESET_STATE,
   CONTACT_SUCCESS,
+  TOPIC_SUCCESS,
+  TOPIC_QUESTIONS_SUCCESS,
 } from "../actions/types";
 
 // import axios
@@ -85,7 +87,7 @@ export const categoryList = () => async (dispatch: any) => {
   }
 };
 
-export const askCategory = (category: string) => async (dispatch: any) => {
+export const askCategory = (category: {name:string, id:number}) => async (dispatch: any) => {
   try {
     dispatch({
       type: CATEGORY_SUCCESS,
@@ -96,7 +98,7 @@ export const askCategory = (category: string) => async (dispatch: any) => {
   }
 };
 
-export const askQuestion = (question: string) => async (dispatch: any) => {
+export const askQuestion = (question: any) => async (dispatch: any) => {
   try {
     dispatch({
       type: QUESTION_SUCCESS,
@@ -134,3 +136,46 @@ export const storeConveration = (messages: any, rating: number) => () => {
     console.log(err)
   }
 };
+
+// fetch topics
+export const fetchTopics = () => async (dispatch: any) => {
+  try {
+    console.log("raboti");
+
+    await axiosInstance.get('/faq-topics').then((res: any) => {
+      console.log(res.data.topics);
+      dispatch({
+        type: TOPIC_SUCCESS,
+        payload: res.data.topics,
+      });
+    })
+  }
+  catch (err) {
+    console.error(err);
+  }
+}
+
+// fetch primary questions with children
+
+export const fetchQuestionsForTopic = (topicId: number) => async (dispatch:any) => {
+  try {
+    console.log(topicId)
+    const body = {
+      data: {
+        topicId: topicId
+      }
+    }
+    await axiosInstance.get('/faq-questions/topic', 
+    {params:{topicId:topicId}})
+    .then((res: any) => {
+      console.log(res.data.questions);
+      dispatch({
+        type: TOPIC_QUESTIONS_SUCCESS,
+        payload: res.data.questions,
+      });
+    })
+  }
+  catch (err) {
+    console.error(err);
+  }
+}

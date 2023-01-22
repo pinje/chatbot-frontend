@@ -15,20 +15,25 @@ import {
   QUESTION_SUCCESS,
   RESET_STATE,
   CONTACT_SUCCESS,
+  TOPIC_SUCCESS,
+  TOPIC_QUESTIONS_SUCCESS,
 } from "../components/actions/types";
 
 // initial state
 const initialState = {
   messages: [],
   toggleSearch: true,
-  language: "english"
+  language: "english",
+  categories: [],
+  quesitons:[]
 };
 
 // switch statement - update state
 export default (state = initialState, action: { type: any; payload: any }) => {
   const { type, payload } = action;
   let { messages }: any = state;
-  console.log(state);
+  let { categories }: any = state;
+  let { questions }: any = state;
 
   switch (type) {
     case INPUT_SUCCESS:
@@ -110,6 +115,20 @@ export default (state = initialState, action: { type: any; payload: any }) => {
       return {
         ...state,
         messages,
+      };
+    case TOPIC_SUCCESS:
+      categories = [{ fetchedCategories: payload, type: "category" }];
+      console.log(categories);
+      return {
+        ...state,
+        categories,
+      };
+      case TOPIC_QUESTIONS_SUCCESS:
+      questions = [{ questionList: payload, type: "question" }];
+      console.log(questions);
+      return {
+        ...state,
+        questions,
       };
     default:
       return {

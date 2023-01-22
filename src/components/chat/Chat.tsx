@@ -33,7 +33,7 @@ const Chat = (props: any) => {
 
   //Handle User Message
   const [message, setMessage] = useState("");
- 
+
 
   // function that handles user submission
   const handleClick = (e: any) => {
@@ -73,69 +73,72 @@ const Chat = (props: any) => {
   /*  When a category is chosen from the list,
       a message is sent as a user that asks the question (to personalize the experience),
       then the bot replies with Q&A of that topic */
-  const clickCategory = (category: string) => {
-    switch (lang) {
-      case ("english"):
-        switch (category) {
-          case "password":
-            return (
-              userMessage("Let me see FAQs about password resets."),
-              askCategory(category)
-            );
-          case "office":
-            return (
-              userMessage("Let me see FAQs about Office 365."),
-              askCategory(category)
-            );
-          case "equipment":
-            return (
-              userMessage("Let me see FAQs about Fontys equipment."),
-              askCategory(category)
-            );
-          case "wifi":
-            return (
-              userMessage("Let me see FAQs about wifi."), askCategory(category)
-            );
-          case "media":
-            return (
-              userMessage("Let me see FAQs about audio and video."),
-              askCategory(category)
-            );
-          default:
-            return null;
-        }
-      case ("dutch"):
-        switch (category) {
-          case "password":
-            return (
-              userMessage("Laat me de veelgestelde vragen over het resetten van mijn wachtwoord zien."),
-              askCategory(category)
-            );
-          case "office":
-            return (
-              userMessage("Laat me de veelgestelde vragen over Office 365 zien."),
-              askCategory(category)
-            );
-          case "equipment":
-            return (
-              userMessage("Laat me de veelgestelde vragen over Fontys spullen zien."),
-              askCategory(category)
-            );
-          case "wifi":
-            return (
-              userMessage("Laat me de veelgestelde vragen over wifi zien."), askCategory(category)
-            );
-          case "media":
-            return (
-              userMessage("Laat me de veelgestelde vragen over audio en video zien."),
-              askCategory(category)
-            );
-          default:
-            return null;
-        }
-      default:
-        return null;
-    }
+  const clickCategory = (name: string, id: number) => {
+    userMessage("Let me see FAQs about " + name);
+    askCategory({ name, id });
+
+    // switch (lang) {
+    // case ("english"):
+    //   switch (category) {
+    //     case "password":
+    //       return (
+    //         userMessage("Let me see FAQs about password resets."),
+    //         askCategory(category)
+    //       );
+    // case "office":
+    //   return (
+    //     userMessage("Let me see FAQs about Office 365."),
+    //     askCategory(category)
+    //   );
+    // case "equipment":
+    //   return (
+    //     userMessage("Let me see FAQs about Fontys equipment."),
+    //     askCategory(category)
+    //   );
+    // case "wifi":
+    //   return (
+    //     userMessage("Let me see FAQs about wifi."), askCategory(category)
+    //   );
+    // case "media":
+    //   return (
+    //     userMessage("Let me see FAQs about audio and video."),
+    //     askCategory(category)
+    //       //   );
+    //       default:
+    //         return null;
+    //     }
+    //   case ("dutch"):
+    //     switch (category) {
+    //       case "password":
+    //         return (
+    //           userMessage("Laat me de veelgestelde vragen over het resetten van mijn wachtwoord zien."),
+    //           askCategory(category)
+    //         );
+    //       case "office":
+    //         return (
+    //           userMessage("Laat me de veelgestelde vragen over Office 365 zien."),
+    //           askCategory(category)
+    //         );
+    //       case "equipment":
+    //         return (
+    //           userMessage("Laat me de veelgestelde vragen over Fontys spullen zien."),
+    //           askCategory(category)
+    //         );
+    //       case "wifi":
+    //         return (
+    //           userMessage("Laat me de veelgestelde vragen over wifi zien."), askCategory(category)
+    //         );
+    //       case "media":
+    //         return (
+    //           userMessage("Laat me de veelgestelde vragen over audio en video zien."),
+    //           askCategory(category)
+    //         );
+    //       default:
+    //         return null;
+    //     }
+    //   default:
+    //     return null;
+    // }
   };
 
   const sendContact = () => {
@@ -160,8 +163,8 @@ const Chat = (props: any) => {
 
   // (category already chosen) user clicks on a question, the question is sent as a user (to personalize the experience),
   // then the bot replies with the answer
-  const clickQuestion = (question: string) => {
-    return userMessage(question), askQuestion(question);
+  const clickQuestion = (question: any) => {   
+      return userMessage(question.questionText), askQuestion(question);  
   };
 
   // Return button to see FAQ Category List
@@ -176,6 +179,7 @@ const Chat = (props: any) => {
 
   // Check output on chat: link, FAQ category list, Specific category questions list, normal message
   function condition(msg: any) {
+    console.log(msg)
     switch (msg.type) {
       case "botLink":
         return <a target="_blank" href={msg.message}>{showLink(msg.message)}</a>;
@@ -188,7 +192,7 @@ const Chat = (props: any) => {
       case "category":
         return (
           <div className="bot">
-            <Questions category={msg.message} clickQuestion={clickQuestion} lang={lang} />
+            <Questions category={msg} clickQuestion={clickQuestion} lang={lang} />
             <button
               className="goback-button"
               onClickCapture={returnCategoryMenu}
@@ -205,7 +209,7 @@ const Chat = (props: any) => {
       case "question":
         return (
           <div className="bot">
-            <Question question={msg.message} lang={lang} />
+            <Question question={msg} lang={lang} clickQuestion={clickQuestion} />
             <button
               className="goback-button"
               onClickCapture={returnCategoryMenu}
@@ -222,20 +226,20 @@ const Chat = (props: any) => {
       case "contact":
         return (
           <>
-          <div className="bot">
-            <div className="contact-detail-title">{lang == "english" && (<>FONTYS CONTACT DETAILS</>)}
-            {lang == "dutch" && (<>FONTYS CONTACTGEGEVENS</>)}</div>
-            <hr />
-            <div className="contact-detail">
-              {lang == "english" && (<><b>Fontys Phone Number</b> <br />+123456789</>)}
-              {lang == "dutch" && (<><b>Fontys Telefoonnummer</b> <br />+123456789</>)}
+            <div className="bot">
+              <div className="contact-detail-title">{lang == "english" && (<>FONTYS CONTACT DETAILS</>)}
+                {lang == "dutch" && (<>FONTYS CONTACTGEGEVENS</>)}</div>
+              <hr />
+              <div className="contact-detail">
+                {lang == "english" && (<><b>Fontys Phone Number</b> <br />+123456789</>)}
+                {lang == "dutch" && (<><b>Fontys Telefoonnummer</b> <br />+123456789</>)}
+              </div>
+              <br />
+              <div className="contact-detail">
+                <b>Email</b> <br />fontys@fhict.nl
+              </div>
             </div>
-            <br />
-            <div className="contact-detail">
-              <b>Email</b> <br />fontys@fhict.nl
-            </div>
-          </div>
-        </>
+          </>
         )
       default:
         return <div> {msg.message} </div>;
@@ -381,28 +385,28 @@ const Chat = (props: any) => {
         {/* Input Box */}
         <div>
           <form onSubmit={handleClick} className="input-box">
-          {props.toggleSearch == true && props.firstDBQ == true
-            ? <input
-              id="chatBox"
-              autoComplete="off"
-              spellCheck="true"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-              placeholder="Press search to skip.">
-            </input>
-            : <input
-              autoComplete="off"
-              id="chatBox"
-              spellCheck="true"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-              placeholder="Vul een vraag in...">
-            </input>
-          }
+            {props.toggleSearch == true && props.firstDBQ == true
+              ? <input
+                id="chatBox"
+                autoComplete="off"
+                spellCheck="true"
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+                placeholder="Press search to skip.">
+              </input>
+              : <input
+                autoComplete="off"
+                id="chatBox"
+                spellCheck="true"
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+                placeholder="Vul een vraag in...">
+              </input>
+            }
             {props.toggleSearch == true
-            ? <button id="sendBtn">Stuur</button>
-            : <button id="sendBtn">Bing stuur</button>
-          }'
+              ? <button id="sendBtn">Stuur</button>
+              : <button id="sendBtn">Bing stuur</button>
+            }'
           </form>
         </div>
       </div>)
