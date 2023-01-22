@@ -56,17 +56,20 @@ export const searchGoogle = (message: string) => async (dispatch: any) => {
   try {
     const res = (await (
       await axiosInstance.get(`/search?q=${message}`)
-    ).data.links) as Array<string>;
-    if (res.length > 0) {
+    ).data);
+
+    if (res.links.length > 0) {
       dispatch({
         type: MESSAGE_SUCCESS,
         payload: "Here are our top results for " + message + ":",
       });
 
-      res.forEach((link: any) => {
+      res.links.forEach((link: any, index: any) => {
+        const linkTitle = res.titles[index];
+        const linkObject = {link, linkTitle};
         dispatch({
           type: LINK_SUCCESS,
-          payload: link,
+          payload: linkObject,
         });
       });
     }
