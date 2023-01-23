@@ -31,11 +31,11 @@ function ChatPopup(props: popupState) {
   const [openSettings, setOpenSettings] = useState<boolean>(false);
   const [feedback, setFeedback] = useState<boolean>(false);
   const [toggleSearch, setToggleSearch] = useState(false);
-  //first question send to db search - keyword
+
+  // first question send to db search - keyword
   const [firstDBQ, setFirstDBQ] = useState(true);
 
   const handleSearchToggle = () => {
-    // e.preventDefault();
     if (toggleSearch == false) {
       setFirstDBQ(true);
     }
@@ -44,7 +44,7 @@ function ChatPopup(props: popupState) {
 
   const reloadClick = () => {
     store.dispatch(clearStore());
-    //closes feedback
+    // close feedback
     setFeedback(false); 
   };
 
@@ -70,19 +70,16 @@ function ChatPopup(props: popupState) {
       <div className='form-container'>
         <div className='popup-header'>
           <img alt="xd" className='bot-icon' src={require('../img/chatbot-icon.png')} />
-          {/* <img className='bot-icon' src={require('../img/chat-profile.jpg')} /> */}
           <button onClick={()=>{props.setIsOpen(false)}}> X </button>
 
-          <button onClick={() => {
-            setOpenSettings(!openSettings)
-          }}>
-            <img alt="xd" className='setting-icon' src={require('../img/setting.png')}
-            />
+          <button onClick={() => {setOpenSettings(!openSettings)}}>
+            <img alt="xd" className='setting-icon' src={require('../img/setting.png')}/>
           </button>
 
           <button onClickCapture={() => { reloadClick() }}>
             <img alt="xd" className='reload-icon' src={require('../img/reload.png')} />
           </button>
+
           {openSettings && <Settings handleSearchToggle={handleSearchToggle} toggleSearch={toggleSearch} setToggleSearch={setToggleSearch}
             firstDBQ={firstDBQ} setFirstDBQ={setFirstDBQ} isOpen={setOpenSettings} />}
 
@@ -91,6 +88,7 @@ function ChatPopup(props: popupState) {
             <div className="popup-header-description">Help-Desk</div>
           </div>
         </div>
+        
         <div className="title">
           {feedback ? <FeedbackPopup setIsOpen={setFeedback}
             chatIsOpen={props.setIsOpen} /> : <Chat handleSearchToggle ={handleSearchToggle} toggleSearch ={toggleSearch} setToggleSearch = {setToggleSearch}

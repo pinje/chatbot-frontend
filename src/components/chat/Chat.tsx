@@ -15,7 +15,7 @@ import {
   categoryList,
   askQuestion,
   askContact,
-  storeConveration,
+  storeConversation,
   preventInput
 } from "../actions/watson";
 
@@ -389,6 +389,6 @@ export default connect(mapStateToProps, {
   categoryList,
   askQuestion,
   askContact,
-  storeConveration,
+  storeConversation,
   preventInput
 })(Chat);

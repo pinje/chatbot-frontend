@@ -17,7 +17,6 @@ import {
 
 // import axios
 import axiosInstance from "../../config/AxiosConfig";
-import { Dispatch } from "redux";
 
 // function that handles user messages
 export const userMessage = (message: string) => async (dispatch: any) => {
@@ -129,9 +128,8 @@ export const clearStore = () => {
   };
 }
 
-export const storeConveration = (messages: any, rating: number) => () => {
+export const storeConversation = (messages: any, rating: number) => () => {
   try {
-    console.log("hello")
     const body = { messages: messages, rating: rating };
     axiosInstance.post("/log", body).catch((err) => { console.log(err) })
   } catch (err) {
