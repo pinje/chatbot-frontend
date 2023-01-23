@@ -82,69 +82,6 @@ const Chat = (props: any) => {
   const clickCategory = (msg: any) => {
     userMessage("Let me see FAQs about " + msg.description);
     askCategory(msg);
-
-    // switch (lang) {
-    // case ("english"):
-    //   switch (category) {
-    //     case "password":
-    //       return (
-    //         userMessage("Let me see FAQs about password resets."),
-    //         askCategory(category)
-    //       );
-    // case "office":
-    //   return (
-    //     userMessage("Let me see FAQs about Office 365."),
-    //     askCategory(category)
-    //   );
-    // case "equipment":
-    //   return (
-    //     userMessage("Let me see FAQs about Fontys equipment."),
-    //     askCategory(category)
-    //   );
-    // case "wifi":
-    //   return (
-    //     userMessage("Let me see FAQs about wifi."), askCategory(category)
-    //   );
-    // case "media":
-    //   return (
-    //     userMessage("Let me see FAQs about audio and video."),
-    //     askCategory(category)
-    //       //   );
-    //       default:
-    //         return null;
-    //     }
-    //   case ("dutch"):
-    //     switch (category) {
-    //       case "password":
-    //         return (
-    //           userMessage("Laat me de veelgestelde vragen over het resetten van mijn wachtwoord zien."),
-    //           askCategory(category)
-    //         );
-    //       case "office":
-    //         return (
-    //           userMessage("Laat me de veelgestelde vragen over Office 365 zien."),
-    //           askCategory(category)
-    //         );
-    //       case "equipment":
-    //         return (
-    //           userMessage("Laat me de veelgestelde vragen over Fontys spullen zien."),
-    //           askCategory(category)
-    //         );
-    //       case "wifi":
-    //         return (
-    //           userMessage("Laat me de veelgestelde vragen over wifi zien."), askCategory(category)
-    //         );
-    //       case "media":
-    //         return (
-    //           userMessage("Laat me de veelgestelde vragen over audio en video zien."),
-    //           askCategory(category)
-    //         );
-    //       default:
-    //         return null;
-    //     }
-    //   default:
-    //     return null;
-    // }
   };
 
   const sendContact = () => {
@@ -178,21 +115,41 @@ const Chat = (props: any) => {
     categoryList();
   };
 
+
+  const getPreviosSub = (msg: any) => {
+
+    let message: any;
+    for (let cat of categories[0].fetchedCategories) {
+      console.log(cat)
+      if (cat.questions.length > 0) {
+        message = cat.questions.filter((quest: any) => {
+          console.log(quest)
+          return quest.id == msg.message.parentId
+        })
+      }
+      if (message[0]) {
+        console.log("FOUND")
+        console.log(message[0])
+        return message[0];
+      }
+    }
+  }
+
   const returnPrevios = (msg: any) => {
     console.log(msg);
-    console.log("YOOOO")
     if (msg.message.topicId != null) {
-      //get from stored
-      
+      //get from stored      
       askCategory(categories[0].fetchedCategories.filter((cat: any) => {
         return cat.id == msg.message.topicId.id
       })[0]);
     }
     else {
-      askQuestion(msg.message);
-    }
+      console.log(getPreviosSub(msg))
 
+      askQuestion(getPreviosSub(msg));
+    }
   }
+
 
   const showLink = (url: string) => {
     let domain = (new URL(url));

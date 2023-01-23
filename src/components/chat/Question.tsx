@@ -19,13 +19,12 @@ function Question(props: any) {
       props.question.message.children.map((cat: any) => {
         return (
           <div>
-            <button onClickCapture={e => { processQuestion(e, cat) }} className="catBtn">
-              <>{console.log(cat)}</>
-              <img className="icons" src={require('../../img/password4.jpg')} />
-              <div>
-                {props.lang == "english"
-                  ? cat.questionText
-                  : cat.questionTextDutch}</div></button><br />
+            <button onClickCapture={(e) => processQuestion(e, cat)}>
+              Q:
+              {props.lang == "english"
+                ? cat.questionText
+                : cat.questionTextDutch}
+              <img className="arrow" src={require('../../img/arrow.png')} /></button>
           </div>
         )
       })
@@ -37,10 +36,12 @@ function Question(props: any) {
       <div>
         Answer:
 
-        {props.question.message.answer.link != null
-          ? <a target="_blank" href={props.question.message.answer.link}>
-            <img className="arrow-left" src={require("../../img/search.png")} />
-          </a>
+        {props.question.message.answer != null
+          ? props.question.message.answer.link != null
+            ? <a target="_blank" href={props.question.message.answer.link}>
+              <img className="arrow-left" src={require("../../img/search.png")} />
+            </a>
+            : ""
           : ""
         }
 

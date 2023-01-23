@@ -139,15 +139,13 @@ export const storeConveration = (messages: any, rating: number) => () => {
 // fetch topics
 
 export const fetchTopics = () => async (dispatch: any) => {
-  let idk;
   try {
-    console.log("raboti");
     await axiosInstance.get('/faq-topics').then((res: any) => {
-      console.log(res.data.topics);
       res.data.topics.forEach((topic: any) => {
         axiosInstance.get('/faq-questions/topic',
           { params: { topicId: topic.id } })
           .then((res: any) => {
+            
             // res.data.questions.forEach((quest:any)=>{
             //   quest.topicId = topic
             //   console.log(quest)
@@ -158,6 +156,8 @@ export const fetchTopics = () => async (dispatch: any) => {
             //     })
             //   }
             // })
+
+            //add parent to each subquestion and this will never load :)
             topic.questions = res.data.questions;            
           })
       })
@@ -165,7 +165,6 @@ export const fetchTopics = () => async (dispatch: any) => {
         type: TOPIC_SUCCESS,
         payload: res.data.topics,
       });
-      console.log(res.data.topics);
     })
   }
   catch (err) {
