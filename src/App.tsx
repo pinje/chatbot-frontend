@@ -8,17 +8,13 @@ function App() {
   const [openModal, setOpenModal] = useState<boolean>(false);
   return (
     <div className='App'>
-    <h1>Fontys ChatBOT.</h1>   
-    <img className='shortcut-bot-icon' alt='bot-icon' src={require('./img/chaIcon2.png')}
-    
-    onClick={() => {
-      setOpenModal(true)
-      }}
-    />  
+        <h1>Fontys ChatBOT.</h1>   
+        <img className='shortcut-bot-icon' alt='bot-icon' src={require('./img/chaIcon2.png')}
+        
+        onClick={() => {setOpenModal(true)}}/>  
 
-{openModal && <ChatPopup setIsOpen={setOpenModal}/>}
-
-</div>      
+        {openModal && <ChatPopup setIsOpen={setOpenModal}/>}
+    </div>      
   );
 }
 

@@ -1,15 +1,14 @@
 import '../components/FeedbackPopup.css';
 import StarRatings from 'react-star-ratings'
 import { useState } from 'react';
-import { storeConveration } from './actions/watson';
+import { storeConversation } from './actions/watson';
 import { connect } from "react-redux";
 import { Checkbox } from "@mui/material";
 import { clearStore } from "./actions/watson";
 import store from "../store";
-import { check } from 'yargs';
 
 const FeedbackPopup = (props:any) => {
-    const { chat, storeConveration, lang } = props;
+    const { chat, storeConversation, lang } = props;
 
     const [rating, setRating] = useState(0);
     const [checked, setChecked] = useState(false);
@@ -17,12 +16,12 @@ const FeedbackPopup = (props:any) => {
     const submitFeedback = () => {
         if (checked) {
             // checked, store both conversation and rating
-            storeConveration(chat, rating);
+            storeConversation(chat, rating);
             props.chatIsOpen(false);
             store.dispatch(clearStore()); 
         } else {
             // not checked, store only rating
-            storeConveration([], rating);
+            storeConversation([], rating);
             props.chatIsOpen(false);
             store.dispatch(clearStore()); 
         }    
@@ -50,7 +49,8 @@ const FeedbackPopup = (props:any) => {
                 <button onClick={() => submitFeedback()} className='submit-button'>submit</button>
                 <button onClick={() => props.setIsOpen(false)} className='return-button'>return</button>
             </div>
-        </div> : <div className='feedback-box'>
+        </div> 
+        : <div className='feedback-box'>
             <div className='title'>HOE ZOU U UW ERVARING <br/> BEOORDELEN?</div>
             <div className='star-rating'>
                 <StarRatings
@@ -79,4 +79,4 @@ const feedbackMapStateToProps = (state: { watson: { messages: any, language: any
     lang: state.watson.language
 });
   
-export default connect(feedbackMapStateToProps, {storeConveration})(FeedbackPopup);
+export default connect(feedbackMapStateToProps, {storeConversation})(FeedbackPopup);

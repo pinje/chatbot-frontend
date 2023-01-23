@@ -6,8 +6,6 @@ import {
   SESSION_FAIL,
   MESSAGE_SUCCESS,
   MESSAGE_FAIL,
-  TOGGLE_FAIL,
-  TOGGLE_SUCCESS,
   LANG_SUCCESS,
   LINK_SUCCESS,
   CATEGORY_LIST_SUCCESS,
@@ -29,7 +27,6 @@ const initialState = {
 export default (state = initialState, action: { type: any; payload: any }) => {
   const { type, payload } = action;
   let { messages }: any = state;
-  console.log(state);
 
   switch (type) {
     case INPUT_SUCCESS:

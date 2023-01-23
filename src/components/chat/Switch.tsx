@@ -1,4 +1,3 @@
-import React from "react";
 import "./Switch.css";
 const Switch=() => {
     return  <label className="switch">
