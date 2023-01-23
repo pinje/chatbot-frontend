@@ -41,9 +41,9 @@ const Chat = (props: any) => {
   const handleClick = (e: any) => {
     e.preventDefault();
     //check if its a category message
-    if (props.toggleSearch == true && props.firstDBQ == true) {
+    if (props.toggleSearch === true && props.firstDBQ === true) {
       props.setFirstDBQ(false);
-      if (message == "") {
+      if (message === "") {
         userMessage("No category");
         sendMessage("No category");
       }
@@ -53,7 +53,7 @@ const Chat = (props: any) => {
       }
     }
     else {
-      if (message != "") {
+      if (message !== "") {
         if (message.includes("/")) {
           preventInput("\"/\" input not allowed. Try to rewrite your question.");
         } else {
@@ -200,10 +200,10 @@ const Chat = (props: any) => {
             >
               <img
                 className="arrow-left"
-                src={require("../../img/arrow-left.png")}
+                src={require("../../img/arrow-left.png")} alt=""
               />{" "}
-              {/* {lang == "english" && (<>Return to FAQ List</>)}
-              {lang == "dutch" && (<>Terug naar veelgestelde vragen lijst</>)} */}
+              {/* {lang === "english" && (<>Return to FAQ List</>)}
+              {lang === "dutch" && (<>Terug naar veelgestelde vragen lijst</>)} */}
             </button>
           </div>
         );
@@ -217,10 +217,10 @@ const Chat = (props: any) => {
             >
               <img
                 className="arrow-left"
-                src={require("../../img/arrow-left.png")}
+                src={require("../../img/arrow-left.png")} alt=""
               />{" "}
-              {/* {lang == "english" && (<>Return to FAQ List</>)}
-              {lang == "dutch" && (<>Terug naar veelgestelde vragen lijst</>)} */}
+              {/* {lang === "english" && (<>Return to FAQ List</>)}
+              {lang === "dutch" && (<>Terug naar veelgestelde vragen lijst</>)} */}
             </button>
           </div>
         );
@@ -228,12 +228,12 @@ const Chat = (props: any) => {
         return (
           <>
           <div className="bot">
-            <div className="contact-detail-title">{lang == "english" && (<>FONTYS CONTACT DETAILS</>)}
-            {lang == "dutch" && (<>FONTYS CONTACTGEGEVENS</>)}</div>
+            <div className="contact-detail-title">{lang === "english" && (<>FONTYS CONTACT DETAILS</>)}
+            {lang === "dutch" && (<>FONTYS CONTACTGEGEVENS</>)}</div>
             <hr />
             <div className="contact-detail">
-              {lang == "english" && (<><b>Fontys Phone Number</b> <br />+123456789</>)}
-              {lang == "dutch" && (<><b>Fontys Telefoonnummer</b> <br />+123456789</>)}
+              {lang === "english" && (<><b>Fontys Phone Number</b> <br />+123456789</>)}
+              {lang === "dutch" && (<><b>Fontys Telefoonnummer</b> <br />+123456789</>)}
             </div>
             <br />
             <div className="contact-detail">
@@ -248,12 +248,12 @@ const Chat = (props: any) => {
   }
 
   return (<>
-    {lang == "english" && (<div className="chat">
+    {lang === "english" && (<div className="chat">
       {/* implement toggle button.. */}
       <div className="chat-header">
         {/* Contact button */}
         <div className="contact-button" onClickCapture={sendContact}>
-          <img className="phonelogo" src={require("../../img/phone.png")} />
+          <img className="phonelogo" src={require("../../img/phone.png")} alt=""/>
         </div>
         <button onClick={props.askFeedback} className="feeback-btn"> Rate our service </button>
         {/* implement toggle button.. */}
@@ -304,7 +304,7 @@ const Chat = (props: any) => {
           : chat.map((msg: any) => (
             <div className={msg.type}>{condition(msg)}</div>
           ))}
-        {props.firstDBQ == true && props.toggleSearch == true
+        {props.firstDBQ === true && props.toggleSearch === true
           ? <div className="bot">Enter keyword for question: </div>
           : ""
         }
@@ -315,7 +315,7 @@ const Chat = (props: any) => {
       <div>
         <form onSubmit={handleClick} className="input-box">
 
-          {props.toggleSearch == true && props.firstDBQ == true
+          {props.toggleSearch === true && props.firstDBQ === true
             ? <input
               id="chatBox"
               autoComplete="off"
@@ -334,7 +334,7 @@ const Chat = (props: any) => {
             </input>
           }
 
-          {props.toggleSearch == true
+          {props.toggleSearch === true
             ? <button id="sendBtn">Search</button>
             : <button id="sendBtn">Bing search</button>
           }
@@ -345,11 +345,11 @@ const Chat = (props: any) => {
     </div>)
     }
     {
-      lang == "dutch" && (<div className="chat">
+      lang === "dutch" && (<div className="chat">
         <div className="chat-header">
           {/* Contact button */}
           <div className="contact-button" onClickCapture={sendContact}>
-            <img className="phonelogo" src={require("../../img/phone.png")} />
+            <img className="phonelogo" src={require("../../img/phone.png")} alt=""/>
           </div>
           <button onClick={props.askFeedback} className="feeback-btn"> Geef ons een rating </button>
 
@@ -377,7 +377,7 @@ const Chat = (props: any) => {
             : chat.map((msg: any) => (
               <div className={msg.type}>{condition(msg)}</div>
             ))}
-          {props.firstDBQ == true && props.toggleSearch == true
+          {props.firstDBQ === true && props.toggleSearch === true
             ? <div className="bot">Enter keyword for question: </div>
             : ""
           }
@@ -386,7 +386,7 @@ const Chat = (props: any) => {
         {/* Input Box */}
         <div>
           <form onSubmit={handleClick} className="input-box">
-          {props.toggleSearch == true && props.firstDBQ == true
+          {props.toggleSearch === true && props.firstDBQ === true
             ? <input
               id="chatBox"
               autoComplete="off"
@@ -404,9 +404,9 @@ const Chat = (props: any) => {
               placeholder="Vul een vraag in...">
             </input>
           }
-            {props.toggleSearch == true
+            {props.toggleSearch === true
             ? <button id="sendBtn">Stuur</button>
-            : <button id="sendBtn">Bing stuur</button>
+            : <button id="sendBtn">Stuur Bing</button>
           }'
           </form>
         </div>

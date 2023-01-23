@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from "react";
-import { connect, ReactReduxContext } from "react-redux";
+import { connect } from "react-redux";
 import './Settings.css';
 import {
   LANG_SUCCESS
@@ -21,7 +20,7 @@ const Settings = (props: any) => {
       {lang === "english" && (
         <>
           <div className="setting-option">
-            <img className='flags' src={require('../img/bflag.jpg')} />
+            <img className='flags' src={require('../img/bflag.jpg')} alt=""/>
             <select onChange={(e) => { ChangeLang(e) }}>
               <option value="english"
               >English
@@ -35,15 +34,15 @@ const Settings = (props: any) => {
                 <img className='search-icon' src={require('../img/bing1.webp')} />
               </div> */}
               <div>
-                <div className="googletext" > Internal Search </div>
+                <div className="googletext" > Search Bing </div>
               </div>
               <div className="switch-container">
                 <label className="switch">
-                  <input onFocus={props.handleSearchToggle} checked={props.toggleSearch} type="checkbox"  />
+                  <input onFocus={props.handleSearchToggle} checked={!props.toggleSearch} type="checkbox"  />
                   <span className="slider round" />
-                  {props.toggleSearch == true
-                    ? <div className="off">On</div>
-                    : <div className="on">Off</div>
+                  {props.toggleSearch === true
+                    ? <div className="off">Off</div>
+                    : <div className="on">On</div>
                   }
                 </label>
               </div>
@@ -54,7 +53,7 @@ const Settings = (props: any) => {
       {lang === "dutch" && (
         <>
           <div className="setting-option">
-            <img className='flags' src={require('../img/dflag.jpg')} />
+            <img className='flags' src={require('../img/dflag.jpg')}  alt=""/>
             <select onChange={(e) => { ChangeLang(e) }}>
               <option value="english"
               >Engels
@@ -68,15 +67,15 @@ const Settings = (props: any) => {
                 <img className='search-icon' src={require('../img/bing1.webp')} />
               </div> */}
               <div>
-                <div className="googletext" > Internal Search </div>
+                <div className="googletext" > Zoek met Bing </div>
               </div>
               <div className="switch-container">
                 <label className="switch">
-                  <input onFocus={props.handleSearchToggle} type="checkbox" />
+                  <input onFocus={props.handleSearchToggle} checked={!props.toggleSearch} type="checkbox" />
                   <span className="slider round" />
-                  {props.toggleSearch == true
-                    ? <div className="on">Aan</div>
-                    : <div className="off">Uit</div>
+                  {props.toggleSearch === true
+                    ? <div className="off">Uit</div>
+                    : <div className="on">Aan</div>
                   }
                 </label>
               </div>
