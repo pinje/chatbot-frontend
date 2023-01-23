@@ -33,10 +33,11 @@ const Chat = (props: any) => {
     preventInput
   } = props;
 
-  //Handle User Message
+  // handle user message
   const [message, setMessage] = useState("");
- 
 
+  const messagesEndRef = useRef<null | HTMLDivElement>(null);
+ 
   // function that handles user submission
   const handleClick = (e: any) => {
     e.preventDefault();
@@ -54,10 +55,10 @@ const Chat = (props: any) => {
     }
     else {
       if (message !== "") {
+        // prevent "/" input
         if (message.includes("/")) {
           preventInput("\"/\" input not allowed. Try to rewrite your question.");
         } else {
-          console.log(message);
           userMessage(message);
           props.toggleSearch ? sendMessage(message) : searchGoogle(message);
           setMessage("");
@@ -66,8 +67,7 @@ const Chat = (props: any) => {
     }
   };
 
-  const messagesEndRef = useRef<null | HTMLDivElement>(null);
-
+  // smooth scrolling
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -144,6 +144,7 @@ const Chat = (props: any) => {
     }
   };
 
+  // fontys staff contact button
   const sendContact = () => {
     return (
       userMessage("Send me contact details of Fontys."),
@@ -175,58 +176,41 @@ const Chat = (props: any) => {
     categoryList();
   };
 
-  const showLink = (title: string) => {
-    return title;
-  }
-
   // Check output on chat: link, FAQ category list, Specific category questions list, normal message
   function condition(msg: any) {
     switch (msg.type) {
       case "botLink":
-        return <a target="_blank" href={msg.message}>{showLink(msg.title)}</a>;
+        return <a target="_blank" href={msg.message}>{msg.title}</a>;
+
       case "category-list":
         return (
           <div className="faq">
             <Category clickCategory={clickCategory} lang={lang} />
           </div>
         );
+
       case "category":
         return (
           <div className="bot">
             <Questions category={msg.message} clickQuestion={clickQuestion} lang={lang} />
-            <button
-              className="goback-button"
-              onClickCapture={returnCategoryMenu}
-            >
-              <img
-                className="arrow-left"
-                src={require("../../img/arrow-left.png")} alt=""
-              />{" "}
-              {/* {lang === "english" && (<>Return to FAQ List</>)}
-              {lang === "dutch" && (<>Terug naar veelgestelde vragen lijst</>)} */}
+            <button className="goback-button" onClickCapture={returnCategoryMenu}>
+              <img className="arrow-left" src={require("../../img/arrow-left.png")} alt="" />
             </button>
           </div>
         );
+
       case "question":
         return (
           <div className="bot">
             <Question question={msg.message} lang={lang} />
-            <button
-              className="goback-button"
-              onClickCapture={returnCategoryMenu}
-            >
-              <img
-                className="arrow-left"
-                src={require("../../img/arrow-left.png")} alt=""
-              />{" "}
-              {/* {lang === "english" && (<>Return to FAQ List</>)}
-              {lang === "dutch" && (<>Terug naar veelgestelde vragen lijst</>)} */}
+            <button className="goback-button" onClickCapture={returnCategoryMenu}>
+              <img className="arrow-left" src={require("../../img/arrow-left.png")} alt="" />
             </button>
           </div>
         );
+
       case "contact":
         return (
-          <>
           <div className="bot">
             <div className="contact-detail-title">{lang === "english" && (<>FONTYS CONTACT DETAILS</>)}
             {lang === "dutch" && (<>FONTYS CONTACTGEGEVENS</>)}</div>
@@ -240,8 +224,8 @@ const Chat = (props: any) => {
               <b>Email</b> <br />fontys@fhict.nl
             </div>
           </div>
-        </>
         )
+
       default:
         return <div> {msg.message} </div>;
     }
@@ -249,37 +233,13 @@ const Chat = (props: any) => {
 
   return (<>
     {lang === "english" && (<div className="chat">
-      {/* implement toggle button.. */}
+      {/* Implement toggle button */}
       <div className="chat-header">
         {/* Contact button */}
         <div className="contact-button" onClickCapture={sendContact}>
           <img className="phonelogo" src={require("../../img/phone.png")} alt=""/>
         </div>
         <button onClick={props.askFeedback} className="feeback-btn"> Rate our service </button>
-        {/* implement toggle button.. */}
-        {/* <div className="flex-container">
-          <div>
-            <img className='search-icon' src={require('../../img/bing1.webp')} />
-          </div>
-          <div>
-            <div className="googletext" > Bing Search </div>
-          </div>
-          <div className="switch-container">
-
-            <label className="switch">
-              <input onFocus={props.handleSearchToggle} type="checkbox" />
-              <span className="slider round" />
-              {props.toggleSearch === false
-                ? <div className="off">Off</div>
-                : <div className="on">On</div>}
-            </label>
-          </div> */}
-        {/* <button className="onOffButton" onClick={handleSearchToggle}>
-        {toggleSearch === false
-            ? <div className="">Off</div>
-            :<div>On</div> }        
-          </button> */}
-        {/* </div> */}
       </div>
 
       {/* Handle Messages */}
@@ -292,18 +252,17 @@ const Chat = (props: any) => {
         </div>
 
         <div className="bot">Hi! How can I help you?</div>
-        {/* <div className="bot">Please note, that this conversation will be stored.</div> */}
+
         {/* Showing FAQ by categories*/}
         <div className="faq">
           <Category clickCategory={clickCategory} lang={lang} />
         </div>
 
         {/* Display Chat */}
-        {chat.length === 0
-          ? ""
-          : chat.map((msg: any) => (
-            <div className={msg.type}>{condition(msg)}</div>
-          ))}
+        {chat.length === 0 ? "" : chat.map((msg: any) => (
+          <div className={msg.type}>{condition(msg)}</div>
+        ))}
+        
         {props.firstDBQ === true && props.toggleSearch === true
           ? <div className="bot">Enter keyword for question: </div>
           : ""
@@ -311,6 +270,7 @@ const Chat = (props: any) => {
 
         <div ref={messagesEndRef} className="chat-buffer" />
       </div>
+
       {/* Input Box */}
       <div>
         <form onSubmit={handleClick} className="input-box">
@@ -340,23 +300,21 @@ const Chat = (props: any) => {
           }
 
         </form>
-
       </div>
     </div>)
     }
     {
       lang === "dutch" && (<div className="chat">
+        {/* Implement toggle button.. */}
         <div className="chat-header">
           {/* Contact button */}
           <div className="contact-button" onClickCapture={sendContact}>
             <img className="phonelogo" src={require("../../img/phone.png")} alt=""/>
           </div>
           <button onClick={props.askFeedback} className="feeback-btn"> Geef ons een rating </button>
-
-          {/* implement toggle button.. */}
         </div>
-        {/* Dutch version */}
 
+        {/* Dutch version */}
         <div className="history-box">
           <div className="intro-container">
             <div className="warning-container">
@@ -372,43 +330,46 @@ const Chat = (props: any) => {
           </div>
 
           {/* Display Chat */}
-          {chat.length === 0
-            ? ""
-            : chat.map((msg: any) => (
-              <div className={msg.type}>{condition(msg)}</div>
-            ))}
+          {chat.length === 0 ? "" : chat.map((msg: any) => (
+            <div className={msg.type}>{condition(msg)}</div>
+          ))}
+
           {props.firstDBQ === true && props.toggleSearch === true
             ? <div className="bot">Enter keyword for question: </div>
             : ""
           }
+
           <div ref={messagesEndRef} className="chat-buffer" />
         </div>
+
         {/* Input Box */}
         <div>
           <form onSubmit={handleClick} className="input-box">
-          {props.toggleSearch === true && props.firstDBQ === true
-            ? <input
-              id="chatBox"
-              autoComplete="off"
-              spellCheck="true"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-              placeholder="Press search to skip.">
-            </input>
-            : <input
-              autoComplete="off"
-              id="chatBox"
-              spellCheck="true"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-              placeholder="Vul een vraag in...">
-            </input>
-          }
+            {props.toggleSearch === true && props.firstDBQ === true
+              ? <input
+                id="chatBox"
+                autoComplete="off"
+                spellCheck="true"
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+                placeholder="Press search to skip.">
+              </input>
+              : <input
+                autoComplete="off"
+                id="chatBox"
+                spellCheck="true"
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+                placeholder="Vul een vraag in...">
+              </input>
+            }
+            
             {props.toggleSearch === true
-            ? <button id="sendBtn">Stuur</button>
-            : <button id="sendBtn">Stuur Bing</button>
-          }'
+              ? <button id="sendBtn">Stuur</button>
+              : <button id="sendBtn">Stuur Bing</button>
+            }
           </form>
+
         </div>
       </div>)
     }
@@ -431,5 +392,3 @@ export default connect(mapStateToProps, {
   storeConveration,
   preventInput
 })(Chat);
-
-
