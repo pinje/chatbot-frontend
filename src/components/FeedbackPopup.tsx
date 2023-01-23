@@ -6,16 +6,26 @@ import { connect } from "react-redux";
 import { Checkbox } from "@mui/material";
 import { clearStore } from "./actions/watson";
 import store from "../store";
+import { check } from 'yargs';
 
 const FeedbackPopup = (props:any) => {
     const { chat, storeConveration, lang } = props;
 
     const [rating, setRating] = useState(0);
+    const [checked, setChecked] = useState(false);
 
     const submitFeedback = () => {
-        storeConveration(chat, rating);
-        props.chatIsOpen(false);
-        store.dispatch(clearStore());     
+        if (checked) {
+            // checked, store both conversation and rating
+            storeConveration(chat, rating);
+            props.chatIsOpen(false);
+            store.dispatch(clearStore()); 
+        } else {
+            // not checked, store only rating
+            storeConveration([], rating);
+            props.chatIsOpen(false);
+            store.dispatch(clearStore()); 
+        }    
     }
 
     return (
@@ -33,7 +43,8 @@ const FeedbackPopup = (props:any) => {
                     name='rating' />
             </div>
             <div className='notice'>
-                Your feedback will help us to improve our service. 
+                <Checkbox checked={checked} onChange={() => {setChecked(!checked)}}/>
+                <div>"I want our conversation to be saved and used to improve the chat bot."</div>
             </div>
             <div>
                 <button onClick={() => submitFeedback()} className='submit-button'>submit</button>
@@ -53,7 +64,7 @@ const FeedbackPopup = (props:any) => {
             </div>
             <div className='notice'>
                 <Checkbox />
-                Uw feedback zal worden gebruikt om onze dienst te verbeteren.
+                <div>"Ik wil dat mijn gesprek wordt opgeslagen en gebruikt om de chat bot te verbeteren."</div>
             </div>
             <div>
                 <button onClick={() => submitFeedback()} className='submit-button'>verstuur</button>
