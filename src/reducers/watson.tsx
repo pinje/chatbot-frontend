@@ -25,7 +25,7 @@ const initialState = {
   toggleSearch: true,
   language: "english",
   categories: [],
-  quesitons:[]
+  quesiton: ""
 };
 
 // switch statement - update state
@@ -33,7 +33,7 @@ export default (state = initialState, action: { type: any; payload: any }) => {
   const { type, payload } = action;
   let { messages }: any = state;
   let { categories }: any = state;
-  let { questions }: any = state;
+  let { question }: any = state;
 
   switch (type) {
     case INPUT_SUCCESS:
@@ -123,12 +123,11 @@ export default (state = initialState, action: { type: any; payload: any }) => {
         ...state,
         categories,
       };
-      case TOPIC_QUESTIONS_SUCCESS:
-      questions = [{ questionList: payload, type: "question" }];
-      console.log(questions);
+    case TOPIC_QUESTIONS_SUCCESS:
+      question = [{ questionList: payload, type: "question" }];
       return {
         ...state,
-        questions,
+        question,
       };
     default:
       return {

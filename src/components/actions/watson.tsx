@@ -145,20 +145,7 @@ export const fetchTopics = () => async (dispatch: any) => {
         axiosInstance.get('/faq-questions/topic',
           { params: { topicId: topic.id } })
           .then((res: any) => {
-            
-            // res.data.questions.forEach((quest:any)=>{
-            //   quest.topicId = topic
-            //   console.log(quest)
-            //   if(quest.children.lenght >0){
-            //     console.log("yoS")
-            //     quest.children.forEach((child:any)=>{
-            //       child.parent = quest
-            //     })
-            //   }
-            // })
-
-            //add parent to each subquestion and this will never load :)
-            topic.questions = res.data.questions;            
+            topic.questions = res.data.questions;
           })
       })
       dispatch({
@@ -197,3 +184,25 @@ export const fetchQuestionsForTopic = (topicId: number) => async (dispatch: any)
     console.error(err);
   }
 }
+
+export const fetchQuestionById = (id: number) => async (dispatch: any) => {
+  try {
+    console.log(id)
+
+    await axiosInstance.get('/faq-questions/id', { params: { id: id } })
+      .then((res: any) => {
+        console.log(res.data);
+        dispatch({
+          type: TOPIC_QUESTIONS_SUCCESS,
+          payload: res.data,
+        });
+      })
+  }
+  catch (err) {
+    console.error(err);
+  }
+}
+
+// export const fetchQuestionById = async (id: number) => {
+//   return (await axiosInstance.get('/faq-questions/id', { params: { id: id } }));
+// }

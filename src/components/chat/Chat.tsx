@@ -5,6 +5,8 @@ import Category from "./Category";
 import Questions from "./Questions";
 import Question from "./Question";
 import "./Switch.css";
+import axiosInstance from "../../config/AxiosConfig";
+
 
 // import action
 import {
@@ -16,13 +18,15 @@ import {
   askQuestion,
   askContact,
   storeConveration,
-  fetchTopics
+  fetchTopics,
+  fetchQuestionById
 } from "../actions/watson";
 
 const Chat = (props: any) => {
   const {
     chat,
     lang,
+    question,
     categories,
     userMessage,
     sendMessage,
@@ -31,11 +35,14 @@ const Chat = (props: any) => {
     categoryList,
     askQuestion,
     askContact,
-    fetchTopics
+    fetchTopics,
+    fetchQuestionById
   } = props;
 
   //Handle User Message
   const [message, setMessage] = useState("");
+  const [getPQ, setGetPQ] = useState();
+  const [trigger, setTrigger] = useState<boolean>(false);
 
   // function that handles user submission
   const handleClick = (e: any) => {
@@ -61,6 +68,12 @@ const Chat = (props: any) => {
       }
     }
   };
+
+  useEffect(() => {
+    if (question != undefined) {
+      setGetPQ(question);
+    }
+  }, [trigger])
 
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
@@ -116,26 +129,9 @@ const Chat = (props: any) => {
   };
 
 
-  const getPreviosSub = (msg: any) => {
-
-    let message: any;
-    for (let cat of categories[0].fetchedCategories) {
-      console.log(cat)
-      if (cat.questions.length > 0) {
-        message = cat.questions.filter((quest: any) => {
-          console.log(quest)
-          return quest.id == msg.message.parentId
-        })
-      }
-      if (message[0]) {
-        console.log("FOUND")
-        console.log(message[0])
-        return message[0];
-      }
-    }
-  }
-
   const returnPrevios = (msg: any) => {
+
+    // get question by id = parent id 
     console.log(msg);
     if (msg.message.topicId != null) {
       //get from stored      
@@ -144,9 +140,13 @@ const Chat = (props: any) => {
       })[0]);
     }
     else {
-      console.log(getPreviosSub(msg))
 
-      askQuestion(getPreviosSub(msg));
+      axiosInstance.get('/faq-questions/id', { params: { id: msg.message.parentId } }).then((res) => {
+        console.log("res")
+        console.log(res.data)
+        askQuestion(res.data);
+      }).catch((err) => { console.error(err) });
+
     }
   }
 
@@ -158,7 +158,6 @@ const Chat = (props: any) => {
 
   // Check output on chat: link, FAQ category list, Specific category questions list, normal message
   function condition(msg: any) {
-    console.log(msg)
     switch (msg.type) {
       case "botLink":
         return <a target="_blank" href={msg.message}>{showLink(msg.message)}</a>;
@@ -169,6 +168,7 @@ const Chat = (props: any) => {
           </div>
         );
       case "category":
+        console.log(msg)
         return (
           <div className="bot">
             <Questions category={msg} clickQuestion={clickQuestion} lang={lang} />
@@ -187,6 +187,7 @@ const Chat = (props: any) => {
           </div>
         );
       case "question":
+        console.log(msg)
         return (
           <div className="bot">
             <Question question={msg} lang={lang} clickQuestion={clickQuestion} />
@@ -394,10 +395,11 @@ const Chat = (props: any) => {
   </>);
 };
 
-const mapStateToProps = (state: { watson: { messages: any, language: any, categories: any } }) => ({
+const mapStateToProps = (state: { watson: { messages: any, language: any, categories: any, question: any } }) => ({
   chat: state.watson.messages,
   lang: state.watson.language,
-  categories: state.watson.categories
+  categories: state.watson.categories,
+  question: state.watson.question
 });
 
 export default connect(mapStateToProps, {
@@ -409,7 +411,8 @@ export default connect(mapStateToProps, {
   askQuestion,
   askContact,
   storeConveration,
-  fetchTopics
+  fetchTopics,
+  fetchQuestionById
 })(Chat);
 
 
