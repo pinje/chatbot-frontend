@@ -177,7 +177,7 @@ const Chat = (props: any) => {
   };
 
   // Check output on chat: link, FAQ category list, Specific category questions list, normal message
-  function condition(msg: any) {
+  function filterMessageType(msg: any) {
     switch (msg.type) {
       case "botLink":
         return <a target="_blank" href={msg.message}>{msg.title}</a>;
@@ -260,7 +260,7 @@ const Chat = (props: any) => {
 
         {/* Display Chat */}
         {chat.length === 0 ? "" : chat.map((msg: any) => (
-          <div className={msg.type}>{condition(msg)}</div>
+          <div className={msg.type}>{filterMessageType(msg)}</div>
         ))}
         
         {props.firstDBQ === true && props.toggleSearch === true
@@ -331,7 +331,7 @@ const Chat = (props: any) => {
 
           {/* Display Chat */}
           {chat.length === 0 ? "" : chat.map((msg: any) => (
-            <div className={msg.type}>{condition(msg)}</div>
+            <div className={msg.type}>{filterMessageType(msg)}</div>
           ))}
 
           {props.firstDBQ === true && props.toggleSearch === true
