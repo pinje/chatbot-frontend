@@ -6,8 +6,6 @@ import {
   SESSION_FAIL,
   MESSAGE_SUCCESS,
   MESSAGE_FAIL,
-  TOGGLE_FAIL,
-  TOGGLE_SUCCESS,
   LANG_SUCCESS,
   LINK_SUCCESS,
   CATEGORY_LIST_SUCCESS,
@@ -17,6 +15,7 @@ import {
   CONTACT_SUCCESS,
   TOPIC_SUCCESS,
   TOPIC_QUESTIONS_SUCCESS,
+  PREVENT_INPUT
 } from "../components/actions/types";
 
 // initial state
@@ -72,7 +71,7 @@ export default (state = initialState, action: { type: any; payload: any }) => {
       };
 
     case LINK_SUCCESS:
-      messages = [...messages, { message: payload, type: "botLink" }];
+      messages = [...messages, { message: payload.link, title: payload.linkTitle, type: "botLink" }];
       return {
         ...state,
         messages,
@@ -129,6 +128,13 @@ export default (state = initialState, action: { type: any; payload: any }) => {
         ...state,
         question,
       };
+    case PREVENT_INPUT:
+      messages = [...messages, { message: payload, type: "not-allowed" }];
+      return {
+        ...state,
+        messages,
+      };
+
     default:
       return {
         ...state,

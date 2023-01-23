@@ -14,11 +14,11 @@ import {
   CONTACT_SUCCESS,
   TOPIC_SUCCESS,
   TOPIC_QUESTIONS_SUCCESS,
+  PREVENT_INPUT
 } from "../actions/types";
 
 // import axios
 import axiosInstance from "../../config/AxiosConfig";
-import { Dispatch } from "redux";
 
 // function that handles user messages
 export const userMessage = (message: string) => async (dispatch: any) => {
@@ -57,17 +57,20 @@ export const searchGoogle = (message: string) => async (dispatch: any) => {
   try {
     const res = (await (
       await axiosInstance.get(`/search?q=${message}`)
-    ).data.links) as Array<string>;
-    if (res.length > 0) {
+    ).data);
+
+    if (res.links.length > 0) {
       dispatch({
         type: MESSAGE_SUCCESS,
         payload: "Here are our top results for " + message + ":",
       });
 
-      res.forEach((link: any) => {
+      res.links.forEach((link: any, index: any) => {
+        const linkTitle = res.titles[index];
+        const linkObject = {link, linkTitle};
         dispatch({
           type: LINK_SUCCESS,
-          payload: link,
+          payload: linkObject,
         });
       });
     }
@@ -127,7 +130,7 @@ export const clearStore = () => {
   };
 }
 
-export const storeConveration = (messages: any, rating: number) => () => {
+export const storeConversation = (messages: any, rating: number) => () => {
   try {
     const body = { messages: messages, rating: rating };
     axiosInstance.post("/log", body).catch((err) => { console.log(err) })
@@ -135,7 +138,6 @@ export const storeConveration = (messages: any, rating: number) => () => {
     console.log(err)
   }
 };
-
 // fetch topics
 
 export const fetchTopics = () => async (dispatch: any) => {
@@ -203,6 +205,11 @@ export const fetchQuestionById = (id: number) => async (dispatch: any) => {
   }
 }
 
-// export const fetchQuestionById = async (id: number) => {
-//   return (await axiosInstance.get('/faq-questions/id', { params: { id: id } }));
-// }
+// function that handles not allowed input such as "/"
+export const preventInput = (message: string) => async (dispatch: any) => {
+  try {
+    dispatch({ type: PREVENT_INPUT, payload: message });
+  } catch (err) {
+    dispatch({ type: INPUT_FAIL });
+  }
+};
