@@ -22,4 +22,9 @@ export const RESET_STATE = "RESET_STATE";
 
 export const STORED_FAIL = "STORED_FAIL";
 
+export const TOPIC_SUCCESS = "TOPIC_SUCCESS";
+
+export const TOPIC_QUESTIONS_SUCCESS = "TOPIC_QUESTIONS_SUCCESS";
+
 export const PREVENT_INPUT = "PREVENT_INPUT";
+

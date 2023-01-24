@@ -13,6 +13,8 @@ import {
   QUESTION_SUCCESS,
   RESET_STATE,
   CONTACT_SUCCESS,
+  TOPIC_SUCCESS,
+  TOPIC_QUESTIONS_SUCCESS,
   PREVENT_INPUT
 } from "../components/actions/types";
 
@@ -20,13 +22,17 @@ import {
 const initialState = {
   messages: [],
   toggleSearch: true,
-  language: "english"
+  language: "english",
+  categories: [],
+  quesiton: ""
 };
 
 // switch statement - update state
 export default (state = initialState, action: { type: any; payload: any }) => {
   const { type, payload } = action;
   let { messages }: any = state;
+  let { categories }: any = state;
+  let { question }: any = state;
 
   switch (type) {
     case INPUT_SUCCESS:
@@ -109,7 +115,19 @@ export default (state = initialState, action: { type: any; payload: any }) => {
         ...state,
         messages,
       };
-
+    case TOPIC_SUCCESS:
+      categories = [{ fetchedCategories: payload, type: "category" }];
+      console.log(categories);
+      return {
+        ...state,
+        categories,
+      };
+    case TOPIC_QUESTIONS_SUCCESS:
+      question = [{ questionList: payload, type: "question" }];
+      return {
+        ...state,
+        question,
+      };
     case PREVENT_INPUT:
       messages = [...messages, { message: payload, type: "not-allowed" }];
       return {

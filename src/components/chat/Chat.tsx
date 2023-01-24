@@ -5,6 +5,7 @@ import Category from "./Category";
 import Questions from "./Questions";
 import Question from "./Question";
 import "./Switch.css";
+import axiosInstance from "../../config/AxiosConfig";
 
 // import action
 import {
@@ -15,7 +16,8 @@ import {
   categoryList,
   askQuestion,
   askContact,
-  storeConversation,
+  fetchTopics,
+  fetchQuestionById,
   preventInput
 } from "../actions/watson";
 
@@ -23,6 +25,8 @@ const Chat = (props: any) => {
   const {
     chat,
     lang,
+    question,
+    categories,
     userMessage,
     sendMessage,
     searchGoogle,
@@ -30,6 +34,8 @@ const Chat = (props: any) => {
     categoryList,
     askQuestion,
     askContact,
+    fetchTopics,
+    fetchQuestionById,
     preventInput
   } = props;
 
@@ -37,37 +43,35 @@ const Chat = (props: any) => {
   const [message, setMessage] = useState("");
 
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
- 
+
   // function that handles user submission
   const handleClick = (e: any) => {
     e.preventDefault();
     //check if its a category message
-    if (props.toggleSearch === true && props.firstDBQ === true) {
-      props.setFirstDBQ(false);
-      if (message === "") {
-        userMessage("No category");
-        sendMessage("No category");
-      }
-      else {
+    // if (props.toggleSearch === true && props.firstDBQ === true) {
+    //   props.setFirstDBQ(false);
+    //   if (message === "") {
+    //     userMessage("No category");
+    //     sendMessage("No category");
+    //   }
+    //   else {
+    //     userMessage(message);
+    //     sendMessage(message);
+    //   }
+    // }
+    // else {
+    if (message !== "") {
+      // prevent "/" input
+      if (message.includes("/")) {
+        preventInput("\"/\" input not allowed. Try to rewrite your question.");
+      } else {
         userMessage(message);
-        sendMessage(message);
-      }
-    }
-    else {
-      if (message !== "") {
-        // prevent "/" input
-        if (message.includes("/")) {
-          preventInput("\"/\" input not allowed. Try to rewrite your question.");
-        } else {
-          userMessage(message);
-          props.toggleSearch ? sendMessage(message) : searchGoogle(message);
-          setMessage("");
-        }
+        props.toggleSearch ? sendMessage(message) : searchGoogle(message);
+        setMessage("");
       }
     }
   };
 
-  // smooth scrolling
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -76,72 +80,16 @@ const Chat = (props: any) => {
     scrollToBottom();
   }, [chat, props.toggleSearch]);
 
+  useEffect(() => {
+    fetchTopics();
+  }, [])
+
   /*  When a category is chosen from the list,
       a message is sent as a user that asks the question (to personalize the experience),
       then the bot replies with Q&A of that topic */
-  const clickCategory = (category: string) => {
-    switch (lang) {
-      case ("english"):
-        switch (category) {
-          case "password":
-            return (
-              userMessage("Let me see FAQs about password resets."),
-              askCategory(category)
-            );
-          case "office":
-            return (
-              userMessage("Let me see FAQs about Office 365."),
-              askCategory(category)
-            );
-          case "equipment":
-            return (
-              userMessage("Let me see FAQs about Fontys equipment."),
-              askCategory(category)
-            );
-          case "wifi":
-            return (
-              userMessage("Let me see FAQs about wifi."), askCategory(category)
-            );
-          case "media":
-            return (
-              userMessage("Let me see FAQs about audio and video."),
-              askCategory(category)
-            );
-          default:
-            return null;
-        }
-      case ("dutch"):
-        switch (category) {
-          case "password":
-            return (
-              userMessage("Laat me de veelgestelde vragen over het resetten van mijn wachtwoord zien."),
-              askCategory(category)
-            );
-          case "office":
-            return (
-              userMessage("Laat me de veelgestelde vragen over Office 365 zien."),
-              askCategory(category)
-            );
-          case "equipment":
-            return (
-              userMessage("Laat me de veelgestelde vragen over Fontys spullen zien."),
-              askCategory(category)
-            );
-          case "wifi":
-            return (
-              userMessage("Laat me de veelgestelde vragen over wifi zien."), askCategory(category)
-            );
-          case "media":
-            return (
-              userMessage("Laat me de veelgestelde vragen over audio en video zien."),
-              askCategory(category)
-            );
-          default:
-            return null;
-        }
-      default:
-        return null;
-    }
+  const clickCategory = (msg: any) => {
+    userMessage("Let me see FAQs about " + msg.description);
+    askCategory(msg);
   };
 
   // fontys staff contact button
@@ -167,14 +115,39 @@ const Chat = (props: any) => {
 
   // (category already chosen) user clicks on a question, the question is sent as a user (to personalize the experience),
   // then the bot replies with the answer
-  const clickQuestion = (question: string) => {
-    return userMessage(question), askQuestion(question);
+  const clickQuestion = (question: any) => {
+    return userMessage(question.questionText), askQuestion(question);
   };
 
   // Return button to see FAQ Category List
   const returnCategoryMenu = () => {
     categoryList();
   };
+
+
+  const returnPrevios = (msg: any) => {
+    // get question by id = parent id 
+    console.log(msg);
+    if (msg.message.topicId != null) {
+      //get from stored      
+      askCategory(categories[0].fetchedCategories.filter((cat: any) => {
+        return cat.id == msg.message.topicId.id
+      })[0]);
+    }
+    else {
+      axiosInstance.get('/faq-questions/id', { params: { id: msg.message.parentId } }).then((res) => {
+        console.log("res")
+        console.log(res.data)
+        askQuestion(res.data);
+      }).catch((err) => { console.error(err) });
+
+    }
+  }
+
+  // const showLink = (url: string) => {
+  //   let domain = (new URL(url));
+  //   return domain.host;
+  // }
 
   // Check output on chat: link, FAQ category list, Specific category questions list, normal message
   function filterMessageType(msg: any) {
@@ -188,42 +161,59 @@ const Chat = (props: any) => {
             <Category clickCategory={clickCategory} lang={lang} />
           </div>
         );
-
       case "category":
+        console.log(msg.message)
         return (
           <div className="bot">
-            <Questions category={msg.message} clickQuestion={clickQuestion} lang={lang} />
-            <button className="goback-button" onClickCapture={returnCategoryMenu}>
-              <img className="arrow-left" src={require("../../img/arrow-left.png")} alt="" />
+            <Questions category={msg} clickQuestion={clickQuestion} lang={lang} />
+            <button
+              className="goback-button"
+              onClickCapture={returnCategoryMenu}
+            >
+              <img
+                className="arrow-left"
+                src={require("../../img/arrow-left.png")}
+              />{" "}
+
             </button>
           </div>
         );
 
       case "question":
+        console.log(msg)
         return (
           <div className="bot">
-            <Question question={msg.message} lang={lang} />
-            <button className="goback-button" onClickCapture={returnCategoryMenu}>
-              <img className="arrow-left" src={require("../../img/arrow-left.png")} alt="" />
+            <Question question={msg} lang={lang} clickQuestion={clickQuestion} />
+            <button
+              className="goback-button"
+              onClickCapture={() => returnPrevios(msg)}
+            >
+              <img
+                className="arrow-left"
+                src={require("../../img/arrow-left.png")}
+              />{" "}
+
             </button>
           </div>
         );
 
       case "contact":
         return (
-          <div className="bot">
-            <div className="contact-detail-title">{lang === "english" && (<>FONTYS CONTACT DETAILS</>)}
-            {lang === "dutch" && (<>FONTYS CONTACTGEGEVENS</>)}</div>
-            <hr />
-            <div className="contact-detail">
-              {lang === "english" && (<><b>Fontys Phone Number</b> <br />+123456789</>)}
-              {lang === "dutch" && (<><b>Fontys Telefoonnummer</b> <br />+123456789</>)}
+          <>
+            <div className="bot">
+              <div className="contact-detail-title">{lang == "english" && (<>FONTYS CONTACT DETAILS</>)}
+                {lang == "dutch" && (<>FONTYS CONTACTGEGEVENS</>)}</div>
+              <hr />
+              <div className="contact-detail">
+                {lang == "english" && (<><b>Fontys Phone Number</b> <br />+123456789</>)}
+                {lang == "dutch" && (<><b>Fontys Telefoonnummer</b> <br />+123456789</>)}
+              </div>
+              <br />
+              <div className="contact-detail">
+                <b>Email</b> <br />fontys@fhict.nl
+              </div>
             </div>
-            <br />
-            <div className="contact-detail">
-              <b>Email</b> <br />fontys@fhict.nl
-            </div>
-          </div>
+          </>
         )
 
       default:
@@ -237,20 +227,13 @@ const Chat = (props: any) => {
       <div className="chat-header">
         {/* Contact button */}
         <div className="contact-button" onClickCapture={sendContact}>
-          <img className="phonelogo" src={require("../../img/phone.png")} alt=""/>
+          <img className="phonelogo" src={require("../../img/phone.png")} alt="" />
         </div>
         <button onClick={props.askFeedback} className="feeback-btn"> Rate our service </button>
       </div>
 
       {/* Handle Messages */}
       <div className="history-box">
-
-        <div className="intro-container">
-          <div className="warning-container">
-            <p>Please note, that this conversation will be stored</p>
-          </div>
-        </div>
-
         <div className="bot">Hi! How can I help you?</div>
 
         {/* Showing FAQ by categories*/}
@@ -262,11 +245,11 @@ const Chat = (props: any) => {
         {chat.length === 0 ? "" : chat.map((msg: any) => (
           <div className={msg.type}>{filterMessageType(msg)}</div>
         ))}
-        
-        {props.firstDBQ === true && props.toggleSearch === true
+
+        {/* {props.firstDBQ === true && props.toggleSearch === true
           ? <div className="bot">Enter keyword for question: </div>
           : ""
-        }
+        } */}
 
         <div ref={messagesEndRef} className="chat-buffer" />
       </div>
@@ -309,18 +292,14 @@ const Chat = (props: any) => {
         <div className="chat-header">
           {/* Contact button */}
           <div className="contact-button" onClickCapture={sendContact}>
-            <img className="phonelogo" src={require("../../img/phone.png")} alt=""/>
+            <img className="phonelogo" src={require("../../img/phone.png")} alt="" />
           </div>
           <button onClick={props.askFeedback} className="feeback-btn"> Geef ons een rating </button>
         </div>
 
         {/* Dutch version */}
         <div className="history-box">
-          <div className="intro-container">
-            <div className="warning-container">
-              <p>Dit gesprek wordt opgeslagen!</p>
-            </div>
-          </div>
+
 
           <div className="bot">Hallo! Hoe kan ik je helpen?</div>
 
@@ -330,14 +309,16 @@ const Chat = (props: any) => {
           </div>
 
           {/* Display Chat */}
+
           {chat.length === 0 ? "" : chat.map((msg: any) => (
             <div className={msg.type}>{filterMessageType(msg)}</div>
           ))}
 
-          {props.firstDBQ === true && props.toggleSearch === true
+          {/* {props.firstDBQ === true && props.toggleSearch === true
+
             ? <div className="bot">Enter keyword for question: </div>
             : ""
-          }
+          } */}
 
           <div ref={messagesEndRef} className="chat-buffer" />
         </div>
@@ -345,7 +326,8 @@ const Chat = (props: any) => {
         {/* Input Box */}
         <div>
           <form onSubmit={handleClick} className="input-box">
-            {props.toggleSearch === true && props.firstDBQ === true
+            {/* {props.toggleSearch === true && props.firstDBQ === true
+
               ? <input
                 id="chatBox"
                 autoComplete="off"
@@ -362,8 +344,7 @@ const Chat = (props: any) => {
                 value={message}
                 placeholder="Vul een vraag in...">
               </input>
-            }
-            
+            } */}
             {props.toggleSearch === true
               ? <button id="sendBtn">Stuur</button>
               : <button id="sendBtn">Stuur Bing</button>
@@ -376,9 +357,11 @@ const Chat = (props: any) => {
   </>);
 };
 
-const mapStateToProps = (state: { watson: { messages: any, language: any } }) => ({
+const mapStateToProps = (state: { watson: { messages: any, language: any, categories: any, question: any } }) => ({
   chat: state.watson.messages,
-  lang: state.watson.language
+  lang: state.watson.language,
+  categories: state.watson.categories,
+  question: state.watson.question
 });
 
 export default connect(mapStateToProps, {
@@ -389,6 +372,7 @@ export default connect(mapStateToProps, {
   categoryList,
   askQuestion,
   askContact,
-  storeConversation,
+  fetchTopics,
+  fetchQuestionById,
   preventInput
 })(Chat);

@@ -12,6 +12,8 @@ import {
   QUESTION_SUCCESS,
   RESET_STATE,
   CONTACT_SUCCESS,
+  TOPIC_SUCCESS,
+  TOPIC_QUESTIONS_SUCCESS,
   PREVENT_INPUT
 } from "../actions/types";
 
@@ -81,14 +83,14 @@ export const categoryList = () => async (dispatch: any) => {
   try {
     dispatch({
       type: CATEGORY_LIST_SUCCESS,
-      payload: null,
+      payload: "category list selected",
     });
   } catch (err) {
     dispatch({ type: MESSAGE_FAIL });
   }
 };
 
-export const askCategory = (category: string) => async (dispatch: any) => {
+export const askCategory = (category: any) => async (dispatch: any) => {
   try {
     dispatch({
       type: CATEGORY_SUCCESS,
@@ -99,7 +101,7 @@ export const askCategory = (category: string) => async (dispatch: any) => {
   }
 };
 
-export const askQuestion = (question: string) => async (dispatch: any) => {
+export const askQuestion = (question: any) => async (dispatch: any) => {
   try {
     dispatch({
       type: QUESTION_SUCCESS,
@@ -114,7 +116,7 @@ export const askContact = () => async (dispatch: any) => {
   try {
     dispatch({
       type: CONTACT_SUCCESS,
-      payload: null,
+      payload: "asked for contact",
     });
   } catch (err) {
     dispatch({ type: MESSAGE_FAIL });
@@ -128,6 +130,7 @@ export const clearStore = () => {
   };
 }
 
+
 export const storeConversation = (messages: any, rating: number) => () => {
   try {
     const body = { messages: messages, rating: rating };
@@ -136,6 +139,73 @@ export const storeConversation = (messages: any, rating: number) => () => {
     console.log(err)
   }
 };
+
+// fetch topics
+
+export const fetchTopics = () => async (dispatch: any) => {
+  try {
+    await axiosInstance.get('/faq-topics').then((res: any) => {
+      res.data.topics.forEach((topic: any) => {
+        axiosInstance.get('/faq-questions/topic',
+          { params: { topicId: topic.id } })
+          .then((res: any) => {
+            topic.questions = res.data.questions;
+          })
+      })
+      dispatch({
+        type: TOPIC_SUCCESS,
+        payload: res.data.topics,
+      });
+    })
+  }
+  catch (err) {
+    console.error(err);
+  }
+
+}
+
+// fetch primary questions with children
+
+export const fetchQuestionsForTopic = (topicId: number) => async (dispatch: any) => {
+  try {
+    console.log(topicId)
+    const body = {
+      data: {
+        topicId: topicId
+      }
+    }
+    await axiosInstance.get('/faq-questions/topic',
+      { params: { topicId: topicId } })
+      .then((res: any) => {
+        console.log(res.data.questions);
+        dispatch({
+          type: TOPIC_QUESTIONS_SUCCESS,
+          payload: res.data.questions,
+        });
+      })
+  }
+  catch (err) {
+    console.error(err);
+  }
+}
+
+export const fetchQuestionById = (id: number) => async (dispatch: any) => {
+  try {
+    console.log(id)
+
+    await axiosInstance.get('/faq-questions/id', { params: { id: id } })
+      .then((res: any) => {
+        console.log(res.data);
+        dispatch({
+          type: TOPIC_QUESTIONS_SUCCESS,
+          payload: res.data,
+        });
+      })
+  }
+  catch (err) {
+    console.error(err);
+  }
+}
 
 // function that handles not allowed input such as "/"
 export const preventInput = (message: string) => async (dispatch: any) => {

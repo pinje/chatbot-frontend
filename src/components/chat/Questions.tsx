@@ -1,110 +1,129 @@
-function Questions(props:any) {
+import { CSSProperties, useState } from "react";
+import { useEffect } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
-    const question = (e:any, questionId:string) => {
-      e.preventDefault();
-      return (props.clickQuestion(questionId));
-    }
 
-    switch(props.lang) {
-      case("english"):
-        switch(props.category) {
-          case 'password':
+// function Questions(props: any) {
+//   const [questionList, setQuestionList] = useState([]);
+//   const [loading, setLoading] = useState(true);
+
+//   const selectQuestion = (e: any, question: any) => {
+//     e.preventDefault();
+//     return (props.clickQuestion(question));
+//   }
+//   useEffect(() => {
+//     console.log(props.category.questions)
+//     if (props.category.questions != undefined) {
+//       if (props.category.questions[0]) {
+//         setQuestionList(props.category.questions)
+//       }
+//     }
+//   }, [])
+
+//   useEffect(() => {
+//     console.log(props)
+//     if (props.category.questions != undefined) {
+//       if (props.category.questions[0]) {
+//         setQuestionList(props.category.questions)
+//       }
+//     }
+//   }, [props])
+
+//   useEffect(() => {
+//     if (questionList != undefined) {
+//       if (questionList.length > 0) {
+//         setLoading(false);
+//       }
+//     }
+//   }, [questionList])
+
+//   const override: CSSProperties = {
+//     display: "block",
+//     margin: "0 auto",
+//     borderColor: "#457b9d"
+//   };
+
+//   return (
+//     <>
+//       <ClipLoader
+//         loading={loading}
+//         size={50}
+//         color={"#457b9d"}
+//         aria-label="Loading Spinner"
+//         data-testid="loader"
+//         cssOverride={override}
+//       />
+//       <div>
+
+//         <>
+//           {questionList != undefined && questionList.length > 0
+//             ? <>
+//               < strong > FAQ:
+//                 {props.lang == "english"
+//                   ? props.category.message.description
+//                   : props.category.message.descriptionDutch}
+//               </strong>
+//               <hr />
+//               {questionList.map((question: any) => {
+//                 return (
+//                   <button onClickCapture={(e) => selectQuestion(e, question)}>
+//                     Q:
+//                     {props.lang == "english"
+//                       ? question.questionText
+//                       : question.questionTextDutch}
+//                     <img className="arrow" src={require('../../img/arrow.png')} /></button>
+//                 )
+//               }
+//               )}
+//             </>
+//             : ""
+//           }
+//         </>
+//       </div>
+//     </>
+
+//   );
+function Questions(props: any) {
+  const [questionList, setQuestionList] = useState([]);
+
+  const selectQuestion = (e: any, question: any) => {
+    e.preventDefault();
+    return (props.clickQuestion(question));
+  }
+  useEffect(() => {
+    console.log(props)
+    setQuestionList(props.category.message.questions)
+  }, [])
+
+  return (
+    <>
+      <div>
+        <strong>FAQ:
+          {props.lang == "english"
+            ? props.category.message.description
+            : props.category.message.descriptionDutch}
+        </strong>
+        <hr />
+        <>
+          {questionList != undefined && questionList.map((question: any) => {
             return (
-              <div>
-                  <strong>FAQ: Password</strong>
-                  <hr/>
-                  <button onClickCapture={(e) => question(e, "How can I reset my password?")}>Q: How can I reset my password? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-              </div>
-            );
-          case 'office':
-            return (
-              <div>
-                 <strong> FAQ: Office 365</strong>
-                  <hr/>
-                  <button onClickCapture={(e) => question(e, "What is included in Office 365?")}>Q: What is included in Office 365? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-                  <button onClickCapture={(e) => question(e, "Can I get Office 365?")}>Q: Can I get Office 365? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-                  <button onClickCapture={(e) => question(e, "Can I add an email account?")}>Q: Can I add an email account? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-                  <button onClickCapture={(e) => question(e, "Other Office 365 questions.")}>Q: Other Office 365 questions. <img className="arrow" src={require('../../img/arrow.png')} /></button>
-              </div>
-            );
-          case 'equipment':
-          return (
-            <div>
-             <strong>FAQ: Fontys Laptop</strong>
-                <hr/>
-                <button onClickCapture={(e) => question(e, "I have Battery, Sound or Camera issues.")}>Q: I have Battery, Sound or Camera issues. <img className="arrow" src={require('../../img/arrow.png')} /></button>
-            </div>
-          );
-          case 'wifi':
-            return (
-              <div>
-             <strong>FAQ: WiFi</strong>
-                  <hr/>
-                  <button onClickCapture={(e) => question(e, "How to connect to eduroam (students)?")}>Q: How to connect to eduroam (students)? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-              </div>
-            );
-          case 'media':
-            return (
-              <div>
-                  <strong>FAQ: Audio & Video</strong>
-                  <hr/>
-                  <button onClickCapture={(e) => question(e, "How to use the smart board?")}>Q: How to use the smart board? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-              </div>
-            );
-          default:
-            return(null);
-        }
-        case("dutch"):
-        switch(props.category) {
-          case 'password':
-            return (
-              <div>
-                <strong>  FAQ: Wachtwoord</strong>
-                  <hr/>
-                  <button onClickCapture={(e) => question(e, "How kan ik mijn wachtwoord resetten?")}>Q: How kan ik mijn wachtwoord resetten? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-              </div>
-            );
-          case 'office':
-            return (
-              <div>
-               <strong>   FAQ: Office 365</strong>
-                  <hr/>
-                  <button onClickCapture={(e) => question(e, "Wat is inbegrepen bij Office 365?")}>Q: Wat is inbegrepen bij Office 365? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-                  <button onClickCapture={(e) => question(e, "Krijg ik Office 365?")}>Q: Krijg ik Office 365? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-                  <button onClickCapture={(e) => question(e, "Kan ik een email account toevoegen?")}>Q: Kan ik een email account toevoegen? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-                  <button onClickCapture={(e) => question(e, "Andere Office 365 vragen.")}>Q: Andere Office 365 vragen. <img className="arrow" src={require('../../img/arrow.png')} /></button>
-              </div>
-            );
-          case 'equipment':
-          return (
-            <div>
-               <strong> FAQ: Fontys Laptop</strong>
-                <hr/>
-                <button onClickCapture={(e) => question(e, "Ik heb batterij, geluid of camera problemen.")}>Q: Ik heb batterij, geluid of camera problemen. <img className="arrow" src={require('../../img/arrow.png')} /></button>
-            </div>
-          );
-          case 'wifi':
-            return (
-              <div>
-               <strong>   FAQ: WiFi </strong>
-                  <hr/>
-                  <button onClickCapture={(e) => question(e, "Hoe verbind ik met eduroam (studenten)?")}>Q: Hoe verbind ik met eduroam (studenten)? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-              </div>
-            );
-          case 'media':
-            return (
-              <div>
-                 <strong> FAQ: Audio & Video </strong>
-                  <hr/>
-                  <button onClickCapture={(e) => question(e, "Hoe gebruik ik het smart board?")}>Q: Hoe gebruik ik het smart board? <img className="arrow" src={require('../../img/arrow.png')} /></button>
-              </div>
-            );
-          default:
-            return(null);
-        }
-      default:
-        return(null);
-    }
+              <button onClickCapture={(e) => selectQuestion(e, question)}>
+                Q:
+                {props.lang == "english"
+                  ? question.questionText
+                  : question.questionTextDutch}
+                <img className="arrow" src={require('../../img/arrow.png')} /></button>
+            )
+          }
+
+          )}
+        </>
+      </div>
+    </>
+
+  );
+
+
 }
-
 export default Questions;
+

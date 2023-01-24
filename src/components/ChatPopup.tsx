@@ -33,12 +33,12 @@ function ChatPopup(props: popupState) {
   const [toggleSearch, setToggleSearch] = useState(false);
 
   // first question send to db search - keyword
-  const [firstDBQ, setFirstDBQ] = useState(true);
+  // const [firstDBQ, setFirstDBQ] = useState(true);
 
   const handleSearchToggle = () => {
-    if (toggleSearch == false) {
-      setFirstDBQ(true);
-    }
+    // if (toggleSearch == false) {
+    //   setFirstDBQ(true);
+    // }
     setToggleSearch(!toggleSearch);
   };
 
@@ -81,7 +81,7 @@ function ChatPopup(props: popupState) {
           </button>
 
           {openSettings && <Settings handleSearchToggle={handleSearchToggle} toggleSearch={toggleSearch} setToggleSearch={setToggleSearch}
-            firstDBQ={firstDBQ} setFirstDBQ={setFirstDBQ} isOpen={setOpenSettings} />}
+            isOpen={setOpenSettings} />}
 
           <div className="popup-header-box">
             <div className="popup-header-title">Fontys Buddy</div>
@@ -92,7 +92,7 @@ function ChatPopup(props: popupState) {
         <div className="title">
           {feedback ? <FeedbackPopup setIsOpen={setFeedback}
             chatIsOpen={props.setIsOpen} /> : <Chat handleSearchToggle ={handleSearchToggle} toggleSearch ={toggleSearch} setToggleSearch = {setToggleSearch}
-            firstDBQ = {firstDBQ} setFirstDBQ = {setFirstDBQ} askFeedback={askFeedback}
+           askFeedback={askFeedback}
            />}
         </div>
       </div>
