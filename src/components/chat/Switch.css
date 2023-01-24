@@ -62,6 +62,7 @@ input:checked + .slider {
   }
   .switch-container{
     max-width: 100%;
+    margin-right: 10px;
     padding: 3px;
   }
   .onOffButton{
@@ -95,7 +96,7 @@ input:checked + .slider {
     border-radius: 10px;
     width:180px;    
     height: 30px;
-    margin-left: 5px;
+    margin-right: 10px;
   }
   
   .flex-container > div {   
@@ -111,7 +112,7 @@ input:checked + .slider {
   .flex-container > div:nth-child(1){    
     width: 300px;  
     height: 20px;
-    margin-left: 3%;
+    margin-left: 4%;
    
   }
   .flex-container > div:nth-child(3){
@@ -120,6 +121,7 @@ input:checked + .slider {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
     0 4px 20px 0 rgba(0, 0, 0, 0.19);  
     color: rgb(36, 35, 35);    
+    
   }
 
 .googletext{
@@ -134,7 +136,6 @@ input:checked + .slider {
   width: 30px;
   height: 30px;
   float: left;
-  margin: none;
   border-radius: 40px;
    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2),
     0 4px 20px 0 rgba(0, 0, 0, 0.19);  

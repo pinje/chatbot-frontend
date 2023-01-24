@@ -41,8 +41,8 @@ const Settings = (props: any) => {
                   <input onFocus={props.handleSearchToggle} checked={!props.toggleSearch} type="checkbox"  />
                   <span className="slider round" />
                   {props.toggleSearch === true
-                    ? <div className="off">Off</div>
-                    : <div className="on">On</div>
+                    ? <div className="on">Off</div>
+                    : <div className="off">On</div>
                   }
                 </label>
               </div>
@@ -74,8 +74,8 @@ const Settings = (props: any) => {
                   <input onFocus={props.handleSearchToggle} checked={!props.toggleSearch} type="checkbox" />
                   <span className="slider round" />
                   {props.toggleSearch === true
-                    ? <div className="off">Uit</div>
-                    : <div className="on">Aan</div>
+                    ? <div className="on">Uit</div>
+                    : <div className="off">Aan</div>
                   }
                 </label>
               </div>

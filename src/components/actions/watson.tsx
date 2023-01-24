@@ -189,24 +189,6 @@ export const fetchQuestionsForTopic = (topicId: number) => async (dispatch: any)
   }
 }
 
-export const fetchQuestionById = (id: number) => async (dispatch: any) => {
-  try {
-    console.log(id)
-
-    await axiosInstance.get('/faq-questions/id', { params: { id: id } })
-      .then((res: any) => {
-        console.log(res.data);
-        dispatch({
-          type: TOPIC_QUESTIONS_SUCCESS,
-          payload: res.data,
-        });
-      })
-  }
-  catch (err) {
-    console.error(err);
-  }
-}
-
 // function that handles not allowed input such as "/"
 export const preventInput = (message: string) => async (dispatch: any) => {
   try {

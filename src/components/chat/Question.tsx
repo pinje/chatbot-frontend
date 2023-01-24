@@ -7,8 +7,6 @@ function Question(props: any) {
   }
 
   const subQuestions = () => {
-    { console.log(props) }
-
     return (
       props.question.message.children.map((cat: any) => {
         return (

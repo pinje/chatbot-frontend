@@ -9,7 +9,6 @@ function Category(props: any) {
     const [fetched, setFetched] = useState([]);
     const [loading, setLoading] = useState(true);
 
-
     useEffect(() => {
         fetchTopics();
     }, [])
@@ -65,5 +64,4 @@ const categoryMapStateToProps = (state: { watson: { categories: any } }) => ({
     categories: state.watson.categories
 
 });
-
 export default connect(categoryMapStateToProps, { fetchTopics })(Category);

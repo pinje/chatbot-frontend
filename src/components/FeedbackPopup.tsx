@@ -61,8 +61,10 @@ const FeedbackPopup = (props: any) => {
                         name='rating' />
                 </div>
                 <div className='notice'>
-                    <Checkbox checked={checked} onChange={() => { setChecked(!checked) }} />
-                    <div>"I want our conversation to be saved and used to improve the chat bot."</div>
+                    <div className='box'>
+                        <Checkbox checked={checked} onChange={() => { setChecked(!checked) }} /></div>
+                    <div>I want this conversation to be saved and used to
+                        improve the chat bot.</div>
                 </div>
                 <div>
                     <button onClick={() => submitFeedback()} className='submit-button'>submit</button>
@@ -83,7 +85,7 @@ const FeedbackPopup = (props: any) => {
                 </div>
                 <div className='notice'>
                     <Checkbox />
-                    <div>"Ik wil dat mijn gesprek wordt opgeslagen en gebruikt om de chat bot te verbeteren."</div>
+                    <div>Ik wil dat mijn gesprek wordt opgeslagen en gebruikt om de chat bot te verbeteren.</div>
                 </div>
                 <div>
                     <button onClick={() => submitFeedback()} className='submit-button'>verstuur</button>

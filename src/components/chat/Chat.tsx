@@ -17,7 +17,6 @@ import {
   askQuestion,
   askContact,
   fetchTopics,
-  fetchQuestionById,
   preventInput
 } from "../actions/watson";
 
@@ -25,7 +24,6 @@ const Chat = (props: any) => {
   const {
     chat,
     lang,
-    question,
     categories,
     userMessage,
     sendMessage,
@@ -35,7 +33,6 @@ const Chat = (props: any) => {
     askQuestion,
     askContact,
     fetchTopics,
-    fetchQuestionById,
     preventInput
   } = props;
 
@@ -47,19 +44,7 @@ const Chat = (props: any) => {
   // function that handles user submission
   const handleClick = (e: any) => {
     e.preventDefault();
-    //check if its a category message
-    // if (props.toggleSearch === true && props.firstDBQ === true) {
-    //   props.setFirstDBQ(false);
-    //   if (message === "") {
-    //     userMessage("No category");
-    //     sendMessage("No category");
-    //   }
-    //   else {
-    //     userMessage(message);
-    //     sendMessage(message);
-    //   }
-    // }
-    // else {
+
     if (message !== "") {
       // prevent "/" input
       if (message.includes("/")) {
@@ -143,12 +128,6 @@ const Chat = (props: any) => {
 
     }
   }
-
-  // const showLink = (url: string) => {
-  //   let domain = (new URL(url));
-  //   return domain.host;
-  // }
-
   // Check output on chat: link, FAQ category list, Specific category questions list, normal message
   function filterMessageType(msg: any) {
     switch (msg.type) {
@@ -205,12 +184,12 @@ const Chat = (props: any) => {
                 {lang == "dutch" && (<>FONTYS CONTACTGEGEVENS</>)}</div>
               <hr />
               <div className="contact-detail">
-                {lang == "english" && (<><b>Fontys Phone Number</b> <br />+123456789</>)}
-                {lang == "dutch" && (<><b>Fontys Telefoonnummer</b> <br />+123456789</>)}
+                {lang == "english" && (<><b>Fontys Phone Number</b> <br />+31 8850 75277</>)}
+                {lang == "dutch" && (<><b>Fontys Telefoonnummer</b> <br />+31 8850 75277</>)}
               </div>
               <br />
               <div className="contact-detail">
-                <b>Email</b> <br />fontys@fhict.nl
+                <b>Email</b> <br />studyict@fontys.nl
               </div>
             </div>
           </>
@@ -246,36 +225,20 @@ const Chat = (props: any) => {
           <div className={msg.type}>{filterMessageType(msg)}</div>
         ))}
 
-        {/* {props.firstDBQ === true && props.toggleSearch === true
-          ? <div className="bot">Enter keyword for question: </div>
-          : ""
-        } */}
-
         <div ref={messagesEndRef} className="chat-buffer" />
       </div>
 
       {/* Input Box */}
       <div>
         <form onSubmit={handleClick} className="input-box">
-
-          {props.toggleSearch === true && props.firstDBQ === true
-            ? <input
-              id="chatBox"
-              autoComplete="off"
-              spellCheck="true"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-              placeholder="Press search to skip.">
-            </input>
-            : <input
-              autoComplete="off"
-              id="chatBox"
-              spellCheck="true"
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-              placeholder="Enter a question...">
-            </input>
-          }
+          <input
+            autoComplete="off"
+            id="chatBox"
+            spellCheck="true"
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
+            placeholder="Enter a question...">
+          </input>
 
           {props.toggleSearch === true
             ? <button id="sendBtn">Search</button>
@@ -314,37 +277,21 @@ const Chat = (props: any) => {
             <div className={msg.type}>{filterMessageType(msg)}</div>
           ))}
 
-          {/* {props.firstDBQ === true && props.toggleSearch === true
-
-            ? <div className="bot">Enter keyword for question: </div>
-            : ""
-          } */}
-
           <div ref={messagesEndRef} className="chat-buffer" />
         </div>
 
         {/* Input Box */}
         <div>
           <form onSubmit={handleClick} className="input-box">
-            {/* {props.toggleSearch === true && props.firstDBQ === true
+            <input
+              autoComplete="off"
+              id="chatBox"
+              spellCheck="true"
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
+              placeholder="Vul een vraag in...">
+            </input>
 
-              ? <input
-                id="chatBox"
-                autoComplete="off"
-                spellCheck="true"
-                onChange={(e) => setMessage(e.target.value)}
-                value={message}
-                placeholder="Press search to skip.">
-              </input>
-              : <input
-                autoComplete="off"
-                id="chatBox"
-                spellCheck="true"
-                onChange={(e) => setMessage(e.target.value)}
-                value={message}
-                placeholder="Vul een vraag in...">
-              </input>
-            } */}
             {props.toggleSearch === true
               ? <button id="sendBtn">Stuur</button>
               : <button id="sendBtn">Stuur Bing</button>
@@ -373,6 +320,5 @@ export default connect(mapStateToProps, {
   askQuestion,
   askContact,
   fetchTopics,
-  fetchQuestionById,
   preventInput
 })(Chat);

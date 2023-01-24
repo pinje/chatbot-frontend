@@ -32,13 +32,7 @@ function ChatPopup(props: popupState) {
   const [feedback, setFeedback] = useState<boolean>(false);
   const [toggleSearch, setToggleSearch] = useState(false);
 
-  // first question send to db search - keyword
-  // const [firstDBQ, setFirstDBQ] = useState(true);
-
   const handleSearchToggle = () => {
-    // if (toggleSearch == false) {
-    //   setFirstDBQ(true);
-    // }
     setToggleSearch(!toggleSearch);
   };
 
