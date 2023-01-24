@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { fetchTopics } from "../actions/watson";
 import "./Category.css";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Category(props: any) {
     const { categories, fetchTopics } = props;
     const [fetched, setFetched] = useState([]);
+    const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         fetchTopics();
@@ -15,6 +18,7 @@ function Category(props: any) {
         if (categories != undefined && categories.length > 0) {
             console.log(categories)
             setFetched(categories[0].fetchedCategories);
+            setLoading(false);
         }
     }, [categories]);
 
@@ -31,6 +35,15 @@ function Category(props: any) {
         <>
             <strong>FAQ</strong>
             <hr />
+            <div>
+                <ClipLoader
+                    loading={loading}
+                    size={50}
+                    color={"#457b9d"}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+            </div>
             {fetched.map((cat: any) => {
                 return (
                     <div key={cat.id}>

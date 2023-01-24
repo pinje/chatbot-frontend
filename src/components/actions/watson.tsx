@@ -83,7 +83,7 @@ export const categoryList = () => async (dispatch: any) => {
   try {
     dispatch({
       type: CATEGORY_LIST_SUCCESS,
-      payload: null,
+      payload: "category list selected",
     });
   } catch (err) {
     dispatch({ type: MESSAGE_FAIL });
@@ -116,7 +116,7 @@ export const askContact = () => async (dispatch: any) => {
   try {
     dispatch({
       type: CONTACT_SUCCESS,
-      payload: null,
+      payload: "asked for contact",
     });
   } catch (err) {
     dispatch({ type: MESSAGE_FAIL });
@@ -130,14 +130,16 @@ export const clearStore = () => {
   };
 }
 
+
 export const storeConversation = (messages: any, rating: number) => () => {
   try {
-    const body = { messages: messages, rating: rating};
+    const body = { messages: messages, rating: rating };
     axiosInstance.post("/log", body).catch((err) => { console.log(err) })
   } catch (err) {
     console.log(err)
   }
 };
+
 // fetch topics
 
 export const fetchTopics = () => async (dispatch: any) => {

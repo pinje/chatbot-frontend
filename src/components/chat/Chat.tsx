@@ -135,7 +135,6 @@ const Chat = (props: any) => {
       })[0]);
     }
     else {
-
       axiosInstance.get('/faq-questions/id', { params: { id: msg.message.parentId } }).then((res) => {
         console.log("res")
         console.log(res.data)
@@ -163,7 +162,7 @@ const Chat = (props: any) => {
           </div>
         );
       case "category":
-        console.log(msg)
+        console.log(msg.message)
         return (
           <div className="bot">
             <Questions category={msg} clickQuestion={clickQuestion} lang={lang} />
@@ -247,10 +246,10 @@ const Chat = (props: any) => {
           <div className={msg.type}>{filterMessageType(msg)}</div>
         ))}
 
-        {props.firstDBQ === true && props.toggleSearch === true
+        {/* {props.firstDBQ === true && props.toggleSearch === true
           ? <div className="bot">Enter keyword for question: </div>
           : ""
-        }
+        } */}
 
         <div ref={messagesEndRef} className="chat-buffer" />
       </div>
