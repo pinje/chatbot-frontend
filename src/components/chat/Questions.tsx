@@ -22,7 +22,8 @@ function Questions(props: any) {
             : props.category.message.descriptionDutch}
         </strong>
         <hr />
-        <> {questionList.map((question: any) => {
+        <> 
+        {questionList != undefined && questionList.map((question: any) => {
           return (
             <button onClickCapture={(e) => selectQuestion(e, question)}>
               Q:

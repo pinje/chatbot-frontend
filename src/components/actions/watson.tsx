@@ -132,7 +132,7 @@ export const clearStore = () => {
 
 export const storeConversation = (messages: any, rating: number) => () => {
   try {
-    const body = { messages: messages, rating: rating };
+    const body = { messages: messages, rating: rating};
     axiosInstance.post("/log", body).catch((err) => { console.log(err) })
   } catch (err) {
     console.log(err)

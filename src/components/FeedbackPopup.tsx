@@ -16,12 +16,13 @@ const FeedbackPopup = (props:any) => {
     const submitFeedback = () => {
         if (checked) {
             // checked, store both conversation and rating
-            storeConversation(chat, rating);
+            console.log(chat)
+            storeConversation(chat as [], rating);
             props.chatIsOpen(false);
             store.dispatch(clearStore()); 
         } else {
             // not checked, store only rating
-            storeConversation([], rating);
+            storeConversation(null, rating);
             props.chatIsOpen(false);
             store.dispatch(clearStore()); 
         }    

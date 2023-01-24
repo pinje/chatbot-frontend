@@ -16,7 +16,6 @@ import {
   categoryList,
   askQuestion,
   askContact,
-  storeConveration,
   fetchTopics,
   fetchQuestionById,
   preventInput
@@ -44,32 +43,31 @@ const Chat = (props: any) => {
   const [message, setMessage] = useState("");
 
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
- 
+
   // function that handles user submission
   const handleClick = (e: any) => {
     e.preventDefault();
     //check if its a category message
-    if (props.toggleSearch === true && props.firstDBQ === true) {
-      props.setFirstDBQ(false);
-      if (message === "") {
-        userMessage("No category");
-        sendMessage("No category");
-      }
-      else {
+    // if (props.toggleSearch === true && props.firstDBQ === true) {
+    //   props.setFirstDBQ(false);
+    //   if (message === "") {
+    //     userMessage("No category");
+    //     sendMessage("No category");
+    //   }
+    //   else {
+    //     userMessage(message);
+    //     sendMessage(message);
+    //   }
+    // }
+    // else {
+    if (message !== "") {
+      // prevent "/" input
+      if (message.includes("/")) {
+        preventInput("\"/\" input not allowed. Try to rewrite your question.");
+      } else {
         userMessage(message);
-        sendMessage(message);
-      }
-    }
-    else {
-      if (message !== "") {
-        // prevent "/" input
-        if (message.includes("/")) {
-          preventInput("\"/\" input not allowed. Try to rewrite your question.");
-        } else {
-          userMessage(message);
-          props.toggleSearch ? sendMessage(message) : searchGoogle(message);
-          setMessage("");
-        }
+        props.toggleSearch ? sendMessage(message) : searchGoogle(message);
+        setMessage("");
       }
     }
   };
@@ -147,10 +145,10 @@ const Chat = (props: any) => {
     }
   }
 
-  const showLink = (url: string) => {
-    let domain = (new URL(url));
-    return domain.host;
-  }
+  // const showLink = (url: string) => {
+  //   let domain = (new URL(url));
+  //   return domain.host;
+  // }
 
   // Check output on chat: link, FAQ category list, Specific category questions list, normal message
   function filterMessageType(msg: any) {
@@ -177,7 +175,7 @@ const Chat = (props: any) => {
                 className="arrow-left"
                 src={require("../../img/arrow-left.png")}
               />{" "}
-              
+
             </button>
           </div>
         );
@@ -230,20 +228,13 @@ const Chat = (props: any) => {
       <div className="chat-header">
         {/* Contact button */}
         <div className="contact-button" onClickCapture={sendContact}>
-          <img className="phonelogo" src={require("../../img/phone.png")} alt=""/>
+          <img className="phonelogo" src={require("../../img/phone.png")} alt="" />
         </div>
         <button onClick={props.askFeedback} className="feeback-btn"> Rate our service </button>
       </div>
 
       {/* Handle Messages */}
       <div className="history-box">
-
-        <div className="intro-container">
-          <div className="warning-container">
-            <p>Please note, that this conversation will be stored</p>
-          </div>
-        </div>
-
         <div className="bot">Hi! How can I help you?</div>
 
         {/* Showing FAQ by categories*/}
@@ -255,7 +246,7 @@ const Chat = (props: any) => {
         {chat.length === 0 ? "" : chat.map((msg: any) => (
           <div className={msg.type}>{filterMessageType(msg)}</div>
         ))}
-        
+
         {props.firstDBQ === true && props.toggleSearch === true
           ? <div className="bot">Enter keyword for question: </div>
           : ""
@@ -302,18 +293,14 @@ const Chat = (props: any) => {
         <div className="chat-header">
           {/* Contact button */}
           <div className="contact-button" onClickCapture={sendContact}>
-            <img className="phonelogo" src={require("../../img/phone.png")} alt=""/>
+            <img className="phonelogo" src={require("../../img/phone.png")} alt="" />
           </div>
           <button onClick={props.askFeedback} className="feeback-btn"> Geef ons een rating </button>
         </div>
 
         {/* Dutch version */}
         <div className="history-box">
-          <div className="intro-container">
-            <div className="warning-container">
-              <p>Dit gesprek wordt opgeslagen!</p>
-            </div>
-          </div>
+
 
           <div className="bot">Hallo! Hoe kan ik je helpen?</div>
 
@@ -328,11 +315,11 @@ const Chat = (props: any) => {
             <div className={msg.type}>{filterMessageType(msg)}</div>
           ))}
 
-          {props.firstDBQ === true && props.toggleSearch === true
+          {/* {props.firstDBQ === true && props.toggleSearch === true
 
             ? <div className="bot">Enter keyword for question: </div>
             : ""
-          }
+          } */}
 
           <div ref={messagesEndRef} className="chat-buffer" />
         </div>
@@ -340,7 +327,7 @@ const Chat = (props: any) => {
         {/* Input Box */}
         <div>
           <form onSubmit={handleClick} className="input-box">
-            {props.toggleSearch === true && props.firstDBQ === true
+            {/* {props.toggleSearch === true && props.firstDBQ === true
 
               ? <input
                 id="chatBox"
@@ -358,7 +345,7 @@ const Chat = (props: any) => {
                 value={message}
                 placeholder="Vul een vraag in...">
               </input>
-            }            
+            } */}
             {props.toggleSearch === true
               ? <button id="sendBtn">Stuur</button>
               : <button id="sendBtn">Stuur Bing</button>
@@ -386,7 +373,6 @@ export default connect(mapStateToProps, {
   categoryList,
   askQuestion,
   askContact,
-  storeConveration,
   fetchTopics,
   fetchQuestionById,
   preventInput
