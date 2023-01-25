@@ -46,7 +46,7 @@ export const sendMessage = (message: string) => async (dispatch: any) => {
     const res = axiosInstance.post("/responses", body);
     dispatch({
       type: MESSAGE_SUCCESS,
-      payload: (await res).data.response,
+      payload: (await res).data,
     });
   } catch (err) {
     dispatch({ type: MESSAGE_FAIL });
@@ -67,7 +67,7 @@ export const searchGoogle = (message: string) => async (dispatch: any) => {
 
       res.links.forEach((link: any, index: any) => {
         const linkTitle = res.titles[index];
-        const linkObject = {link, linkTitle};
+        const linkObject = { link, linkTitle };
         dispatch({
           type: LINK_SUCCESS,
           payload: linkObject,

@@ -196,9 +196,10 @@ const Chat = (props: any) => {
         )
 
       case 'bot':
+        console.log(msg)
         return (lang == "english" ?
-         <div> {msg.message} </div> :
-         <div> {msg.questionTextDutch} </div>
+         <div> {msg.message.answer} </div> :
+         <div> {msg.message.answerDutch} </div>
          );
 
       default:

@@ -29,7 +29,7 @@ function Question(props: any) {
         Answer:
 
         {props.question.message.answer != null
-          ? props.question.message.answer.link != null
+          ? props.question.message.answer.link != null && props.question.message.answer.link != ""
             ? <a target="_blank" href={props.question.message.answer.link}>
               <img className="arrow-left" src={require("../../img/search.png")} />
             </a>

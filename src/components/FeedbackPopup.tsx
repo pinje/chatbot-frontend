@@ -39,6 +39,10 @@ const FeedbackPopup = (props: any) => {
                 msg.message = msg.message.questionText;
                 messages.push(msg);
             }
+            else if (msg.type == "bot") {
+                msg.message = msg.message.answer;
+                messages.push(msg);
+            }
             else {
                 messages.push(msg);
             }
@@ -84,7 +88,8 @@ const FeedbackPopup = (props: any) => {
                         name='rating' />
                 </div>
                 <div className='notice'>
-                    <Checkbox />
+                    <Checkbox checked={checked} onChange={() => { setChecked(!checked) }} />
+
                     <div>Ik wil dat mijn gesprek wordt opgeslagen en gebruikt om de chat bot te verbeteren.</div>
                 </div>
                 <div>
